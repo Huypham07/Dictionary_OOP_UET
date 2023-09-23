@@ -11,14 +11,19 @@ public class Dictionary {
         return this.Dict;
     }
 
-    // method
+    //-------------METHOD-------------
+
+    public Word findWord(String w_target) {
+        for (Word w : getDict()) {
+            if (w.getWord_target().equalsIgnoreCase(w_target)) {
+                return w;
+            }
+        }
+        return null;
+    }
     /*
     suggest:
     insertWord
-
-    Search_wordExplain
-
-    find_word
 
     edit_word
 
