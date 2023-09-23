@@ -1,14 +1,17 @@
 import java.util.*;
-import java.util.Dictionary;
 
 public class DictionaryManagement {
+    private Scanner sc;
     private Dictionary dictionary;
 
     // constructors
-    public DictionaryManagement() {
+    public DictionaryManagement(Dictionary dictionary) {
+        this.dictionary = dictionary;
+        sc = new Scanner(System.in);
     }
 
     // method
+
     /*
     insertFromCommandline
 

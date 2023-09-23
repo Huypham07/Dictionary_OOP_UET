@@ -8,6 +8,9 @@ public class DictionaryCommandline {
 
     // Constructor
     public DictionaryCommandline() {
+        dictionary = new Dictionary();
+        dict_manager = new DictionaryManagement(dictionary);
+        sc = new Scanner(System.in);
     }
 
     // METHODS

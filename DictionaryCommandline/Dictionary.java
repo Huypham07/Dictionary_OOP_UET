@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Dictionary {
     private ArrayList<Word> Dict;
 
