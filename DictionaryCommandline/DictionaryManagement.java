@@ -6,6 +6,7 @@ public class DictionaryManagement {
 
     // constructors
     public DictionaryManagement() {
+        dictionary = new Dictionary();
     }
 
     //------------------METHOD-----------------
