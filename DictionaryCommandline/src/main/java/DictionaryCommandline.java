@@ -108,6 +108,15 @@ public class DictionaryCommandline {
         System.out.println();
     }
 
+    public boolean Advanced() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("enter a number: ");
+        int query = input.nextInt();
+        switch (query) {
+            default: return false;
+        }
+
+    }
     /*
     dictionaryBasic
 

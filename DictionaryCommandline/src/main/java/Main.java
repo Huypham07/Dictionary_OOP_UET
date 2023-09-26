@@ -12,10 +12,11 @@ public class Main {
         cls();
 
         boolean isContinue = false;
-        
+        DictionaryCommandline cmdDict = new DictionaryCommandline();
+
         do
         {
-
+            isContinue = cmdDict.Advanced();
         } while (isContinue);
     }
 }
