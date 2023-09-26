@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class DictionaryManagement {
+    private Scanner sc;
     private Dictionary dictionary;
 
     // constructors
@@ -44,7 +45,6 @@ public class DictionaryManagement {
     editWord
 
     dictionaryExportToFile
-
 
      */
 }
