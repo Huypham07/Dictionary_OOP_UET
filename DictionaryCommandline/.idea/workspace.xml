@@ -5,36 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd17fbb0-6614-4256-8a09-8b9ea405ded4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Dictionary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DictionaryCommandline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DictionaryManagement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Trie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dictionary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DictionaryCommandline.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DictionaryManagement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Trie.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Word.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/Dictionary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/DictionaryCommandline.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/DictionaryManagement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/Word.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ts/ts.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ts.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dictionary_OOP_UET.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DictionaryCommandline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DictionaryCommandline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DictionaryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DictionaryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Word.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,17 +32,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "onboarding.tips.debug.path": "C:/Users/huyho/OneDrive/Desktop/Dictionary/DictionaryCommandline/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/UET/2nd/OOP/Dictionary_OOP_UET/DictionaryCommandline&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/huyho/OneDrive/Desktop/Dictionary/DictionaryCommandline/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

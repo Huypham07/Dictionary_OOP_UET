@@ -4,7 +4,10 @@ public class Word {
     private ArrayList<String> word_explain;
 
     //constructors
-    public Word() {}
+    public Word() {
+        word_target = new String("");
+        word_explain = new ArrayList<String>();
+    }
 
     // setters
     public void copy(Word other) {

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class DictionaryCommandline {
@@ -14,6 +15,12 @@ public class DictionaryCommandline {
     }
 
     // METHODS
+
+    //clr screen
+    private static void cls() throws IOException, InterruptedException
+    {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    }
 
     public void showAllWords() {
         ArrayList<Word> allWords = dictionary.getDict();
@@ -108,14 +115,60 @@ public class DictionaryCommandline {
         System.out.println();
     }
 
-    public boolean Advanced() {
+    public boolean dictionaryAdvanced() throws Exception{
+        cls();
+        System.out.println("Welcome to My Application!");
+        System.out.println( "   [0] Exit\n" +
+                            "   [1] Add\n" +
+                            "   [2] Remove\n" +
+                            "   [3] Update\n" +
+                            "   [4] Display\n" +
+                            "   [5] Lookup\n" +
+                            "   [6] Search\n" +
+                            "   [7] Game\n" +
+                            "   [8] Import from file\n" +
+                            "   [9] Export to file");
         Scanner input = new Scanner(System.in);
-        System.out.println("enter a number: ");
-        int query = input.nextInt();
-        switch (query) {
-            default: return false;
+
+        int select;
+
+        // Exception handling
+        try {
+            System.out.print("Select a number between 0 and 9: ");
+            select = Integer.parseInt(input.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Oops...!Action not supported.");
+            System.out.println("Please Select again!");
+            return true;
         }
 
+        switch (select) {
+            case 0: return false;
+
+            case 1:
+                dict_manager.insertFromCommandline();
+                break;
+
+
+            case 4:
+                showAllWords();
+                break;
+
+            case 5:
+                dict_manager.Lookup();
+                break;
+
+
+            default:
+            {
+                System.out.println("Please Select again!");
+                return true;
+            }
+        }
+
+        System.out.print("Press ENTER to back to Menu");
+        input.nextLine();
+        return true;
     }
     /*
     dictionaryBasic

@@ -16,7 +16,7 @@ public class Main {
 
         do
         {
-            isContinue = cmdDict.Advanced();
+            isContinue = cmdDict.dictionaryAdvanced();
         } while (isContinue);
     }
 }
