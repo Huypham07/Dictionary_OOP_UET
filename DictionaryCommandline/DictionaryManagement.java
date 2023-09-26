@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.IOException;
 
 public class DictionaryManagement {
     private Dictionary dictionary;
@@ -7,6 +6,9 @@ public class DictionaryManagement {
     // constructors
     public DictionaryManagement() {
         dictionary = new Dictionary();
+    }
+    public DictionaryManagement(Dictionary dictionary) {
+        this.dictionary = dictionary;
     }
 
     //------------------METHOD-----------------
