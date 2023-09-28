@@ -14,23 +14,23 @@ public class Trie {
 
         //getter, setter of idArray
         public int getIdArray() {
-            return idArray;
+            return this.idArray;
         }
 
         public void setIdArray(int i) {
-            idArray = i;
+            this.idArray = i;
         }
 
     }
 
     private TrieNode root;
     public Trie() {
-        root = new TrieNode();
+        this.root = new TrieNode();
     }
 
     public void insert(String key, int indexArray) {
         String l_key = key.toLowerCase();
-        TrieNode tmpNode = root;
+        TrieNode tmpNode = this.root;
         for (int i = 0; i < l_key.length(); i++) {
             int index = l_key.charAt(i) - 'a';
             if (tmpNode.children[index] == null) {
@@ -43,7 +43,7 @@ public class Trie {
 
     public int search(String key) {
         String l_key = key.toLowerCase();
-        TrieNode tmpNode = root;
+        TrieNode tmpNode = this.root;
         for (int i = 0; i < l_key.length(); i++) {
             int index = l_key.charAt(i) - 'a';
             if (tmpNode.children[index] != null) {

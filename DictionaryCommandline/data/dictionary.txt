@@ -1,5 +1,5 @@
 name	ten
-mom	me
+mom	me	nguoi me
 dad	bo
 parent	bo me noi chung
 book	sach
@@ -102,4 +102,3 @@ ancestor	to tien
 array	day, hang
 application	ung dung
 cow	bo
-

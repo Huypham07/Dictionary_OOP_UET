@@ -9,8 +9,8 @@ public class DictionaryCommandline {
 
     // Constructor
     public DictionaryCommandline() {
-        dictionary = new Dictionary();
-        dict_manager = new DictionaryManagement(dictionary);
+        this.dictionary = new Dictionary();
+        this.dict_manager = new DictionaryManagement(this.dictionary);
         sc = new Scanner(System.in);
     }
 
@@ -23,8 +23,7 @@ public class DictionaryCommandline {
     }
 
     public void showAllWords() {
-        ArrayList<Word> allWords = new ArrayList<>(dictionary.getDict());
-
+        ArrayList<Word> allWords = new ArrayList<>(this.dictionary.getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
             System.out.println("Dictionary is empty.");
@@ -115,7 +114,7 @@ public class DictionaryCommandline {
         System.out.println();
     }
 
-    public boolean dictionaryAdvanced() throws IOException, Exception{
+    public boolean dictionaryAdvanced() throws Exception{
         cls();
         System.out.println("Welcome to My Application!");
         System.out.println( "   [0] Exit\n" +
@@ -130,24 +129,27 @@ public class DictionaryCommandline {
                 "   [9] Export to file");
         sc = new Scanner(System.in);
 
-        int select;
-
-        // Exception handling
-        try {
-            System.out.print("Select a number between 0 and 9: ");
-            select = Integer.parseInt(sc.next());
-        } catch (NumberFormatException e) {
-            System.out.println("Oops...!Action not supported.");
-            System.out.println("Please Select again!");
-            return true;
-        }
+        int select = 0;
+        boolean chooseNumber;
+        do {
+            // Exception handling
+            try {
+                System.out.print("Select a number between 0 and 9: ");
+                select = Integer.parseInt(sc.nextLine());
+                chooseNumber = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Oops...!Action not supported.");
+                System.out.println("Please Select again!");
+                chooseNumber = false;
+            }
+        } while (!chooseNumber);
 
         switch (select) {
             case 0: return false;
 
             case 1: {
                 cls();
-                dict_manager.insertFromCommandline();
+                this.dict_manager.insertFromCommandline();
             }
             break;
 
@@ -160,11 +162,11 @@ public class DictionaryCommandline {
 
             case 5: {
                 cls();
-                dict_manager.Lookup();
+                this.dict_manager.Lookup();
             }
             break;
 
-            case 8: return dict_manager.insertFromFile();
+            case 8: return this.dict_manager.insertFromFile();
 
             default:
             {
@@ -174,9 +176,7 @@ public class DictionaryCommandline {
         }
 
         System.out.print("Press ENTER to back to Menu");
-        sc = new Scanner(System.in);
         sc.nextLine();
-        sc.close();
         return true;
     }
     /*
