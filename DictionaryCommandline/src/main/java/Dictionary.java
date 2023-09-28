@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Dictionary {
@@ -7,7 +6,7 @@ public class Dictionary {
     private Trie TrieOfTargetWord;
     // Constructors
     public Dictionary() {
-        Dict = new ArrayList<Word>();
+        Dict = new ArrayList<>();
         TrieOfTargetWord = new Trie();
 
         for (int i = 0; i < Dict.size(); i++) {
@@ -18,6 +17,10 @@ public class Dictionary {
     // getter
     public ArrayList<Word> getDict() {
         return this.Dict;
+    }
+
+    public Trie getTrieOfTargetWord() {
+        return this.TrieOfTargetWord;
     }
 
     //-------------METHOD-------------
@@ -35,16 +38,16 @@ public class Dictionary {
         } else {
             ArrayList<String> tmp = w.getWord_explain();
             ArrayList<String> wordExist = Dict.get(check).getWord_explain();
-            for (int i = 0; i < tmp.size(); i++){
+            for (String s : tmp) {
                 boolean existExplain = false;
-                for (int j = 0; j < wordExist.size(); j++) {
-                    if (tmp.get(i).equals(wordExist.get(j))) {
+                for (String string : wordExist) {
+                    if (s.equals(string)) {
                         existExplain = true;
                         break;
                     }
                 }
                 if (!existExplain) {
-                    wordExist.add(tmp.get(i));
+                    wordExist.add(s);
                 }
             }
         }

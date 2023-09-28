@@ -1,4 +1,3 @@
-import java.util.*;
 public class Trie {
     static class TrieNode {
         static final int ALPHABET_SIZE = 26;

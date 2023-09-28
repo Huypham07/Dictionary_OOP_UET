@@ -5,13 +5,13 @@ public class Word {
 
     //constructors
     public Word() {
-        word_target = new String("");
-        word_explain = new ArrayList<String>();
+        word_target = "";
+        word_explain = new ArrayList<>();
     }
 
     // setters
     public void copy(Word other) {
-        this.word_explain = new ArrayList<String>(other.word_explain);
+        this.word_explain = new ArrayList<>(other.word_explain);
         this.word_target = new String(other.word_target);
     }
     public void setWordTarget(String word_target) {
@@ -19,13 +19,13 @@ public class Word {
     }
 
     public void setWordExplain(ArrayList<String> word_explain) {
-        this.word_explain = new ArrayList<String>();
+        this.word_explain = new ArrayList<>();
         this.word_explain.addAll(word_explain);
     }
 
     public void addExplain(String newExplain) {
         if (this.word_explain == null)
-            this.word_explain = new ArrayList<String>();
+            this.word_explain = new ArrayList<>();
         this.word_explain.add(newExplain);
     }
 

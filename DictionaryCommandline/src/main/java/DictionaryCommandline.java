@@ -23,7 +23,7 @@ public class DictionaryCommandline {
     }
 
     public void showAllWords() {
-        ArrayList<Word> allWords = dictionary.getDict();
+        ArrayList<Word> allWords = new ArrayList<>(dictionary.getDict());
 
         // check if dictionary is empty
         if (allWords.isEmpty()) {
@@ -67,7 +67,7 @@ public class DictionaryCommandline {
             }
 
         } catch (InputMismatchException e){
-            System.out.println("Invalid input. Please enter a valid option");
+            System.out.println("Invalid sc. Please enter a valid option");
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -115,27 +115,27 @@ public class DictionaryCommandline {
         System.out.println();
     }
 
-    public boolean dictionaryAdvanced() throws Exception{
+    public boolean dictionaryAdvanced() throws IOException, Exception{
         cls();
         System.out.println("Welcome to My Application!");
         System.out.println( "   [0] Exit\n" +
-                            "   [1] Add\n" +
-                            "   [2] Remove\n" +
-                            "   [3] Update\n" +
-                            "   [4] Display\n" +
-                            "   [5] Lookup\n" +
-                            "   [6] Search\n" +
-                            "   [7] Game\n" +
-                            "   [8] Import from file\n" +
-                            "   [9] Export to file");
-        Scanner input = new Scanner(System.in);
+                "   [1] Add\n" +
+                "   [2] Remove\n" +
+                "   [3] Update\n" +
+                "   [4] Display\n" +
+                "   [5] Lookup\n" +
+                "   [6] Search\n" +
+                "   [7] Game\n" +
+                "   [8] Import from file\n" +
+                "   [9] Export to file");
+        sc = new Scanner(System.in);
 
         int select;
 
         // Exception handling
         try {
             System.out.print("Select a number between 0 and 9: ");
-            select = Integer.parseInt(input.nextLine());
+            select = Integer.parseInt(sc.next());
         } catch (NumberFormatException e) {
             System.out.println("Oops...!Action not supported.");
             System.out.println("Please Select again!");
@@ -145,19 +145,26 @@ public class DictionaryCommandline {
         switch (select) {
             case 0: return false;
 
-            case 1:
+            case 1: {
+                cls();
                 dict_manager.insertFromCommandline();
-                break;
+            }
+            break;
 
 
-            case 4:
+            case 4: {
+                cls();
                 showAllWords();
-                break;
+            }
+            break;
 
-            case 5:
+            case 5: {
+                cls();
                 dict_manager.Lookup();
-                break;
+            }
+            break;
 
+            case 8: return dict_manager.insertFromFile();
 
             default:
             {
@@ -167,7 +174,9 @@ public class DictionaryCommandline {
         }
 
         System.out.print("Press ENTER to back to Menu");
-        input.nextLine();
+        sc = new Scanner(System.in);
+        sc.nextLine();
+        sc.close();
         return true;
     }
     /*
