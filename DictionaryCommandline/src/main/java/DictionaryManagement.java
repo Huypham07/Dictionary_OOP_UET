@@ -148,7 +148,7 @@ public class DictionaryManagement {
         }
     }
 
-
+    //export to file
     public boolean dictionaryExportToFile(){
         try {
             FileWriter fw = new FileWriter("data/exported_dictionary.txt");
