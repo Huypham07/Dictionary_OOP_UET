@@ -149,13 +149,36 @@ public class DictionaryManagement {
     }
 
 
-/*
+    public boolean dictionaryExportToFile(){
+        try {
+            FileWriter fw = new FileWriter("data/exported_dictionary.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
 
+            for (Word w : this.dictionary.getDict()) {
+                bw.write(w.getWord_target() + "\t");
+
+                ArrayList<String> w_explain = w.getWord_explain();
+                for (String meaning : w_explain) {
+                    bw.write(meaning + "\t");
+                }
+
+                bw.write("\n");
+            }
+
+            bw.close();
+            fw.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Export failed!!!");
+            System.out.println("Sorry. An error occurred while exporting data.");
+            return false;
+        }
+    }
+
+    /*
     deleteWords
 
     editWord
-
-    dictionaryExportToFile
 
      */
 }
