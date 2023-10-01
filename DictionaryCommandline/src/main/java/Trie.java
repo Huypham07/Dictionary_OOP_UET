@@ -59,8 +59,36 @@ public class Trie {
         }
     }
 
-    // remove word
+    public List<String> dictionarySearcher(String prefix) {
+        List<String> results = new ArrayList<>();
+        TrieNode current = root;
 
-    // find words suggestion with prefix s
+        for (char c : prefix.toLowerCase().toCharArray()) {
+            TrieNode nextNode = current.children[c - 'a'];
+            if (nextNode == null) {
+                return results; // Không tìm thấy tiền tố
+            }
+            current = nextNode; // Đi đến node tiếp theo
+        }
+
+        findWordsWithPrefix(current, prefix, results);
+        return results;
+    }
+
+    private void findWordsWithPrefix(TrieNode node, string currentWord, List<String> results) {
+        if (node.getIdArray() >= 0) {
+            results.add(currentWord.toString());
+        }
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            TrieNode child = node.children[c - 'a'];
+            if (child != null) {
+                currentWord.append(c);
+                findWordsWithPrefix(child, currentWord, results);
+                currentWord.deleteCharAt(currentWord.length() - 1);
+            }
+        }
+    }
     // write method
+    // remove word
 }
