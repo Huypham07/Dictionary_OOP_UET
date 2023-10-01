@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 public class Trie {
+    static final int ALPHABET_SIZE = 26;
     static class TrieNode {
-        static final int ALPHABET_SIZE = 26;
         private TrieNode[] children;
         private int idArray;
 
@@ -61,36 +61,56 @@ public class Trie {
         }
     }
 
-    public List<String> dictionarySearcher(String prefix) {
-        List<String> results = new ArrayList<>();
-        TrieNode current = root;
+    public void suggest(TrieNode root, ArrayList<String> list, StringBuffer curr) {
+        if (root == null) return;
 
-        for (char c : prefix.toLowerCase().toCharArray()) {
-            TrieNode nextNode = current.children[c - 'a'];
-            if (nextNode == null) {
-                return results; // Không tìm thấy tiền tố
-            }
-            current = nextNode; // Đi đến node tiếp theo
+        if (root.getIdArray() >= 0) {
+            list.add(curr.toString());
         }
 
-        findWordsWithPrefix(current, prefix, results);
-        return results;
-    }
-
-    private void findWordsWithPrefix(TrieNode node, string currentWord, List<String> results) {
-        if (node.getIdArray() >= 0) {
-            results.add(currentWord.toString());
-        }
-
-        for (char c = 'a'; c <= 'z'; c++) {
-            TrieNode child = node.children[c - 'a'];
-            if (child != null) {
-                currentWord.append(c);
-                findWordsWithPrefix(child, currentWord, results);
-                currentWord.deleteCharAt(currentWord.length() - 1);
-            }
+        for (int i = 0; i < ALPHABET_SIZE; i++) {
+            char c = (char)(i + 'a');
+            curr.append(c);
+            suggest(root.children[i], list, curr);
+            curr.setLength(curr.length() - 1);
         }
     }
-    // write method
+
+    public ArrayList<String> findWordsWithPrefix(String prefix) {
+        String l_prefix = prefix.toLowerCase();
+        ArrayList<String> list = new ArrayList<>();
+        TrieNode lastNode = this.root;
+        StringBuffer curr = new StringBuffer(l_prefix);
+        for (int i = 0; i < l_prefix.length(); i++) {
+            int index = l_prefix.charAt(i) - 'a';
+            if (lastNode.children[index] != null) {
+                lastNode = lastNode.children[index];
+            } else {
+                return list;
+            }
+        }
+        suggest(lastNode, list, curr);
+        return list;
+    }
+
     // remove word
+    public boolean remove(String key)
+    {
+        String l_key = key.toLowerCase();
+        TrieNode tmpNode = this.root;
+        for (int i = 0; i < l_key.length(); i++) {
+            int index = l_key.charAt(i) - 'a';
+            if (tmpNode.children[index] != null) {
+                tmpNode = tmpNode.children[index];
+            } else {
+                return false;
+            }
+        }
+        if (tmpNode != null && tmpNode.getIdArray() >= 0) {
+            tmpNode.setIdArray(-1);
+            return true;
+        } else {
+            return false; // Can't find
+        }
+    }
 }

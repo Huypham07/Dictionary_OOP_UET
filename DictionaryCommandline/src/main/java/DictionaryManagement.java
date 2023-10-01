@@ -1,18 +1,12 @@
 import java.util.*;
 import java.io.*;
-public class DictionaryManagement {
-    private Dictionary dictionary;
-    
-    private Scanner sc;
+public class DictionaryManagement extends Dictionary{
+    protected Scanner sc;
 
     // constructors
     public DictionaryManagement() {
-        this.dictionary = new Dictionary();
-        sc = new Scanner(System.in);
-    }
-    public DictionaryManagement(Dictionary dictionary) {
-        this.dictionary = dictionary;
-        sc = new Scanner(System.in);
+        super();
+        this.sc = new Scanner(System.in);
     }
 
     //------------------METHOD-----------------
@@ -31,16 +25,16 @@ public class DictionaryManagement {
     public void Lookup() {
         System.out.println("Enter the word you want to lookup:");
 
-        String w_target = sc.nextLine();
+        String w_target = this.sc.nextLine();
         while(!validWord(w_target))
         {
             if (!w_target.isEmpty()) {
                 System.out.println("Please enter again!!!");
             }
-            w_target = sc.nextLine();
+            w_target = this.sc.nextLine();
         }
 
-        Word foundWord = this.dictionary.findWord(w_target);
+        Word foundWord = this.findWord(w_target);
         if (foundWord == null) {
             System.out.println("Sorry, We did not find your word in our Dictionary!");
         } else {
@@ -62,7 +56,7 @@ public class DictionaryManagement {
         while (n < 0)
         {
             try {
-                n = Integer.parseInt(sc.nextLine());
+                n = Integer.parseInt(this.sc.nextLine());
                 if (n < 0) {
                     System.out.println("Sorry. You must enter a natural number !!!");
                     System.out.println("Please enter again!!!");
@@ -80,13 +74,13 @@ public class DictionaryManagement {
         for (int i = 1; i <= n; i++) {
 
             System.out.print("Please enter English word: ");
-            String English = sc.nextLine();
+            String English = this.sc.nextLine();
             while(!validWord(English))
             {
                 if (!English.isEmpty()) {
                     System.out.println("Please enter again!!!");
                 }
-                English = sc.nextLine();
+                English = this.sc.nextLine();
             }
             w.setWordTarget(English);
             boolean endOfExplain = false;
@@ -96,14 +90,14 @@ public class DictionaryManagement {
             int cnt = 1;
             do {
                 System.out.print(cnt + ". ");
-                explain = sc.nextLine();
+                explain = this.sc.nextLine();
                 if (explain.equals("#")) endOfExplain = true;
                 else if (!explain.isEmpty()) {
                     w.getWord_explain().add(explain);
                     cnt++;
                 }
             } while(!endOfExplain);
-            this.dictionary.insertWord(w);
+            this.insertWord(w);
         }
     }
 
@@ -130,7 +124,7 @@ public class DictionaryManagement {
                     }
 
                     if (validWord(w_target)) {
-                        this.dictionary.insertWord(temp);
+                        this.insertWord(temp);
                     } else {
                         System.out.println("Error!!! " + w_target + " is not an English word!!!. Can't import this word to the dictionary.");
                         System.out.println();
@@ -138,6 +132,8 @@ public class DictionaryManagement {
                 }
             }
 
+            System.out.println("Import successful !!");
+            System.out.println("The dictionary have " + this.getDict().size() + " words");
             fr.close();
             br.close();
             return true;
@@ -154,7 +150,7 @@ public class DictionaryManagement {
             FileWriter fw = new FileWriter("data/exported_dictionary.txt");
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (Word w : this.dictionary.getDict()) {
+            for (Word w : this.getDict()) {
                 bw.write(w.getWord_target() + "\t");
 
                 ArrayList<String> w_explain = w.getWord_explain();
@@ -175,10 +171,138 @@ public class DictionaryManagement {
         }
     }
 
-    /*
-    deleteWords
+    // edit method
+    public void updateWord() {
+        System.out.print("Enter the English Word you want to update: ");
+        String oldEnglishWord = this.sc.nextLine();
 
-    editWord
+        while(!validWord(oldEnglishWord))
+        {
+            if (!oldEnglishWord.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            oldEnglishWord = this.sc.nextLine();
+        }
 
-     */
+        Word w = this.findWord(oldEnglishWord);
+        if (w == null) {
+            System.out.println("We didn't find the word " + oldEnglishWord);
+        } else {
+            System.out.println("We found:\n");
+            System.out.printf("%-15s |", w.getWord_target());
+
+            for(String meaning : w.getWord_explain()){
+                System.out.printf(" %-20s", meaning);
+            }
+            System.out.println("\n");
+            System.out.println("Enter '1' to edit the English word\nEnter '2' to add the meaning\nEnter other number to reset the meaning");
+
+            int select = 0;
+            boolean chooseNumber;
+            do {
+                // Exception handling
+                try {
+                    select = Integer.parseInt(this.sc.nextLine());
+                    chooseNumber = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Oops...!Action not supported.");
+                    System.out.println("Please Select again!");
+                    chooseNumber = false;
+                }
+            } while (!chooseNumber);
+
+            if (select == 1) {
+                System.out.println("Give us the new English word");
+                String newEnglishWord = this.sc.nextLine();
+                w.setWordTarget(newEnglishWord);
+
+                this.getTrieOfTargetWord().remove(oldEnglishWord);
+                this.insertWord(w);
+            } if (select == 2){
+                System.out.println("Give us the new meaning of English word");
+                String newMeaning = this.sc.nextLine();
+                w.addExplain(newMeaning);
+            } else {
+                ArrayList<String> newMeaning = new ArrayList<>();
+                boolean endOfExplain = false;
+                String explain;
+                System.out.println("Give us the meaning of English word, press ENTER to save it.\n" +
+                        "Enter # to end the process.");
+                int cnt = 1;
+                do {
+                    System.out.print(cnt + ". ");
+                    explain = this.sc.nextLine();
+                    if (explain.equals("#")) endOfExplain = true;
+                    else if (!explain.isEmpty()) {
+                        newMeaning.add(explain);
+                        cnt++;
+                    }
+                } while(!endOfExplain);
+                w.setWordExplain(newMeaning);
+            }
+            System.out.println("Successful");
+        }
+
+    }
+
+    //remove method
+    public void removeWord() {
+        System.out.println("Enter the English word : ");
+        String English = this.sc.nextLine();
+        while(!validWord(English))
+        {
+            if (!English.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            English = this.sc.nextLine();
+        }
+
+        if (this.deleteWord(English)) {
+            System.out.println("Successful");
+            System.out.println("The word " + English + " has been removed!");
+        } else {
+            System.out.println("Can't remove this word !! You can try again. Thanks!");
+        }
+    }
+
+    // search with prefix
+    public void searcher() {
+        System.out.print("You want to find words beginning with: ");
+        String prefix = this.sc.nextLine();
+        while(!validWord(prefix))
+        {
+            if (!prefix.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            prefix = this.sc.nextLine();
+        }
+        ArrayList<String> result = this.getTrieOfTargetWord().findWordsWithPrefix(prefix);
+
+        System.out.println("We found " + result.size() + " words beginning with " + prefix + ": ");
+
+        if (result.size() <= 0) return;// not found
+
+        System.out.println("Do you want to print the meaning of these words? YES or NO");
+
+        String ans = this.sc.nextLine();
+
+        if (ans.toLowerCase().equals("yes")) {
+            System.out.println(result.size() + " results are:");
+            for (int i = 1; i <= result.size(); i++) {
+                Word w = this.findWord(result.get(i-1));
+                System.out.printf("%-3s| %-15s |", i, w.getWord_target());
+
+                for(String meaning : w.getWord_explain()){
+                    System.out.printf(" %-20s", meaning);
+                }
+                System.out.println();
+            }
+        } else {
+            System.out.println(result.size() + " Words are:");
+
+            for (int i = 1; i <= result.size(); i++) {
+                System.out.println(i + ". " + result.get(i-1));
+            }
+        }
+    }
 }

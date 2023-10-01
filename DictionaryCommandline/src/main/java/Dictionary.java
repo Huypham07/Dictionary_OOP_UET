@@ -35,7 +35,7 @@ public class Dictionary {
 
         if(check == -1) {
             this.Dict.add(w);
-            this.TrieOfTargetWord.insert(w.getWord_target(), this.Dict.size()-1);
+            this.getTrieOfTargetWord().insert(w.getWord_target(), this.Dict.size()-1);
         } else {
             ArrayList<String> tmp = w.getWord_explain();
             ArrayList<String> wordExist = this.Dict.get(check).getWord_explain();
@@ -56,11 +56,18 @@ public class Dictionary {
             }
         }
     }
-    /*
-    suggest:
-    edit_word
 
-    delete_word
+    // edit method
+    public void editWord(String old_EnglishWord, Word new_word) {
+        this.deleteWord(old_EnglishWord);
+        this.insertWord(new_word);
+    }
 
-     */
+    //delete method
+    public boolean deleteWord(String key) {
+        int id = this.getTrieOfTargetWord().search(key);
+        if (id < 0) return false;
+        this.getDict().remove(id);
+        return this.getTrieOfTargetWord().remove(key);
+    }
 }

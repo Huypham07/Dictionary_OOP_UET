@@ -19,8 +19,7 @@ public class Word {
     }
 
     public void setWordExplain(ArrayList<String> word_explain) {
-        this.word_explain = new ArrayList<>();
-        this.word_explain.addAll(word_explain);
+        this.word_explain = new ArrayList<>(word_explain);
     }
 
     public void addExplain(String newExplain) {

@@ -1,17 +1,10 @@
 import java.io.IOException;
 import java.util.*;
 
-public class DictionaryCommandline {
-    private Dictionary dictionary;
-    private DictionaryManagement dict_manager;
-    private Scanner sc;
-
-
+public class DictionaryCommandline extends DictionaryManagement{
     // Constructor
     public DictionaryCommandline() {
-        this.dictionary = new Dictionary();
-        this.dict_manager = new DictionaryManagement(this.dictionary);
-        sc = new Scanner(System.in);
+        super();
     }
 
     // METHODS
@@ -23,7 +16,7 @@ public class DictionaryCommandline {
     }
 
     public void showAllWords() {
-        ArrayList<Word> allWords = new ArrayList<>(this.dictionary.getDict());
+        ArrayList<Word> allWords = new ArrayList<>(this.getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
             System.out.println("Dictionary is empty.");
@@ -60,7 +53,7 @@ public class DictionaryCommandline {
                 }
                 if(page < totalPages){
                     System.out.println("Press Enter to continue to the next page....");
-                    sc.nextLine();
+                    this.sc.nextLine();
                 }
 
             }
@@ -74,19 +67,19 @@ public class DictionaryCommandline {
 
     private String getUserSortOption() {
         System.out.println("Do you want to sort word list by English?\n Enter YES or NO: ");
-        return sc.nextLine().toUpperCase();
+        return this.sc.nextLine().toUpperCase();
     }
 
     private boolean getUserSortOrder(){
         System.out.println("You want to sort word list by Ascending (ASC) or Descending (DES)?");
-        String order = sc.nextLine().toUpperCase();
+        String order = this.sc.nextLine().toUpperCase();
         return order.equals("ASC");
     }
 
     private int getUsertPageSize() {
         System.out.println("Enter number of word per page: ");
-        int pageSize = sc.nextInt();
-        sc.nextLine();
+        int pageSize = this.sc.nextInt();
+        this.sc.nextLine();
         return pageSize;
     }
 
@@ -135,7 +128,7 @@ public class DictionaryCommandline {
             // Exception handling
             try {
                 System.out.print("Select a number between 0 and 9: ");
-                select = Integer.parseInt(sc.nextLine());
+                select = Integer.parseInt(this.sc.nextLine());
                 chooseNumber = true;
             } catch (NumberFormatException e) {
                 System.out.println("Oops...!Action not supported.");
@@ -145,14 +138,28 @@ public class DictionaryCommandline {
         } while (!chooseNumber);
 
         switch (select) {
-            case 0: return false;
+            case 0: {
+                System.out.println("  --- Bye !!! ---");
+                return false;
+            }
 
             case 1: {
                 cls();
-                this.dict_manager.insertFromCommandline();
+                this.insertFromCommandline();
             }
             break;
 
+            case 2: {
+                cls();
+                this.removeWord();
+            }
+            break;
+
+            case 3: {
+                cls();
+                this.updateWord();
+            }
+            break;
 
             case 4: {
                 cls();
@@ -162,11 +169,26 @@ public class DictionaryCommandline {
 
             case 5: {
                 cls();
-                this.dict_manager.Lookup();
+                this.Lookup();
             }
             break;
 
-            case 8: return this.dict_manager.insertFromFile();
+            case 6: {
+                cls();
+                this.searcher();
+            }
+            break;
+
+            case 8: {
+                cls();
+                this.insertFromFile();
+            }
+            break;
+
+            case 9: {
+                cls();
+                this.dictionaryExportToFile();
+            }
 
             default:
             {
@@ -175,8 +197,9 @@ public class DictionaryCommandline {
             }
         }
 
+        System.out.println();
         System.out.print("Press ENTER to back to Menu");
-        sc.nextLine();
+        this.sc.nextLine();
         return true;
     }
     /*
