@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 public class Trie {
     static class TrieNode {
         static final int ALPHABET_SIZE = 26;
