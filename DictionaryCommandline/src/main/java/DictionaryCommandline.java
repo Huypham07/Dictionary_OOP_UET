@@ -179,6 +179,12 @@ public class DictionaryCommandline extends DictionaryManagement{
             }
             break;
 
+            case 7: {
+                cls();
+                System.out.println("Sorry");
+            }
+            break;
+
             case 8: {
                 cls();
                 this.insertFromFile();
@@ -189,6 +195,7 @@ public class DictionaryCommandline extends DictionaryManagement{
                 cls();
                 this.dictionaryExportToFile();
             }
+            break;
 
             default:
             {
@@ -202,12 +209,5 @@ public class DictionaryCommandline extends DictionaryManagement{
         this.sc.nextLine();
         return true;
     }
-    /*
-    dictionaryBasic
 
-    dictionaryAdvanced
-
-    dictionarySearcher
-
-     */
 }

@@ -161,6 +161,7 @@ public class DictionaryManagement extends Dictionary{
                 bw.write("\n");
             }
 
+            System.out.println("Export successful !!");
             bw.close();
             fw.close();
             return true;
