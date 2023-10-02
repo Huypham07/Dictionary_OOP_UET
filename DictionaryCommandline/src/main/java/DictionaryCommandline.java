@@ -93,7 +93,7 @@ public class DictionaryCommandline extends DictionaryManagement{
 
     private void displayHeader(){
         System.out.println("No | English         | Vietnamese");
-        System.out.println("-------------------------------");
+        System.out.println("-----------------------------------");
     }
 
     private void displayWord(Word word, int index){
