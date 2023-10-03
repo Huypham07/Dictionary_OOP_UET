@@ -107,6 +107,12 @@ public class DictionaryCommandline extends DictionaryManagement{
         System.out.println();
     }
 
+    // Game mod
+    public void GameMode() {
+        System.out.println("Sorry");
+    }
+
+    // advanced
     public boolean dictionaryAdvanced() throws Exception{
         cls();
         System.out.println("Welcome to My Application!");
@@ -146,56 +152,47 @@ public class DictionaryCommandline extends DictionaryManagement{
             case 1: {
                 cls();
                 this.insertFromCommandline();
-            }
-            break;
+            } break;
 
             case 2: {
                 cls();
                 this.removeWord();
-            }
-            break;
+            } break;
 
             case 3: {
                 cls();
                 this.updateWord();
-            }
-            break;
+            } break;
 
             case 4: {
                 cls();
                 showAllWords();
-            }
-            break;
+            } break;
 
             case 5: {
                 cls();
                 this.Lookup();
-            }
-            break;
+            } break;
 
             case 6: {
                 cls();
                 this.searcher();
-            }
-            break;
+            } break;
 
             case 7: {
                 cls();
-                System.out.println("Sorry");
-            }
-            break;
+                this.GameMode();
+            } break;
 
             case 8: {
                 cls();
                 this.insertFromFile();
-            }
-            break;
+            } break;
 
             case 9: {
                 cls();
                 this.dictionaryExportToFile();
-            }
-            break;
+            } break;
 
             default:
             {

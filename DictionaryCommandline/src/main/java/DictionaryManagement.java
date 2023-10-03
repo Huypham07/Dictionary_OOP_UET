@@ -69,10 +69,9 @@ public class DictionaryManagement extends Dictionary{
 
         System.out.println();
 
-        Word w = new Word();
-
         for (int i = 1; i <= n; i++) {
 
+            Word w = new Word();
             System.out.print("Please enter English word: ");
             String English = this.sc.nextLine();
             while(!validWord(English))
