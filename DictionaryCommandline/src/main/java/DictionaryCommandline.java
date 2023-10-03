@@ -48,7 +48,7 @@ public class DictionaryCommandline extends DictionaryManagement{
             int pageSize = getUsertPageSize(); // Number of word per page
             int totalPages = (int)Math.ceil((double) allWords.size() / pageSize);
 
-            for(int page = 1; page <= totalPages; page++){
+            for (int page = 1; page <= totalPages; page++) {
                 System.out.println("Page " + page);
                 displayHeader();
                 for(int i = (page - 1) * pageSize; i < Math.min(page * pageSize, allWords.size()); i++){
