@@ -19,25 +19,29 @@ public class DictionaryCommandline extends DictionaryManagement{
         ArrayList<Word> allWords = new ArrayList<>(this.getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
-            System.out.println("Dictionary is empty.");
+            System.out.println("Dictionary is empty.\nPlease add new words first!");
             return;
         }
 
         // Exception handling
         try {
             // Sort option
-            String userOption = getUserSortOption();
+            String userOption;
 
-            if(userOption.equals("YES")) {
-                // Order option
-                boolean sortOrder = getUserSortOrder();
-                sortWords(allWords, Comparator.comparing(Word::getWord_target), sortOrder);
-                System.out.println("Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
-            } else if (userOption.equals("NO")) {
-                System.out.println("Word list will be shown on default order");
-            } else {
-                System.out.println("Invalid option. Word list will be shown on default order");
-            }
+            do{
+                userOption = getUserSortOption();
+                if(userOption.equals("YES")) {
+                    // Order option
+                    System.out.print("You want to sort word list by Ascending (ASC) or Descending (DES)? ");
+                    boolean sortOrder = getUserSortOrder();
+                    sortWords(allWords, Comparator.comparing(Word::getWord_target), sortOrder);
+                    System.out.println("Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
+                } else if (userOption.equals("NO")) {
+                    System.out.println("Word list will be shown on default order");
+                } else {
+                    System.out.println("Invalid option!");
+                }
+            } while(!userOption.equals("YES") && !userOption.equals("NO"));
 
             // Page setting
 
@@ -52,7 +56,7 @@ public class DictionaryCommandline extends DictionaryManagement{
                     displayWord(word, i + 1);
                 }
                 if(page < totalPages){
-                    System.out.println("Press Enter to continue to the next page....");
+                    System.out.print("Press Enter to continue to the next page....");
                     this.sc.nextLine();
                 }
 
@@ -66,21 +70,43 @@ public class DictionaryCommandline extends DictionaryManagement{
     }
 
     private String getUserSortOption() {
-        System.out.println("Do you want to sort word list by English?\n Enter YES or NO: ");
+        System.out.print("Do you want to sort word list? Please enter YES or NO: ");
         return this.sc.nextLine().toUpperCase();
     }
 
     private boolean getUserSortOrder(){
-        System.out.println("You want to sort word list by Ascending (ASC) or Descending (DES)?");
-        String order = this.sc.nextLine().toUpperCase();
-        return order.equals("ASC");
+        try{
+            String userOption = this.sc.nextLine().toUpperCase();
+            if(userOption.equals("ASC")){
+                return true;
+            } else if(userOption.equals("DES")){
+                return false;
+            } else {
+                throw new InputMismatchException();
+            }
+        } catch (InputMismatchException e){
+            System.out.print("Invalid option!\nPlease enter ASC or DES: ");
+            return getUserSortOrder();
+        }
     }
 
     private int getUsertPageSize() {
-        System.out.println("Enter number of word per page: ");
-        int pageSize = this.sc.nextInt();
-        this.sc.nextLine();
-        return pageSize;
+        int userInput = 0; // Number of word per page
+        boolean isValidInput = false;
+        System.out.print("Enter number of word per page: ");
+        while(!isValidInput){
+            try{
+                userInput = Integer.parseInt(this.sc.nextLine());
+                if(userInput <= 0){
+                    System.out.print("Invalid input!\nPlease enter a positive number: ");
+                } else {
+                    isValidInput = true;
+                }
+            } catch (NumberFormatException e){
+                System.out.print("Invalid input!\nPlease enter a positive number: ");
+            }
+        }
+        return userInput;
     }
 
     private void sortWords(ArrayList<Word> words, Comparator<Word> comparator, boolean ascending){
