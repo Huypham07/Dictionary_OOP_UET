@@ -16,7 +16,7 @@ public class DictionaryCommandline extends DictionaryManagement{
     }
 
     public void showAllWords() {
-        ArrayList<Word> allWords = new ArrayList<>(this.getDict());
+        ArrayList<Word> allWords = new ArrayList<>(this.getDictionary().getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
             System.out.println("Dictionary is empty.\nPlease add new words first!");

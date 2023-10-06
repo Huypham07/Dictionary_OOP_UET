@@ -1,15 +1,20 @@
 import java.util.*;
 import java.io.*;
-public class DictionaryManagement extends Dictionary{
+public class DictionaryManagement {
+
+    private Dictionary dictionary;
     protected Scanner sc;
 
     // constructors
     public DictionaryManagement() {
-        super();
         this.sc = new Scanner(System.in);
+        this.dictionary = new Dictionary();
     }
 
     //------------------METHOD-----------------
+    public Dictionary getDictionary() {
+        return this.dictionary;
+    }
     // check valid word
     public boolean validWord(String s) {
         for(int i = 0; i < s.length(); i++)
@@ -34,7 +39,7 @@ public class DictionaryManagement extends Dictionary{
             w_target = this.sc.nextLine();
         }
 
-        Word foundWord = this.findWord(w_target);
+        Word foundWord = this.dictionary.findWord(w_target);
         if (foundWord == null) {
             System.out.println("Sorry, We did not find your word in our Dictionary!");
         } else {
@@ -96,7 +101,7 @@ public class DictionaryManagement extends Dictionary{
                     cnt++;
                 }
             } while(!endOfExplain);
-            this.insertWord(w);
+            this.dictionary.insertWord(w);
         }
     }
 
@@ -123,7 +128,7 @@ public class DictionaryManagement extends Dictionary{
                     }
 
                     if (validWord(w_target)) {
-                        this.insertWord(temp);
+                        this.dictionary.insertWord(temp);
                     } else {
                         System.out.println("Error!!! " + w_target + " is not an English word!!!. Can't import this word to the dictionary.");
                         System.out.println();
@@ -132,7 +137,7 @@ public class DictionaryManagement extends Dictionary{
             }
 
             System.out.println("Import successful !!");
-            System.out.println("The dictionary have " + this.getDict().size() + " words");
+            System.out.println("The dictionary have " + this.dictionary.getDict().size() + " words");
             fr.close();
             br.close();
             return true;
@@ -149,7 +154,7 @@ public class DictionaryManagement extends Dictionary{
             FileWriter fw = new FileWriter("data/exported_dictionary.txt");
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (Word w : this.getDict()) {
+            for (Word w : this.dictionary.getDict()) {
                 bw.write(w.getWord_target() + "\t");
 
                 ArrayList<String> w_explain = w.getWord_explain();
@@ -184,7 +189,7 @@ public class DictionaryManagement extends Dictionary{
             oldEnglishWord = this.sc.nextLine();
         }
 
-        Word w = this.findWord(oldEnglishWord);
+        Word w = this.dictionary.findWord(oldEnglishWord);
         if (w == null) {
             System.out.println("We didn't find the word " + oldEnglishWord);
         } else {
@@ -216,8 +221,8 @@ public class DictionaryManagement extends Dictionary{
                 String newEnglishWord = this.sc.nextLine();
                 w.setWordTarget(newEnglishWord);
 
-                this.getTrieOfTargetWord().remove(oldEnglishWord);
-                this.insertWord(w);
+                this.dictionary.getTrieOfTargetWord().remove(oldEnglishWord);
+                this.dictionary.insertWord(w);
             } if (select == 2){
                 System.out.println("Give us the new meaning of English word");
                 String newMeaning = this.sc.nextLine();
@@ -257,7 +262,7 @@ public class DictionaryManagement extends Dictionary{
             English = this.sc.nextLine();
         }
 
-        if (this.deleteWord(English)) {
+        if (this.dictionary.deleteWord(English)) {
             System.out.println("Successful");
             System.out.println("The word " + English + " has been removed!");
         } else {
@@ -276,7 +281,7 @@ public class DictionaryManagement extends Dictionary{
             }
             prefix = this.sc.nextLine();
         }
-        ArrayList<String> result = this.getTrieOfTargetWord().findWordsWithPrefix(prefix);
+        ArrayList<String> result = this.dictionary.getTrieOfTargetWord().findWordsWithPrefix(prefix);
 
         System.out.println("We found " + result.size() + " words beginning with " + prefix + ": ");
 
@@ -289,7 +294,7 @@ public class DictionaryManagement extends Dictionary{
         if (ans.toLowerCase().equals("yes")) {
             System.out.println(result.size() + " results are:");
             for (int i = 1; i <= result.size(); i++) {
-                Word w = this.findWord(result.get(i-1));
+                Word w = this.dictionary.findWord(result.get(i-1));
                 System.out.printf("%-3s| %-15s |", i, w.getWord_target());
 
                 for(String meaning : w.getWord_explain()){
