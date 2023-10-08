@@ -1,5 +1,5 @@
+package manageData.TrieTree;
 import java.util.ArrayList;
-import java.util.List;
 public class Trie {
     static final int ALPHABET_SIZE = 26;
     static class TrieNode {
