@@ -1,4 +1,4 @@
-package GUI;
+package GUI.roundComponent;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 
-public class PanelRound extends JPanel {
+public class RoundedPanel extends JPanel {
 
     public int getRoundTopLeft() {
         return roundTopLeft;
@@ -52,7 +52,16 @@ public class PanelRound extends JPanel {
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
-    public PanelRound() {
+    public RoundedPanel() {
+        setOpaque(false);
+    }
+
+    public RoundedPanel(int roundTopLeft, int roundTopRight, int roundBottomLeft, int roundBottomRight) {
+        this.roundTopLeft = roundTopLeft;
+        this.roundTopRight = roundTopRight;
+        this.roundBottomLeft = roundBottomLeft;
+        this.roundBottomRight = roundBottomRight;
+        repaint();
         setOpaque(false);
     }
 
