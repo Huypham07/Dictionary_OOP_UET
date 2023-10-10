@@ -11,6 +11,5 @@ public class Main {
 //            isContinue = cmdDict.dictionaryAdvanced();
 //        } while (isContinue);
 //        new DictionaryUI();
-        new DictionaryGUI().setVisible(true);
     }
 }

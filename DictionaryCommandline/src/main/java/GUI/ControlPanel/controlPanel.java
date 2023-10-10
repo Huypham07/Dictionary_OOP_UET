@@ -42,6 +42,11 @@ public class controlPanel extends RoundedPanel {
         Tiltle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         Translate.setText("button1");
+        Translate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TranslateActionPerformed(evt);
+            }
+        });
 
         AddWord.setText("button2");
 
@@ -105,6 +110,10 @@ public class controlPanel extends RoundedPanel {
     private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ExportActionPerformed
+
+    private void TranslateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TranslateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TranslateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

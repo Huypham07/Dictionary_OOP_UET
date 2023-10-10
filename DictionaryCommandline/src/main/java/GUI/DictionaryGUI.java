@@ -1,13 +1,16 @@
 package GUI;
 
 import javax.swing.*;
-import net.miginfocom.swing.MigLayout;
-import GUI.ControlPanel.controlPanel;
+import GUI.ControlPanel.LookupGUI;
+import Dict.DictionaryManagement;
+import java.awt.CardLayout;
 
 public class DictionaryGUI extends javax.swing.JFrame {
-
-//    private MigLayout layout;
-//    private controlPanel ctrlPanel;
+    private CardLayout cardLayout;
+            
+    private DictionaryManagement dictionaryManagement;
+    
+    private LookupGUI lookupGUI;
     
     public DictionaryGUI() {
         initComponents();
@@ -17,11 +20,18 @@ public class DictionaryGUI extends javax.swing.JFrame {
     private void init() {
         ImageIcon iconApp = new ImageIcon("src/main/java/data/img/dictionary.png");
         setIconImage(iconApp.getImage());
-//        layout = new MigLayout("fill", "0[]0", "0[fill, top]0");
-//        bg.setLayout(layout);
-//        ctrlPanel = new controlPanel();
-//        
-//        bg.add(ctrlPanel, "h 120!, wrap");
+        
+        dictionaryManagement = new DictionaryManagement();
+        dictionaryManagement.insertFromFile();
+        
+        cardLayout = new CardLayout(0, 0);
+        
+        lookupGUI = new LookupGUI();
+        lookupGUI.setDictionay(dictionaryManagement);
+        
+        workPanel.setLayout(cardLayout);
+        workPanel.add("lookup",lookupGUI);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -31,7 +41,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         button1 = new GUI.roundComponent.Button();
         controlPanel1 = new GUI.ControlPanel.controlPanel();
         resultPanel1 = new GUI.ResultPanel.resultPanel();
-        searchGUI1 = new GUI.ControlPanel.SearchGUI();
+        workPanel = new javax.swing.JPanel();
 
         button1.setText("button1");
 
@@ -40,21 +50,34 @@ public class DictionaryGUI extends javax.swing.JFrame {
         setBackground(new java.awt.Color(245, 245, 245));
         setResizable(false);
 
+        workPanel.setBackground(new java.awt.Color(255, 255, 255));
+        workPanel.setOpaque(false);
+
+        javax.swing.GroupLayout workPanelLayout = new javax.swing.GroupLayout(workPanel);
+        workPanel.setLayout(workPanelLayout);
+        workPanelLayout.setHorizontalGroup(
+            workPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        workPanelLayout.setVerticalGroup(
+            workPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 576, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout resultPanel1Layout = new javax.swing.GroupLayout(resultPanel1);
         resultPanel1.setLayout(resultPanel1Layout);
         resultPanel1Layout.setHorizontalGroup(
             resultPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resultPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(searchGUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(95, 95, 95)
+                .addComponent(workPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         resultPanel1Layout.setVerticalGroup(
             resultPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resultPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchGUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(496, Short.MAX_VALUE))
+                .addComponent(workPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,11 +106,6 @@ public class DictionaryGUI extends javax.swing.JFrame {
 
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -118,6 +136,6 @@ public class DictionaryGUI extends javax.swing.JFrame {
     private GUI.roundComponent.Button button1;
     private GUI.ControlPanel.controlPanel controlPanel1;
     private GUI.ResultPanel.resultPanel resultPanel1;
-    private GUI.ControlPanel.SearchGUI searchGUI1;
+    private javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }

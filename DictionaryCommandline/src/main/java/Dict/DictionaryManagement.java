@@ -11,7 +11,10 @@ public class DictionaryManagement {
     private Trie TrieOfDict;
 
     // constructors
-    public DictionaryManagement() {}
+    public DictionaryManagement() {
+        this.dictionary = new Dictionary();
+        TrieOfDict = this.dictionary.getTrieOfTargetWord();
+    }
     public DictionaryManagement(Dictionary dictionary) {
         this.dictionary = dictionary;
         TrieOfDict = this.dictionary.getTrieOfTargetWord();
@@ -84,5 +87,81 @@ public class DictionaryManagement {
         if (id < 0) return false;
         this.dictionary.getDict().remove(id);
         return this.TrieOfDict.remove(key);
+    }
+    
+    //search prefix
+    public ArrayList<String> findWordsWithPrefix(String key) {
+        return this.TrieOfDict.findWordsWithPrefix(key);
+    }
+    
+    //insert from file
+    public boolean insertFromFile() {
+        try {
+            FileReader fr = new FileReader("src/main/java/data/dictionary.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\t");
+
+                if (parts.length >= 1) {
+                    String w_target = parts[0];
+                    ArrayList<String> w_explain = new ArrayList<>();
+                    Word temp = new Word();
+                    temp.setWordTarget(w_target);
+
+                    if (parts.length > 1) {
+                        for (int i = 1; i < parts.length; i++) {
+                            w_explain.add(parts[i]);
+                        }
+                        temp.setWordExplain(w_explain);
+                    }
+
+                    if (validWord(w_target)) {
+                        this.insertWord(temp);
+                    } else {
+                        System.out.println("Error!!! " + w_target + " is not an English word!!!. Can't import this word to the dictionary.");
+                        System.out.println();
+                    }
+                }
+            }
+
+            System.out.println("Import successful !!");
+            System.out.println("The dictionary have " + this.getDictionary().getDict().size() + " words");
+            fr.close();
+            br.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Import failed!!!");
+            System.out.println("Sorry. An error occurred while importing data.");
+            return false;
+        }
+    }
+        //export to file
+    public boolean dictionaryExportToFile(){
+        try {
+            FileWriter fw = new FileWriter("src/main/java/data/exported_dictionary.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Word w : this.getDictionary().getDict()) {
+                bw.write(w.getWord_target() + "\t");
+
+                ArrayList<String> w_explain = w.getWord_explain();
+                for (String meaning : w_explain) {
+                    bw.write(meaning + "\t");
+                }
+
+                bw.write("\n");
+            }
+
+            System.out.println("Export successful !!");
+            bw.close();
+            fw.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Export failed!!!");
+            System.out.println("Sorry. An error occurred while exporting data.");
+            return false;
+        }
     }
 }
