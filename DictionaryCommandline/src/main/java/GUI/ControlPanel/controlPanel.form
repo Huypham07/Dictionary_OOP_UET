@@ -25,22 +25,22 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Logo" min="-2" pref="108" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="Translate" min="-2" max="-2" attributes="0"/>
+                      <Component id="Translate" min="-2" pref="103" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="AddWord" min="-2" max="-2" attributes="0"/>
+                      <Component id="AddWord" min="-2" pref="103" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="EditWord" min="-2" max="-2" attributes="0"/>
+                      <Component id="EditWord" min="-2" pref="103" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="Learn" min="-2" max="-2" attributes="0"/>
+                      <Component id="Learn" min="-2" pref="103" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="Export" min="-2" max="-2" attributes="0"/>
+                      <Component id="Export" min="-2" pref="101" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="Tiltle" max="32767" attributes="0"/>
+                  <Component id="Tiltle" min="-2" pref="665" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="circleComponent1" pref="106" max="32767" attributes="0"/>
+              <Component id="circleComponent1" pref="103" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -54,14 +54,14 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Logo" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="Tiltle" min="-2" pref="49" max="-2" attributes="0"/>
-                              <EmptySpace pref="14" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Learn" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="EditWord" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="AddWord" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="Translate" alignment="1" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Translate" pref="47" max="32767" attributes="0"/>
+                                  <Component id="AddWord" max="32767" attributes="0"/>
+                                  <Component id="EditWord" max="32767" attributes="0"/>
+                                  <Component id="Learn" max="32767" attributes="0"/>
                                   <Component id="Export" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -77,7 +77,7 @@
     <Container class="GUI.roundComponent.circleComponent" name="Logo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\huyho\OneDrive\Desktop\Dictionary\DictionaryCommandline\src\main\java\data\dictionary.png"/>
+          <Image iconType="2" name="C:\Users\huyho\OneDrive\Desktop\Dictionary\DictionaryCommandline\src\main\java\data\img\dictionary.png"/>
         </Property>
       </Properties>
 
@@ -103,80 +103,33 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="GUI.ControlPanel.DButton" name="Translate">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Container class="GUI.ControlPanel.DButton" name="AddWord">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Container class="GUI.ControlPanel.DButton" name="EditWord">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Container class="GUI.ControlPanel.DButton" name="Learn">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Container class="GUI.ControlPanel.DButton" name="Export">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
+    <Component class="GUI.roundComponent.Button" name="Translate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="button1"/>
+      </Properties>
+    </Component>
+    <Component class="GUI.roundComponent.Button" name="AddWord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="button2"/>
+      </Properties>
+    </Component>
+    <Component class="GUI.roundComponent.Button" name="EditWord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="button3"/>
+      </Properties>
+    </Component>
+    <Component class="GUI.roundComponent.Button" name="Learn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="button4"/>
+      </Properties>
+    </Component>
+    <Component class="GUI.roundComponent.Button" name="Export">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="button5"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -1,4 +1,3 @@
-
 package GUI.roundComponent;
 
 import java.awt.AlphaComposite;
