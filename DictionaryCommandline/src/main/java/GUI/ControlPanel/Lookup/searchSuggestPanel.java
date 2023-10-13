@@ -1,14 +1,15 @@
-package GUI.ControlPanel;
+package GUI.ControlPanel.Lookup;
 
 import GUI.roundComponent.RoundedPanel;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import net.miginfocom.swing.MigLayout;
 
 public class searchSuggestPanel extends RoundedPanel {
     private EventClick event;
+    private int SelectedIndex = -1;
     
     public void addEventClick(EventClick event) {
         this.event = event;
@@ -21,6 +22,8 @@ public class searchSuggestPanel extends RoundedPanel {
     }
 
     public void setSuggestData(ArrayList<String> data) {
+        SelectedIndex = -1;
+        showSelected();
         this.removeAll();
         int cnt = 0;
         for (String d : data) {
@@ -48,6 +51,43 @@ public class searchSuggestPanel extends RoundedPanel {
         return getComponentCount();
     }
     
+    public void keyUp() {
+        int size = getComponentCount();
+        if (size > 0) {
+            if (SelectedIndex <= 0) {
+                SelectedIndex = size-1;
+            } else {
+                SelectedIndex--;
+            }
+            showSelected();
+        }
+    }
+    
+    public void keyDown() {
+        int size = getComponentCount();
+        if (size > 0) {
+            if (SelectedIndex >= size-1) {
+                SelectedIndex = 0;
+            } else {
+                SelectedIndex++;
+            }
+            showSelected();
+        }
+    }
+    
+    private void showSelected() {
+        Component com[] = getComponents();
+        for (int i = 0; i < com.length; i++) {
+            ((SearchItem)com[i]).setSelected(i == SelectedIndex);
+        }
+    }
+    
+    public String getSelectedText() {
+        if (SelectedIndex != -1 && SelectedIndex < getComponentCount()) {
+            return ((SearchItem)getComponent(SelectedIndex)).getText();
+        }
+        return "";
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -7,8 +7,7 @@ import manageData.Datatype.Word;
 public class DictionaryCommandline extends DictionaryManagement{
     private Scanner sc;
     // Constructor
-    public DictionaryCommandline(Dictionary dictionary) {
-        super(dictionary);
+    public DictionaryCommandline() {
         sc = new Scanner(System.in);
     }
 
@@ -18,18 +17,6 @@ public class DictionaryCommandline extends DictionaryManagement{
     private static void cls() throws IOException, InterruptedException
     {
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    }
-
-    // check valid word
-    public boolean validWord(String s) {
-        for(int i = 0; i < s.length(); i++)
-        {
-            if (!Character.isLetter(s.charAt(i))) {
-                System.out.println("An English word can only have alphabet character!!!");
-                return false;
-            }
-        }
-        return !s.isEmpty();
     }
 
     // Show ALl
@@ -334,7 +321,7 @@ public class DictionaryCommandline extends DictionaryManagement{
             }
             prefix = this.sc.nextLine();
         }
-        ArrayList<String> result = this.getTrieOfDict().findWordsWithPrefix(prefix);
+        ArrayList<String> result = this.findWordsWithPrefix(prefix);
 
         System.out.println("We found " + result.size() + " words beginning with " + prefix + ": ");
 

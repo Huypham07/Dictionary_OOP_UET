@@ -1,4 +1,4 @@
-package GUI.roundComponent;
+package GUI.ControlPanel.Lookup;
 
 public interface EventCallBack {
 

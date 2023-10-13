@@ -7,7 +7,7 @@ import java.awt.CardLayout;
 
 public class DictionaryGUI extends javax.swing.JFrame {
     private CardLayout cardLayout;
-            
+    
     private DictionaryManagement dictionaryManagement;
     
     private LookupGUI lookupGUI;
@@ -40,7 +40,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
 
         button1 = new GUI.roundComponent.Button();
         controlPanel1 = new GUI.ControlPanel.controlPanel();
-        resultPanel1 = new GUI.ResultPanel.resultPanel();
+        resultPanel1 = new GUI.ControlPanel.resultPanel();
         workPanel = new javax.swing.JPanel();
 
         button1.setText("button1");
@@ -135,7 +135,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.Button button1;
     private GUI.ControlPanel.controlPanel controlPanel1;
-    private GUI.ResultPanel.resultPanel resultPanel1;
+    private GUI.ControlPanel.resultPanel resultPanel1;
     private javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }

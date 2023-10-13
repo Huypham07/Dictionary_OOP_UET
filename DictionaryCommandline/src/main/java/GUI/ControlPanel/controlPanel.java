@@ -34,7 +34,7 @@ public class controlPanel extends RoundedPanel {
 
         setBackground(new java.awt.Color(29, 42, 87));
 
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\huyho\\OneDrive\\Desktop\\Dictionary\\DictionaryCommandline\\src\\main\\java\\data\\img\\dictionary.png")); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\huyho\\OneDrive\\Desktop\\Dictionary\\DictionaryCommandline\\src\\main\\java\\data\\img\\logo.png")); // NOI18N
 
         Tiltle.setFont(new java.awt.Font("Segoe UI Black", 3, 44)); // NOI18N
         Tiltle.setForeground(new java.awt.Color(255, 255, 255));

@@ -1,4 +1,4 @@
-package GUI.ControlPanel;
+package GUI.ControlPanel.Lookup;
 
 import GUI.roundComponent.RoundedPanel;
 import java.awt.Color;
@@ -22,6 +22,18 @@ public class SearchItem extends javax.swing.JPanel {
         LText.setText(data);
     }
 
+    public void setSelected(boolean act) {
+        if (act) {
+            setBackground(Color.WHITE);
+        } else {
+            setBackground(new Color(245, 242, 242));
+        }
+    }
+    
+    public String getText() {
+        return LText.getText();
+    }
+    
     private void addEventMouse(Component com) {
         com.addMouseListener(new MouseAdapter() {
             @Override

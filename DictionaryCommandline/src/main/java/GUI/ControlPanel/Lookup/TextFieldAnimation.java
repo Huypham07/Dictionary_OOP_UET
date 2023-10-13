@@ -1,4 +1,4 @@
-package GUI.roundComponent;
+package GUI.ControlPanel.Lookup;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -11,16 +11,13 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -56,6 +53,10 @@ public class TextFieldAnimation extends JTextField {
     private EventCallBack callBack;
     private Thread thread;
     private final Animator animator;
+    
+    public boolean getShow() {
+        return this.show;
+    }
 
     public TextFieldAnimation() {
         super.setBackground(new Color(255, 255, 255, 0)); //  Remove background
@@ -76,44 +77,7 @@ public class TextFieldAnimation extends JTextField {
                 }
             }
         });
-        //  Create mouse click
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                if (SwingUtilities.isLeftMouseButton(me)) {
-                    if (checkMouseOver(me.getPoint())) {
-                        if (!animator.isRunning()) {
-                            if (show) {
-                                setEditable(true);
-                                show = false;
-                                location = 0;
-                                animator.start();
-                                if (thread != null) {
-                                    thread.interrupt();
-                                }
-                                if (event != null) {
-                                    event.onCancel();
-                                }
-                            } else {
-                                setEditable(false);
-                                show = true;
-                                location = getWidth();
-                                animator.start();
-                                if (event != null) {
-                                    thread = new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            event.onPressed(callBack);
-                                        }
-                                    });
-                                    thread.start();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+        
         callBack = new EventCallBack() {
             @Override
             public void done() {
@@ -139,6 +103,43 @@ public class TextFieldAnimation extends JTextField {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
+    }
+    
+    public void execute_searching() {
+        if(!animator.isRunning()) {
+//            if (!show) {//click to start
+                setEditable(false);
+                show = true;
+                location = getWidth();
+                animator.start();
+                if (event != null) {
+                    thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            event.onPressed(callBack);
+                        }
+                    });
+                    thread.start();
+                }
+//            }
+        }
+    }
+    
+    public void close_searching() {
+        if(!animator.isRunning()) {
+//            if (show) {//close
+                setEditable(true);
+                show = false;
+                location = 0;
+                animator.start();
+                if (thread != null) {
+                    thread.interrupt();
+                }
+                if (event != null) {
+                    event.onCancel();
+                }
+//            }
+        }
     }
 
     @Override
@@ -212,7 +213,7 @@ public class TextFieldAnimation extends JTextField {
         return alpha;
     }
 
-    private boolean checkMouseOver(Point mouse) {
+    public boolean checkMouseOver(Point mouse) {
         int width = getWidth();
         int height = getHeight();
         int marginButton = 5;

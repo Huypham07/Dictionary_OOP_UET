@@ -59,7 +59,7 @@
   <SubComponents>
     <Component class="GUI.ControlPanel.controlPanel" name="controlPanel1">
     </Component>
-    <Container class="GUI.ResultPanel.resultPanel" name="resultPanel1">
+    <Container class="GUI.ControlPanel.resultPanel" name="resultPanel1">
 
       <Layout>
         <DimensionLayout dim="0">

@@ -15,10 +15,6 @@ public class DictionaryManagement {
         this.dictionary = new Dictionary();
         TrieOfDict = this.dictionary.getTrieOfTargetWord();
     }
-    public DictionaryManagement(Dictionary dictionary) {
-        this.dictionary = dictionary;
-        TrieOfDict = this.dictionary.getTrieOfTargetWord();
-    }
 
     // getter
     public Dictionary getDictionary() {
@@ -34,7 +30,9 @@ public class DictionaryManagement {
     public boolean validWord(String s) {
         for(int i = 0; i < s.length(); i++)
         {
-            if (!Character.isLetter(s.charAt(i))) {
+            char ch = s.charAt(i);
+            if (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))) {
+                System.out.println("An English word can only have alphabet character!!!");
                 return false;
             }
         }
@@ -111,10 +109,12 @@ public class DictionaryManagement {
                     temp.setWordTarget(w_target);
 
                     if (parts.length > 1) {
-                        for (int i = 1; i < parts.length; i++) {
+                        for (int i = 1; i < parts.length-1; i++) {
                             w_explain.add(parts[i]);
                         }
                         temp.setWordExplain(w_explain);
+                        
+                        temp.setWordType(parts[parts.length-1]);
                     }
 
                     if (validWord(w_target)) {
@@ -163,5 +163,9 @@ public class DictionaryManagement {
             System.out.println("Sorry. An error occurred while exporting data.");
             return false;
         }
+    }
+    public static void main(String[] args) {
+        DictionaryManagement dc = new DictionaryManagement();
+        System.out.println(dc.validWord("ư"));
     }
 }

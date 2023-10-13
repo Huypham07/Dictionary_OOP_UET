@@ -1,4 +1,4 @@
-package GUI.ControlPanel;
+package GUI.ControlPanel.Lookup;
 
 public interface EventClick {
 

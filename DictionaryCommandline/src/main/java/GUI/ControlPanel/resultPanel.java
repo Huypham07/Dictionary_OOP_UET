@@ -1,4 +1,4 @@
-package GUI.ResultPanel;
+package GUI.ControlPanel;
 
 import GUI.roundComponent.*;
 
