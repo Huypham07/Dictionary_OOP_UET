@@ -26,6 +26,7 @@ public class Translate {
         languages.add("Spanish");
         languages.add("French");
         languages.add("Japanese");
+        languages.add("Chinese");
     }
 
     public List<String> getLanguages() {
@@ -44,6 +45,8 @@ public class Translate {
                 return "fr";
             case "Japanese":
                 return "ja";
+            case "Chinese":
+                return "zh";
             default:
                 return "en";
         }
@@ -90,15 +93,18 @@ public class Translate {
         // test translateFile function
         Translate translate = new Translate();
         String sourceFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_EnglishOnly.txt";
-        /String targetFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_translated_Vietnamese.txt";
+        String targetFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_translated_Vietnamese.txt";
 
         translate.translateFile("English", "Vietnamese", sourceFile, targetFile);
 
         //test translateWord function
+        /*
         String textToTranslate = "Hello, Friend";
         System.out.println(translateWord(textToTranslate, "en", "vi"));
         System.out.println(translateWord(textToTranslate, "en", "es"));
         System.out.println(translateWord(textToTranslate, "en", "fr"));
         System.out.println(translateWord(textToTranslate, "en", "ja"));
+        System.out.println(translateWord(textToTranslate, "en", "zh"));
+         */
     }
 }
