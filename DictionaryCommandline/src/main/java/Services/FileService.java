@@ -3,30 +3,27 @@ package Services;
 import java.io.*;
 
 public class FileService {
-    public static void writeFile(File sourceFile, String destinationPath) {
-        try (FileInputStream fis = new FileInputStream(sourceFile);
-             FileOutputStream fos = new FileOutputStream(destinationPath)) {
-
-            int i;
-            while ((i = fis.read()) != -1) {
-                fos.write(i);
-            }
+    public static boolean writeFile(String content, File destinationFile) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(destinationFile))) {
+            bw.write(content);
+            return true;
         } catch (IOException e) {
-            System.err.println("Error copying file: " + e.getMessage());
+            System.err.println("Error writing file: " + e.getMessage());
+            return false;
         }
     }
 
-    public static String readFile(File sourceFile) {
-        StringBuilder contentBuilder = new StringBuilder();
+    public static boolean readFile(File sourceFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(sourceFile))) {
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
-                contentBuilder.append(sCurrentLine).append("\n");
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
             }
+            return true;
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
+            return false;
         }
-        return contentBuilder.toString();
     }
 
     public static void copyFile(InputStream is, OutputStream os) {

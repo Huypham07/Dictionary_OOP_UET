@@ -7,8 +7,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -61,39 +60,37 @@ public class Translate {
         return parseTranslationResponse(jsonResponse);
     }
 
-    public static String parseTranslationResponse(String response) {
-        try {
-            JSONArray jsonArray = new JSONArray(response);
-            JSONArray translationArray = jsonArray.getJSONArray(0);
-
-            StringBuilder translatedTextBuilder = new StringBuilder();
-            for (int i = 0; i < translationArray.length(); i++) {
-                String translationSegment = translationArray.getJSONArray(i).getString(0);
-                translatedTextBuilder.append(translationSegment);
-            }
-
-            return translatedTextBuilder.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error: Unable to parse the translation response.";
+    public static String parseTranslationResponse(String jsonResponse) {
+        JSONArray jsonArray = new JSONArray(jsonResponse);
+        JSONArray jsonArray2 = jsonArray.getJSONArray(0);
+        StringBuilder translatedText = new StringBuilder();
+        for (int i = 0; i < jsonArray2.length(); i++) {
+            translatedText.append(jsonArray2.getJSONArray(i).get(0).toString());
         }
+        return translatedText.toString();
     }
 
     public void translateFile(String sourceLanguage, String targetLanguage, File sourceFile, File targetFile) throws IOException {
         String sourceLanguageCode = getLanguageCode(sourceLanguage);
         String targetLanguageCode = getLanguageCode(targetLanguage);
 
-        String sourceText = FileService.readFile(sourceFile);
-        String translatedText = translateWord(sourceText, sourceLanguageCode, targetLanguageCode);
+        try (BufferedReader br = new BufferedReader(new FileReader(sourceFile));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(targetFile))) {
 
-        FileService.writeFile(targetFile, translatedText);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String translatedLine = translateWord(line, sourceLanguageCode, targetLanguageCode);
+                bw.write(translatedLine);
+                bw.newLine();
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
         // test translateFile
         Translate translate = new Translate();
-        File sourceFile = new File("source/main/java/data/words_dictionary.json");
-        File targetFile = new File("source/main/java/data/words_dictionary_vi.json");
+        File sourceFile = new File("C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/dictionary.txt");
+        File targetFile = new File("C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/dictionary2.txt");
         translate.translateFile("English", "Vietnamese", sourceFile, targetFile);
 
     }
