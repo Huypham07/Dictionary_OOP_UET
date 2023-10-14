@@ -1,7 +1,11 @@
+package Dict;
+
+import Dict.Word;
+
 import java.io.IOException;
 import java.util.*;
 
-public class DictionaryCommandline extends DictionaryManagement{
+public class DictionaryCommandline extends DictionaryManagement {
     // Constructor
     public DictionaryCommandline() {
         super();
@@ -19,7 +23,7 @@ public class DictionaryCommandline extends DictionaryManagement{
         ArrayList<Word> allWords = new ArrayList<>(this.getDictionary().getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
-            System.out.println("Dictionary is empty.\nPlease add new words first!");
+            System.out.println("Dict.Dictionary is empty.\nPlease add new words first!");
             return;
         }
 
@@ -35,9 +39,9 @@ public class DictionaryCommandline extends DictionaryManagement{
                     System.out.print("You want to sort word list by Ascending (ASC) or Descending (DES)? ");
                     boolean sortOrder = getUserSortOrder();
                     sortWords(allWords, Comparator.comparing(Word::getWord_target), sortOrder);
-                    System.out.println("Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
+                    System.out.println("Dict.Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
                 } else if (userOption.equals("NO")) {
-                    System.out.println("Word list will be shown on default order");
+                    System.out.println("Dict.Word list will be shown on default order");
                 } else {
                     System.out.println("Invalid option!");
                 }
