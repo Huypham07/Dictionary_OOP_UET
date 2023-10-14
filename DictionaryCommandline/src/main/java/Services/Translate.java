@@ -6,6 +6,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -91,8 +92,8 @@ public class Translate {
     public static void main(String[] args) throws IOException {
         // test translateFile
         Translate translate = new Translate();
-        File sourceFile = new File("src/main/java/data/words_alpha.txt");
-        File targetFile = new File("/data/words_alpha_vi.txt");
+        File sourceFile = new File("source/main/java/data/words_dictionary.json");
+        File targetFile = new File("source/main/java/data/words_dictionary_vi.json");
         translate.translateFile("English", "Vietnamese", sourceFile, targetFile);
 
     }
