@@ -52,10 +52,11 @@ public class Translate {
         }
     }
 
-
+    // translate a word from sourceLanguage to targetLanguage
     public static String translateWord(String textToTranslate, String sourceLanguage, String targetLanguage) throws IOException {
         String encodedText = URLEncoder.encode(textToTranslate, StandardCharsets.UTF_8);
         String apiUrl = String.format("%s&sl=%s&tl=%s&text=%s", API_URL, sourceLanguage, targetLanguage, encodedText);
+
 
         HttpGet httpGet = new HttpGet(apiUrl);
         String jsonResponse = EntityUtils.toString(httpClient.execute(httpGet).getEntity());
@@ -63,6 +64,7 @@ public class Translate {
         return parseTranslationResponse(jsonResponse);
     }
 
+    // parse the json response from the API
     public static String parseTranslationResponse(String jsonResponse) {
         JSONArray jsonArray = new JSONArray(jsonResponse);
         JSONArray jsonArray2 = jsonArray.getJSONArray(0);
