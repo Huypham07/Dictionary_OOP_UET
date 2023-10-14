@@ -92,8 +92,8 @@ public class Translate {
     public static void main(String[] args) throws IOException {
         // test translateFile function
         Translate translate = new Translate();
-        String sourceFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_EnglishOnly.txt";
-        String targetFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_translated_Vietnamese.txt";
+        String sourceFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/EnglishWordsOnly.txt";
+        String targetFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/WordsTranslatedToVietnamese.txt";
 
         translate.translateFile("English", "Vietnamese", sourceFile, targetFile);
 
