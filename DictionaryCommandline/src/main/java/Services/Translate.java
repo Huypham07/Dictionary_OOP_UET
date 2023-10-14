@@ -70,7 +70,7 @@ public class Translate {
         return translatedText.toString();
     }
 
-    public void translateFile(String sourceLanguage, String targetLanguage, File sourceFile, File targetFile) throws IOException {
+    public void translateFile(String sourceLanguage, String targetLanguage, String sourceFile, String targetFile) throws IOException {
         String sourceLanguageCode = getLanguageCode(sourceLanguage);
         String targetLanguageCode = getLanguageCode(targetLanguage);
 
@@ -87,11 +87,18 @@ public class Translate {
     }
 
     public static void main(String[] args) throws IOException {
-        // test translateFile
+        // test translateFile function
         Translate translate = new Translate();
-        File sourceFile = new File("C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/dictionary.txt");
-        File targetFile = new File("C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/dictionary2.txt");
+        String sourceFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_EnglishOnly.txt";
+        /String targetFile = "C:/IntelliJ Projects/Dictionary_OOP_UET/DictionaryCommandline/src/main/java/data/words_translated_Vietnamese.txt";
+
         translate.translateFile("English", "Vietnamese", sourceFile, targetFile);
 
+        //test translateWord function
+        String textToTranslate = "Hello, Friend";
+        System.out.println(translateWord(textToTranslate, "en", "vi"));
+        System.out.println(translateWord(textToTranslate, "en", "es"));
+        System.out.println(translateWord(textToTranslate, "en", "fr"));
+        System.out.println(translateWord(textToTranslate, "en", "ja"));
     }
 }

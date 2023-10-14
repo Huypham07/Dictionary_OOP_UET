@@ -2,6 +2,7 @@ package Dict;
 
 import Dict.Dictionary;
 import Dict.Word;
+import ControlServices.*;
 
 import java.util.*;
 import java.io.*;
@@ -252,7 +253,6 @@ public class DictionaryManagement {
             }
             System.out.println("Successful");
         }
-
     }
 
     //remove method
