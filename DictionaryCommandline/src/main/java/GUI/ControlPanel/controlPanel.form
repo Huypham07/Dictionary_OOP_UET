@@ -25,17 +25,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Logo" min="-2" pref="108" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="Translate" min="-2" pref="103" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="AddWord" min="-2" pref="103" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="EditWord" min="-2" pref="103" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="Learn" min="-2" pref="103" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="Export" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="Translate" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="AddWord" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="EditWord" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Export" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
                   <Component id="Tiltle" min="-2" pref="665" max="-2" attributes="0"/>
               </Group>
@@ -61,7 +59,6 @@
                                   <Component id="Translate" pref="47" max="32767" attributes="0"/>
                                   <Component id="AddWord" max="32767" attributes="0"/>
                                   <Component id="EditWord" max="32767" attributes="0"/>
-                                  <Component id="Learn" max="32767" attributes="0"/>
                                   <Component id="Export" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -76,9 +73,13 @@
   <SubComponents>
     <Container class="GUI.roundComponent.circleComponent" name="Logo">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="a6" green="ec" red="fe" type="rgb"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="2" name="C:\Users\huyho\OneDrive\Desktop\Dictionary\DictionaryCommandline\src\main\java\data\img\logo.png"/>
         </Property>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -105,7 +106,7 @@
     </Container>
     <Component class="GUI.roundComponent.Button" name="Translate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="button1"/>
+        <Property name="text" type="java.lang.String" value="Translate"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TranslateActionPerformed"/>
@@ -113,22 +114,20 @@
     </Component>
     <Component class="GUI.roundComponent.Button" name="AddWord">
       <Properties>
-        <Property name="text" type="java.lang.String" value="button2"/>
+        <Property name="text" type="java.lang.String" value="Add Word"/>
       </Properties>
     </Component>
     <Component class="GUI.roundComponent.Button" name="EditWord">
       <Properties>
-        <Property name="text" type="java.lang.String" value="button3"/>
+        <Property name="text" type="java.lang.String" value="Learn"/>
       </Properties>
-    </Component>
-    <Component class="GUI.roundComponent.Button" name="Learn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="button4"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditWordActionPerformed"/>
+      </Events>
     </Component>
     <Component class="GUI.roundComponent.Button" name="Export">
       <Properties>
-        <Property name="text" type="java.lang.String" value="button5"/>
+        <Property name="text" type="java.lang.String" value="Export to FIle"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportActionPerformed"/>

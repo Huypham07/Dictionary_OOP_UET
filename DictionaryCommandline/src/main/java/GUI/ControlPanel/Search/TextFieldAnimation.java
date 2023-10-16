@@ -1,4 +1,4 @@
-package GUI.ControlPanel.Lookup;
+package GUI.ControlPanel.Search;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

@@ -1,10 +1,9 @@
-package GUI.ControlPanel.Lookup;
+package GUI.ControlPanel.Search;
 
 import GUI.roundComponent.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
@@ -17,6 +16,7 @@ public class ResultBoard extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         panel.setLayout(new MigLayout("nogrid, fillx"));
     }
+    
     public void setData(ArrayList<String> data) {
         panel.removeAll();
         panel.revalidate();
@@ -32,6 +32,40 @@ public class ResultBoard extends javax.swing.JPanel {
             txt.setText("•      " + data.get(i));
             panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
         }
+    }
+    
+    public void setData(String data) {
+        panel.removeAll();
+        panel.revalidate();
+        JTextPane txt = new JTextPane();
+        txt.setBackground(Color.WHITE);
+        txt.setFont(new Font("sansserif", 1, 20));
+        txt.setForeground(new Color(80, 80, 80));
+        txt.setSelectionColor(new Color(150, 150, 150));
+        txt.setBorder(null);
+        txt.setOpaque(false);
+        txt.setEditable(false);
+        txt.setText(data);
+        panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
+    }
+
+    public void setHintData(String data) {
+        panel.removeAll();
+        panel.revalidate();
+        JTextPane txt = new JTextPane();
+        txt.setBackground(Color.WHITE);
+        txt.setFont(new Font("sansserif", 1, 18));
+        int c0 = getBackground().getRGB();
+        int c1 = getForeground().getRGB();
+        int m = 0xfefefefe;
+        int c2 = ((c0 & m) >>> 1) + ((c1 & m) >>> 1);
+        txt.setForeground(new Color(c2, true));
+        txt.setSelectionColor(new Color(150, 150, 150));
+        txt.setBorder(null);
+        txt.setOpaque(false);
+        txt.setEditable(false);
+        txt.setText(data);
+        panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
     }
     public void scrollToTop() {
         SwingUtilities.invokeLater(new Runnable() {

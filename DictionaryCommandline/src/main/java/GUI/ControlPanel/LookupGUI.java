@@ -1,7 +1,7 @@
 package GUI.ControlPanel;
 
-import GUI.ControlPanel.Lookup.EventClick;
-import GUI.ControlPanel.Lookup.searchSuggestPanel;
+import GUI.ControlPanel.Search.EventClick;
+import GUI.ControlPanel.Search.searchSuggestPanel;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
@@ -9,7 +9,6 @@ import Dict.DictionaryManagement;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import manageData.Datatype.Word;
@@ -47,10 +46,7 @@ public class LookupGUI extends javax.swing.JPanel {
     }
     
     private void changeVisible(boolean visible) {
-        WordTarget.setVisible(visible);
-        wordType.setVisible(visible);
-        line.setVisible(visible);
-        resultBoard.setVisible(visible);
+        jPanel1.setVisible(visible);
     }
 
     @SuppressWarnings("unchecked")
@@ -58,17 +54,18 @@ public class LookupGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         iconSearch = new GUI.roundComponent.circleComponent();
-        textBar = new GUI.ControlPanel.Lookup.TextFieldAnimation();
         jPanel1 = new javax.swing.JPanel();
         WordTarget = new javax.swing.JLabel();
         wordType = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         line = new javax.swing.JLabel();
-        resultBoard = new GUI.ControlPanel.Lookup.ResultBoard();
+        resultBoard = new GUI.ControlPanel.Search.ResultBoard();
+        textBar = new GUI.ControlPanel.Search.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
 
+        iconSearch.setBackground(new java.awt.Color(254, 236, 166));
         iconSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\huyho\\OneDrive\\Desktop\\Dictionary\\DictionaryCommandline\\src\\main\\java\\data\\img\\lookup.png")); // NOI18N
         iconSearch.setOpaque(true);
 
@@ -82,25 +79,6 @@ public class LookupGUI extends javax.swing.JPanel {
             iconSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 80, Short.MAX_VALUE)
         );
-
-        textBar.setBackground(new java.awt.Color(245, 242, 242));
-        textBar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        textBar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textBarMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                textBarMousePressed(evt);
-            }
-        });
-        textBar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                textBarKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                textBarKeyReleased(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -147,20 +125,38 @@ public class LookupGUI extends javax.swing.JPanel {
                 .addComponent(resultBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
         );
 
+        textBar.setBackground(new java.awt.Color(245, 242, 242));
+        textBar.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        textBar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textBarMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                textBarMousePressed(evt);
+            }
+        });
+        textBar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textBarKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textBarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +166,7 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(20, 20, 20)
                         .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,11 +175,7 @@ public class LookupGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textBarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textBarMouseClicked
-        if (!textBar.checkMouseOver(evt.getPoint())) {
-            if (suggestPanel.getItemSize() > 0) {
-                menu.show(textBar, 0, textBar.getHeight());
-            }
-        }
+
     }//GEN-LAST:event_textBarMouseClicked
 
     private void textBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBarKeyReleased
@@ -212,39 +204,6 @@ public class LookupGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_textBarKeyReleased
 
-    private void processing() {
-        textBar.execute_searching();
-        Word result = Dictmng.findWord(textBar.getText().trim());
-        Timer timer = new Timer(600, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Đoạn mã trong này sẽ được thực thi sau khi đợi (delay) kết thúc
-                if (textBar.getShow()) {
-                    textBar.close_searching();
-                    if (result != null) {
-                        WordTarget.setText(result.getWord_target());
-                        resultBoard.setData(result.getWord_explain());
-                        
-                        String type = result.getWordType();
-                        if (type.equals("noun")) {
-                            wordType.setText(type + " - danh từ");
-                        } else if (type.equals("adj")) {
-                            wordType.setText(type + " - tính từ");
-                        } else if (type.equals("verb")) {
-                            wordType.setText(type + " - động từ");
-                        }
-                        
-                        changeVisible(true);
-                    }
-                }
-            }
-        });
-
-        // Kích hoạt Timer để bắt đầu đợi
-        timer.setRepeats(false);  // Đặt timer chỉ chạy một lần
-        timer.start();
-    }
-            
     private void textBarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             menu.setVisible(false);
@@ -279,10 +238,47 @@ public class LookupGUI extends javax.swing.JPanel {
                 } else {
                     textBar.close_searching();
                 }
+            } else {
+                if (suggestPanel.getItemSize() > 0) {
+                    menu.show(textBar, 0, textBar.getHeight());
+                }
             }
         }
     }//GEN-LAST:event_textBarMousePressed
 
+    private void processing() {
+        textBar.execute_searching();
+        Word result = Dictmng.findWord(textBar.getText().trim());
+        Timer timer = new Timer(600, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Đoạn mã trong này sẽ được thực thi sau khi đợi (delay) kết thúc
+                if (textBar.getShow()) {
+                    textBar.close_searching();
+                    if (result != null) {
+                        WordTarget.setText(result.getWord_target());
+                        resultBoard.setData(result.getWord_explain());
+                        
+                        String type = result.getWordType();
+                        if (type.equals("noun")) {
+                            wordType.setText(type + " - danh từ");
+                        } else if (type.equals("adj")) {
+                            wordType.setText(type + " - tính từ");
+                        } else if (type.equals("verb")) {
+                            wordType.setText(type + " - động từ");
+                        }
+                        changeVisible(false);
+                        changeVisible(true);
+                    }
+                }
+            }
+        });
+
+        // Kích hoạt Timer để bắt đầu đợi
+        timer.setRepeats(false);  // Đặt timer chỉ chạy một lần
+        timer.start();
+    }
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel WordTarget;
@@ -290,8 +286,8 @@ public class LookupGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel line;
-    private GUI.ControlPanel.Lookup.ResultBoard resultBoard;
-    private GUI.ControlPanel.Lookup.TextFieldAnimation textBar;
+    private GUI.ControlPanel.Search.ResultBoard resultBoard;
+    private GUI.ControlPanel.Search.TextFieldAnimation textBar;
     private javax.swing.JLabel wordType;
     // End of variables declaration//GEN-END:variables
 }

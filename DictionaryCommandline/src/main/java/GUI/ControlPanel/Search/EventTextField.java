@@ -1,4 +1,4 @@
-package GUI.ControlPanel.Lookup;
+package GUI.ControlPanel.Search;
 
 public interface EventTextField {
 

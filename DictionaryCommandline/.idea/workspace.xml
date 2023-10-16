@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd17fbb0-6614-4256-8a09-8b9ea405ded4" name="Changes" comment="" />
+    <list default="true" id="bd17fbb0-6614-4256-8a09-8b9ea405ded4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/EventCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/EventCallBack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/EventClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/EventClick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/EventTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/EventTextField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/ResultBoard.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/ResultBoard.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/ResultBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/ResultBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/SearchItem.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/SearchItem.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/SearchItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/SearchItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/TextFieldAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/TextFieldAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/searchSuggestPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/searchSuggestPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Lookup/searchSuggestPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/Search/searchSuggestPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/LookupGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/LookupGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/LookupGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/LookupGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/controlPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/controlPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/controlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/ControlPanel/controlPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/DictionaryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/DictionaryGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/roundComponent/ScrollBarCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/roundComponent/ScrollBarCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/dict.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/dictionary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/img/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/lookup.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/img/lookup.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/monster2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/translate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/img/translate1.png" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

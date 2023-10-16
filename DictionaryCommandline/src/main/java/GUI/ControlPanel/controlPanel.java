@@ -29,32 +29,36 @@ public class controlPanel extends RoundedPanel {
         Translate = new GUI.roundComponent.Button();
         AddWord = new GUI.roundComponent.Button();
         EditWord = new GUI.roundComponent.Button();
-        Learn = new GUI.roundComponent.Button();
         Export = new GUI.roundComponent.Button();
 
         setBackground(new java.awt.Color(29, 42, 87));
 
+        Logo.setBackground(new java.awt.Color(254, 236, 166));
         Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\huyho\\OneDrive\\Desktop\\Dictionary\\DictionaryCommandline\\src\\main\\java\\data\\img\\logo.png")); // NOI18N
+        Logo.setOpaque(true);
 
         Tiltle.setFont(new java.awt.Font("Segoe UI Black", 3, 44)); // NOI18N
         Tiltle.setForeground(new java.awt.Color(255, 255, 255));
         Tiltle.setText("Dictionary");
         Tiltle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        Translate.setText("button1");
+        Translate.setText("Translate");
         Translate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TranslateActionPerformed(evt);
             }
         });
 
-        AddWord.setText("button2");
+        AddWord.setText("Add Word");
 
-        EditWord.setText("button3");
+        EditWord.setText("Learn");
+        EditWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditWordActionPerformed(evt);
+            }
+        });
 
-        Learn.setText("button4");
-
-        Export.setText("button5");
+        Export.setText("Export to FIle");
         Export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExportActionPerformed(evt);
@@ -69,17 +73,15 @@ public class controlPanel extends RoundedPanel {
                 .addContainerGap()
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Translate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(AddWord, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(EditWord, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(Learn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(Export, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Translate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(AddWord, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(EditWord, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Export, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Tiltle, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(circleComponent1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
@@ -101,7 +103,6 @@ public class controlPanel extends RoundedPanel {
                                     .addComponent(Translate, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                                     .addComponent(AddWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(EditWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Learn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Export, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
         );
@@ -115,12 +116,15 @@ public class controlPanel extends RoundedPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TranslateActionPerformed
 
+    private void EditWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditWordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditWordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.Button AddWord;
     private GUI.roundComponent.Button EditWord;
     private GUI.roundComponent.Button Export;
-    private GUI.roundComponent.Button Learn;
     private GUI.roundComponent.circleComponent Logo;
     private javax.swing.JLabel Tiltle;
     private GUI.roundComponent.Button Translate;

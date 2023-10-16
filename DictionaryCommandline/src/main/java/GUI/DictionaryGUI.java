@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
+import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
 
 public class DictionaryGUI extends javax.swing.JFrame {
@@ -11,6 +12,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     private DictionaryManagement dictionaryManagement;
     
     private LookupGUI lookupGUI;
+    private TranslateGUI translateGUI;
     
     public DictionaryGUI() {
         initComponents();
@@ -18,7 +20,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     }
     
     private void init() {
-        ImageIcon iconApp = new ImageIcon("src/main/java/data/img/dictionary.png");
+        ImageIcon iconApp = new ImageIcon("src/main/java/data/img/logo.png");
         setIconImage(iconApp.getImage());
         
         dictionaryManagement = new DictionaryManagement();
@@ -29,8 +31,11 @@ public class DictionaryGUI extends javax.swing.JFrame {
         lookupGUI = new LookupGUI();
         lookupGUI.setDictionay(dictionaryManagement);
         
+        translateGUI = new TranslateGUI();
+        
         workPanel.setLayout(cardLayout);
         workPanel.add("lookup",lookupGUI);
+//        workPanel.add("translate", translateGUI);
         
     }
 
