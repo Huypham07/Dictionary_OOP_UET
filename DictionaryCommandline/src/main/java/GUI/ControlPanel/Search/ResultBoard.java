@@ -87,6 +87,7 @@ public class ResultBoard extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         panel.setBackground(new java.awt.Color(255, 255, 255));
+        panel.setAutoscrolls(true);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);

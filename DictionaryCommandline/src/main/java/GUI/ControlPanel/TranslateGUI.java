@@ -5,7 +5,7 @@ public class TranslateGUI extends javax.swing.JPanel {
     public TranslateGUI() {
         initComponents();
         
-        Language1.setHintData("English ...");
+        Language1.setHintData("This video I will show how to using glasspane popup to show responsive message popup Instead of dialog I build this custom using java swing with animation and miglayout librar Waiting for next video I will show more option use with this library.");
         Language2.setHintData("Vietnamese ...");
     }
 

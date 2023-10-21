@@ -25,17 +25,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Logo" min="-2" pref="108" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="Translate" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="AddWord" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                      <Component id="EditWord" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="Export" min="-2" pref="110" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="Tiltle" min="-2" pref="665" max="-2" attributes="0"/>
+                  <Component id="menu" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="circleComponent1" pref="103" max="32767" attributes="0"/>
@@ -50,20 +42,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="circleComponent1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Logo" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="Tiltle" min="-2" pref="49" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Translate" pref="47" max="32767" attributes="0"/>
-                                  <Component id="AddWord" max="32767" attributes="0"/>
-                                  <Component id="EditWord" max="32767" attributes="0"/>
-                                  <Component id="Export" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
+                      <Component id="Logo" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="Tiltle" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="menu" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -99,39 +84,17 @@
       </Properties>
     </Component>
     <Container class="GUI.roundComponent.circleComponent" name="circleComponent1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Component class="GUI.roundComponent.Button" name="Translate">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Translate"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TranslateActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="GUI.roundComponent.Button" name="AddWord">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add Word"/>
-      </Properties>
-    </Component>
-    <Component class="GUI.roundComponent.Button" name="EditWord">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Learn"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditWordActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="GUI.roundComponent.Button" name="Export">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Export to FIle"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExportActionPerformed"/>
-      </Events>
+    <Component class="GUI.ControlPanel.Menu.Menu" name="menu">
     </Component>
   </SubComponents>
 </Form>

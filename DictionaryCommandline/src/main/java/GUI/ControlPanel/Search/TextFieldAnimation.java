@@ -103,6 +103,8 @@ public class TextFieldAnimation extends JTextField {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
+        
+        
     }
     
     public void execute_searching() {

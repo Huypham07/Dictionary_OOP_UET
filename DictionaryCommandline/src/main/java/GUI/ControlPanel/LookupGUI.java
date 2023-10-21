@@ -128,9 +128,6 @@ public class LookupGUI extends javax.swing.JPanel {
         textBar.setBackground(new java.awt.Color(245, 242, 242));
         textBar.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         textBar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textBarMouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 textBarMousePressed(evt);
             }
@@ -173,10 +170,6 @@ public class LookupGUI extends javax.swing.JPanel {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textBarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textBarMouseClicked
-
-    }//GEN-LAST:event_textBarMouseClicked
 
     private void textBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBarKeyReleased
         if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && 

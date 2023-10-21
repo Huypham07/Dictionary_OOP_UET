@@ -5,14 +5,19 @@ import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
 import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DictionaryGUI extends javax.swing.JFrame {
-    private CardLayout cardLayout;
+    private static CardLayout cardLayout;
     
     private DictionaryManagement dictionaryManagement;
     
     private LookupGUI lookupGUI;
     private TranslateGUI translateGUI;
+    
+    private static ArrayList<String> Listfuntion = new ArrayList<>();
     
     public DictionaryGUI() {
         initComponents();
@@ -35,16 +40,26 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         workPanel.setLayout(cardLayout);
         workPanel.add("lookup",lookupGUI);
-//        workPanel.add("translate", translateGUI);
+        workPanel.add("translate", translateGUI);
+        
+        Listfuntion.add("lookup");
+        Listfuntion.add("translate");
         
     }
+    
+    public static void change(int select) {
+        CardLayout c = (CardLayout)(workPanel.getLayout());
+        c.show(workPanel, Listfuntion.get(select));  
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         button1 = new GUI.roundComponent.Button();
-        controlPanel1 = new GUI.ControlPanel.controlPanel();
+        controlpanel = new GUI.ControlPanel.controlPanel();
         resultPanel1 = new GUI.ControlPanel.resultPanel();
         workPanel = new javax.swing.JPanel();
 
@@ -91,7 +106,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(controlPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(controlpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(resultPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,7 +115,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(controlPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(controlpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(resultPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -139,8 +154,8 @@ public class DictionaryGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.Button button1;
-    private GUI.ControlPanel.controlPanel controlPanel1;
+    private GUI.ControlPanel.controlPanel controlpanel;
     private GUI.ControlPanel.resultPanel resultPanel1;
-    private javax.swing.JPanel workPanel;
+    private static javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }
