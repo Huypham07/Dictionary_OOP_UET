@@ -1,0 +1,143 @@
+hello	chào	noun
+afternoon	buổi chiều	noun
+beautiful	đẹp	adj
+sleep	ngủ	verb
+sun	mặt trời	noun
+water	nước	noun
+mountain	núi	noun
+ocean	đại dương	noun
+travel	đi du lịch	verb
+smile	cười	verb
+happy	vui	adjective
+game	trò chơi	noun
+run	chạy	verb
+jump	nhảy	verb
+walk	đi bộ	verb
+sing	hát	verb
+breakfast	bữa sáng	noun
+lunch	bữa trưa	noun
+dinner	bữa tối	noun
+juice	nước ép	noun
+coffee	cà phê	noun
+tea	trà	noun
+milk	sữa	noun
+bread	bánh mì	noun
+cheese	phô mai	noun
+onion	hành	noun
+garlic	tỏi	noun
+salt	muối	noun
+pepper	hạt tiêu	noun
+sugar	đường	noun
+honey	mật ong	noun
+oil	dầu	noun
+chicken	gà	noun
+beef	thịt bò	noun
+pork	thịt heo	noun
+lamb	cừu	noun
+fish	cá	noun
+shrimp	tôm	noun
+crab	cua	noun
+lobster	tôm hùm	noun
+sausage	xúc xích	noun
+bacon	thịt xông khói	noun
+egg	trứng	noun
+omelette	trứng áp chảo	noun
+soup	canh súp	noun
+sandwich	bánh mì kẹp	noun
+rice	gạo	noun
+noodles	mì	noun
+pasta	mì ống	noun
+potato	củ khoai tây	noun
+carrot	cà rốt	noun
+broccoli	súp lơ	noun
+cauliflower	bông cải trắng	súp lơ	noun
+cabbage	bắp cải	noun
+spinach	rau chân vịt	noun
+lettuce	rau xà lách	noun
+cucumber	dưa chuột	noun
+tomato	quả cà chua	noun
+eggplant	cà tím	noun
+squash	bí ngô	noun
+avocado	trái bơ	noun
+mango	quả xoài	noun
+pineapple	quả dứa	noun
+papaya	đu đủ	noun
+grapes	nho	noun
+watermelon	quả dưa hấu	noun
+cantaloupe	quả dưa lưới	noun
+lemon	quả chanh	noun
+orange	quả cam	noun
+grapefruit	quả bưởi	noun
+pomegranate	quả lựu	noun
+coconut	dừa	noun
+apple	quả táo	noun
+pear	quả lê	noun
+banana	quả chuối	noun
+strawberry	dâu tây	noun
+cherry	quả anh đào	noun
+raspberry	mâm xôi	noun
+blueberry	quả việt quất	dâu xanh	noun
+blackberry	dâu đen	noun
+plum	mận	noun
+apricot	mơ	noun
+peach	đào	noun
+absent	vắng mặt	adj
+acceptable	chấp nhận được	adj
+angry	tức giận	nổi giận	giận dữ	adj
+brave	dũng cảm	adj
+careful	cẩn thận	adj
+careless	bất cẩn	adj
+diligent	chăm chỉ	siêng năng	adj
+dextrous	khéo léo	adj
+extroverted	hướng ngoại	adj
+enthusiastic	nhiệt tình	adj
+frank	thành thật	chân thành	ngay thảng	adj
+fresh	tươi tỉnh	adj
+gentle	nhẹ nhàng	dịu dàng	cao quý	danh giá	adj
+generous	hào phóng	rộng lượng	adj
+humorous	hài hước	adj
+hot	nóng	adj
+important	quan trọng	adj
+intelligent	thông minh	adj
+interesting	thú vị	adj
+kind	tốt bụng	adj
+lazy	lười biếng	adj
+lucky	may mắn	adj
+mature	trưởng thành	adj
+modest	khiêm tốn	adj
+nervous	lo lắng	adj
+optimistic	lạc quan	adj
+patient	kiên nhẫn	adj
+polite	lịch sự	adj
+practical	thực tế	adj
+pretty	xinh đẹp	adj
+quiet	yên tĩnh	adj
+realistic	thực tế	adj
+relaxed	thư giãn	adj
+responsible	có trách nhiệm	đáng kính	adj 
+romantic	lãng mạn	mơ mộng	adj
+rude	thô lỗ	adj
+sad	buồn	adj
+selfish	ích kỷ	adj
+serious	nghiêm trọng	nghiêm túc	adj
+shy	ngại ngùng	nhút nhát	rụt rè	bẻn lẻn	adj 
+simple	đơn giản	adj
+smart	thông minh	adj
+social	xã hội	hòa đồng	adj
+successful	thành công	adj
+tall	cao	adj 
+talent	tài năng	noun
+thin	gầy	adj
+tired	mệt mỏi	adj
+traditional	truyền thống	adj
+true	đúng	thật	adj
+understanding	sự hiểu biết	sự đồng ý	trí thông minh	noun
+useful	hữu ích	adj
+valuable	quý giá	adj
+versatile	đa năng	linh hoạt	có nhiều tài năng	có thể xoay tròn được	adj
+warm	ấm áp	nồng nhiệt	adj
+weak	yếu đuối	yếu ớt	adj
+wealthy	giàu có	adj
+wise	khôn ngoan	adj
+wonderful	tuyệt vời	kinh ngạc	phi thường	adj
+young	trẻ	trẻ tuổi	adj
