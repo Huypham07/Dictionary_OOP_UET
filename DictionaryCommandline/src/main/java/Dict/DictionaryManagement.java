@@ -1,14 +1,20 @@
+package Dict;
+
+import Dict.Dictionary;
+import Dict.Word;
+import ControlServices.*;
+
 import java.util.*;
 import java.io.*;
 public class DictionaryManagement {
 
-    private Dictionary dictionary;
+    private Dict.Dictionary dictionary;
     protected Scanner sc;
 
     // constructors
     public DictionaryManagement() {
         this.sc = new Scanner(System.in);
-        this.dictionary = new Dictionary();
+        this.dictionary = new Dict.Dictionary();
     }
 
     //------------------METHOD-----------------
@@ -41,7 +47,7 @@ public class DictionaryManagement {
 
         Word foundWord = this.dictionary.findWord(w_target);
         if (foundWord == null) {
-            System.out.println("Sorry, We did not find your word in our Dictionary!");
+            System.out.println("Sorry, We did not find your word in our Dict.Dictionary!");
         } else {
             ArrayList<String> ans = foundWord.getWord_explain();
             String add = (ans.size() > 1) ? "s" : "";
@@ -178,7 +184,7 @@ public class DictionaryManagement {
 
     // edit method
     public void updateWord() {
-        System.out.print("Enter the English Word you want to update: ");
+        System.out.print("Enter the English Dict.Word you want to update: ");
         String oldEnglishWord = this.sc.nextLine();
 
         while(!validWord(oldEnglishWord))
@@ -247,7 +253,6 @@ public class DictionaryManagement {
             }
             System.out.println("Successful");
         }
-
     }
 
     //remove method
