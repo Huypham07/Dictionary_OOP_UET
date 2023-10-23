@@ -3,20 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/controlPanel.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/roundComponent/Button.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Translate/TranslateController.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Menu/Menu.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/DictionaryGUI.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/resultPanel.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/roundComponent/ModernScrollBarUI.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Search/ResultBoard.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Translate/Translate.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/LookupGUI.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Dict/DictionaryManagement.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/TranslateGUI.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Search/TextFieldAnimation.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Translate/LanguagePanel.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/DictionaryManagement.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/DictionaryGUI.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/RoundedTextField.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Search/ResultBoard.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/Button.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/AddWord/Add.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/LookupGUI.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Search/TextFieldAnimation.java</file>
         </group>
     </open-files>
 </project-private>

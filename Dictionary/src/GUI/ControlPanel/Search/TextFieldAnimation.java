@@ -148,7 +148,7 @@ public class TextFieldAnimation extends JTextField {
     protected void paintComponent(Graphics grphcs) {
         int width = getWidth();
         int height = getHeight();
-        Graphics2D g2 = (Graphics2D) grphcs;
+        Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);    //  For smooth line
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); //  For smooth image
         g2.setColor(backgroundColor);

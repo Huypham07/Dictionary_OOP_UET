@@ -3,11 +3,13 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
+import GUI.ControlPanel.EditGUI.EditGUI;
 import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import raven.glasspanepopup.GlassPanePopup;
 
 public class DictionaryGUI extends javax.swing.JFrame {
     private static CardLayout cardLayout;
@@ -22,6 +24,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     public DictionaryGUI() {
         initComponents();
         init();
+        GlassPanePopup.install(this);
     }
     
     private void init() {
@@ -38,7 +41,9 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         translateGUI = new TranslateGUI();
         
+        
         workPanel.setLayout(cardLayout);
+        
         workPanel.add("lookup",lookupGUI);
         workPanel.add("translate", translateGUI);
         

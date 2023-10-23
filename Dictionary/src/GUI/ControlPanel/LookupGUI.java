@@ -6,12 +6,17 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import Dict.DictionaryManagement;
+import GUI.ControlPanel.EditGUI.EditGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import manageData.Datatype.Word;
+import raven.glasspanepopup.GlassPanePopup;
 
 
 public class LookupGUI extends javax.swing.JPanel {
@@ -19,6 +24,9 @@ public class LookupGUI extends javax.swing.JPanel {
     public void setDictionay(DictionaryManagement Dictmng) {
         this.Dictmng = Dictmng;
     }
+    
+    private Word result;
+    private Word pre_result;
 
     private JPopupMenu menu;
     private searchSuggestPanel suggestPanel;
@@ -62,7 +70,7 @@ public class LookupGUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         line = new javax.swing.JLabel();
         resultBoard = new GUI.ControlPanel.Search.ResultBoard();
-        button1 = new GUI.roundComponent.Button();
+        editButton = new GUI.roundComponent.Button();
         button2 = new GUI.roundComponent.Button();
         textBar = new GUI.ControlPanel.Search.TextFieldAnimation();
 
@@ -100,7 +108,12 @@ public class LookupGUI extends javax.swing.JPanel {
         line.setBackground(new java.awt.Color(153, 153, 153));
         line.setOpaque(true);
 
-        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/edit.png"))); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/edit.png"))); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editButtonMousePressed(evt);
+            }
+        });
 
         button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/audio.png"))); // NOI18N
 
@@ -117,7 +130,7 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(wordType, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -131,7 +144,7 @@ public class LookupGUI extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(4, 4, 4)
                 .addComponent(wordType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,11 +192,12 @@ public class LookupGUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(iconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
+                        .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -257,9 +271,44 @@ public class LookupGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_textBarMousePressed
 
+    private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            EditGUI edit = new EditGUI();
+            edit.setDatatoEdit(result);
+            edit.eventOK(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (SwingUtilities.isLeftMouseButton(e)) {
+                        Word tmp = edit.getWord();
+                        if (!Dictmng.validWord(tmp.getWord_target())) {
+                            JOptionPane.showMessageDialog(menu, "Invalid English Word!\nAn English word can only have alphabet character!!!");
+                        } else{
+                            Dictmng.editWord(result.getWord_target(), tmp);
+                            JOptionPane.showMessageDialog(menu, "Successful!");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    }
+                }
+                
+            });
+            edit.eventDelete(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (SwingUtilities.isLeftMouseButton(e)) {
+                        if (Dictmng.deleteWord(result.getWord_target())) {
+                            JOptionPane.showMessageDialog(menu, "Successful!");
+                            GlassPanePopup.closePopupLast();
+                        }
+                    }
+                }
+            });
+            GlassPanePopup.showPopup(edit);
+        }
+    }//GEN-LAST:event_editButtonMousePressed
+
     private void processing() {
         textBar.execute_searching();
-        Word result = Dictmng.findWord(textBar.getText().trim());
+        result = Dictmng.findWord(textBar.getText().trim());
         Timer timer = new Timer(600, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -280,6 +329,9 @@ public class LookupGUI extends javax.swing.JPanel {
                         }
                         changeVisible(false);
                         changeVisible(true);
+                        pre_result = result;
+                    } else {
+                        result = pre_result;
                     }
                 }
             }
@@ -293,8 +345,8 @@ public class LookupGUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel WordTarget;
-    private GUI.roundComponent.Button button1;
     private GUI.roundComponent.Button button2;
+    private GUI.roundComponent.Button editButton;
     private GUI.roundComponent.circleComponent iconSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
