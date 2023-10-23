@@ -1,8 +1,6 @@
 package GUI.ControlPanel;
 
 import GUI.roundComponent.RoundedPanel;
-import net.miginfocom.swing.MigLayout;
-import org.jdesktop.animation.timing.*;
 
 public class controlPanel extends RoundedPanel {
 

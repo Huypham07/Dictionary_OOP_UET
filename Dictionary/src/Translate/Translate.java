@@ -25,7 +25,7 @@ public class Translate {
 
     public Translate() {
         languages.add("English");
-        languages.add("vietnamese");
+        languages.add("Vietnamese");
         languages.add("Spanish");
         languages.add("French");
         languages.add("Japanese");
