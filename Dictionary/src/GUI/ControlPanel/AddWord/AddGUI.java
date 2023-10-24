@@ -1,4 +1,4 @@
-package GUI.ControlPanel.EditGUI;
+package GUI.ControlPanel.AddWord;
 
 import GUI.roundComponent.RoundedPanel;
 import GUI.roundComponent.RoundedTextField;
@@ -11,26 +11,29 @@ import manageData.Datatype.Word;
 import net.miginfocom.swing.MigLayout;
 import raven.glasspanepopup.GlassPanePopup;
 
-
-public class EditGUI extends RoundedPanel {
+public class AddGUI extends RoundedPanel {
     private final List<RoundedTextField> meanings = new ArrayList<>();
 
-    public void setDatatoEdit(Word word) {
-        English.setText(word.getWord_target());
-        Type.setText(word.getWordType());
+    public AddGUI() {
+        initComponents();
         
-        panel.removeAll();
-        panel.revalidate();
-        for (int i = 0; i < word.getWord_explain().size(); i++) {
+        scrollPane.setVerticalScrollBar(new ScrollBarCustom());
+        panel.setLayout(new MigLayout("nogrid, fillx"));
+        
+        for (int i = 0; i < 3; i++) {
             RoundedTextField meaning = new RoundedTextField();
             meaning.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-            meaning.setText(word.getWord_explain().get(i));
+            meaning.setHintText("Meaning " + (meanings.size() + 1) + " ...");
             meanings.add(meaning);
-            panel.add(meaning, "growx, align left, w 100::90%, wrap, gaptop 10");
+            panel.removeAll();
+            panel.revalidate();
+            for (RoundedTextField r : meanings) {
+                panel.add(r, "growx, align left, w 100::90%, wrap, gaptop 10");
+            }
+            panel.repaint();            
         }
-        panel.repaint();
     }
-    
+
     public Word getWord() {
         Word result = new Word();
         result.setWordTarget(English.getText());
@@ -43,13 +46,6 @@ public class EditGUI extends RoundedPanel {
         }
         return result;
     }
-    public EditGUI() {
-        initComponents();
-        
-        scrollPane.setVerticalScrollBar(new ScrollBarCustom());
-        panel.setLayout(new MigLayout("nogrid, fillx"));
-
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,7 +57,6 @@ public class EditGUI extends RoundedPanel {
         panel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         cancel = new GUI.roundComponent.Button();
-        Delete = new GUI.roundComponent.Button();
         Ok = new GUI.roundComponent.Button();
         jPanel1 = new javax.swing.JPanel();
         English = new GUI.roundComponent.RoundedTextField();
@@ -69,14 +64,13 @@ public class EditGUI extends RoundedPanel {
         Type = new GUI.roundComponent.RoundedTextField();
 
         setBackground(new java.awt.Color(215, 246, 248));
-        setPreferredSize(new java.awt.Dimension(390, 540));
         setRoundBottomLeft(30);
         setRoundBottomRight(30);
         setRoundTopLeft(30);
         setRoundTopRight(30);
 
         Tiltle.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
-        Tiltle.setText(" Edit Word");
+        Tiltle.setText(" Add Word");
 
         jLabel2.setBackground(new java.awt.Color(51, 51, 51));
         jLabel2.setOpaque(true);
@@ -108,8 +102,6 @@ public class EditGUI extends RoundedPanel {
                 cancelMousePressed(evt);
             }
         });
-
-        Delete.setText("Delete");
 
         Ok.setText("Ok");
 
@@ -165,8 +157,6 @@ public class EditGUI extends RoundedPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(addMeaning, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +189,6 @@ public class EditGUI extends RoundedPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -225,17 +214,13 @@ public class EditGUI extends RoundedPanel {
             panel.repaint();
         }
     }//GEN-LAST:event_addMeaningMousePressed
+
     
     public void eventOK(MouseAdapter event) {
         Ok.addMouseListener(event);
     }
-    
-    public void eventDelete(MouseAdapter event) {
-        Delete.addMouseListener(event);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.roundComponent.Button Delete;
     private GUI.roundComponent.RoundedTextField English;
     private GUI.roundComponent.Button Ok;
     private javax.swing.JLabel Tiltle;

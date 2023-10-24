@@ -60,9 +60,6 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lookupMousePressed"/>
-      </Events>
     </Component>
     <Component class="GUI.ControlPanel.Menu.MenuItem" name="translate">
       <Properties>
@@ -74,9 +71,6 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="translateMousePressed"/>
-      </Events>
     </Component>
     <Component class="GUI.ControlPanel.Menu.MenuItem" name="addword">
       <Properties>
@@ -88,9 +82,6 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addwordMousePressed"/>
-      </Events>
     </Component>
     <Component class="GUI.ControlPanel.Menu.MenuItem" name="learn">
       <Properties>
@@ -102,9 +93,6 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="learnMousePressed"/>
-      </Events>
     </Component>
     <Component class="GUI.ControlPanel.Menu.MenuItem" name="export">
       <Properties>
@@ -116,9 +104,6 @@
           <Font name="SansSerif" size="12" style="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="exportMousePressed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

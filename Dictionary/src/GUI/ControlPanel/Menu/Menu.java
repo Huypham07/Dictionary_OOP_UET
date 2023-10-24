@@ -1,30 +1,33 @@
 package GUI.ControlPanel.Menu;
 
-import static GUI.DictionaryGUI.change;
+import java.awt.event.MouseAdapter;
 
 public class Menu extends javax.swing.JPanel {
-    
-    private int itemSelect = 0;
-
-    public int getItemSelect() {
-        return itemSelect;
-    }
-
-    public void setItemSelect(int itemSelect) {
-        this.itemSelect = itemSelect;
-    }
 
     public Menu() {
         initComponents();
         lookup.setSelected(true);
     }
 
-    private void unSelectAll() {
+    public void unSelectAll() {
         lookup.setSelected(false); //0
         translate.setSelected(false); //1
         addword.setSelected(false); //2
         learn.setSelected(false); //3
         export.setSelected(false); //4
+    }
+    
+    public void setSelectedItem(int item) {
+        switch (item) {
+            case 0 -> //controlPanel.LOOKUP
+                lookup.setSelected(true);
+            case 1 -> //controlPanel.TRANSLATE
+                translate.setSelected(true);
+            case 2 -> //controlPanel.LEARN
+                learn.setSelected(true);
+            case 3 -> //controlPanel.EXPORT
+                export.setSelected(true);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -43,47 +46,22 @@ public class Menu extends javax.swing.JPanel {
         lookup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/look up.png"))); // NOI18N
         lookup.setText("Look up");
         lookup.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        lookup.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lookupMousePressed(evt);
-            }
-        });
 
         translate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/translate.png"))); // NOI18N
         translate.setText("Translate");
         translate.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        translate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                translateMousePressed(evt);
-            }
-        });
 
         addword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/add.png"))); // NOI18N
         addword.setText("Add Word");
         addword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        addword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addwordMousePressed(evt);
-            }
-        });
 
         learn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/learn.png"))); // NOI18N
         learn.setText("Learn");
         learn.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        learn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                learnMousePressed(evt);
-            }
-        });
 
         export.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/export.png"))); // NOI18N
         export.setText("Export");
         export.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        export.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                exportMousePressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,39 +90,26 @@ public class Menu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lookupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lookupMousePressed
-        unSelectAll();
-        itemSelect = 0;
-        lookup.setSelected(true);
-        change(itemSelect);
-    }//GEN-LAST:event_lookupMousePressed
-
-    private void translateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translateMousePressed
-        unSelectAll();
-        itemSelect = 1;
-        translate.setSelected(true);
-        change(itemSelect);
-    }//GEN-LAST:event_translateMousePressed
-
-    private void addwordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addwordMousePressed
-        unSelectAll();
-        itemSelect = 2;
-        addword.setSelected(true);
-    }//GEN-LAST:event_addwordMousePressed
-
-    private void learnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_learnMousePressed
-        unSelectAll();
-        itemSelect = 3;
-        learn.setSelected(true);
-    }//GEN-LAST:event_learnMousePressed
-
-    private void exportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportMousePressed
-        unSelectAll();
-        itemSelect = 4;
-        export.setSelected(true);
-    }//GEN-LAST:event_exportMousePressed
-
-
+    public void eventAdd(MouseAdapter event) {
+        addword.addMouseListener(event);
+    }
+    
+    public void eventLookup(MouseAdapter event) {
+        lookup.addMouseListener(event);
+    }
+    
+    public void eventTranslate(MouseAdapter event) {
+        translate.addMouseListener(event);
+    }
+    
+    public void eventLearn(MouseAdapter event) {
+        learn.addMouseListener(event);
+    }
+    
+    public void eventExport(MouseAdapter event) { //maybe delete
+        export.addMouseListener(event);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.ControlPanel.Menu.MenuItem addword;
     private GUI.ControlPanel.Menu.MenuItem export;

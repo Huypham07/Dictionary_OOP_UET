@@ -3,23 +3,24 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
-import GUI.ControlPanel.EditGUI.EditGUI;
+import GUI.ControlPanel.AddWord.AddGUI;
 import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import manageData.Datatype.Word;
 import raven.glasspanepopup.GlassPanePopup;
 
 public class DictionaryGUI extends javax.swing.JFrame {
-    private static CardLayout cardLayout;
+    private CardLayout cardLayout;
     
     private DictionaryManagement dictionaryManagement;
     
     private LookupGUI lookupGUI;
     private TranslateGUI translateGUI;
     
-    private static ArrayList<String> Listfuntion = new ArrayList<>();
+    private ArrayList<String> Listfuntion = new ArrayList<>();
     
     public DictionaryGUI() {
         initComponents();
@@ -50,9 +51,53 @@ public class DictionaryGUI extends javax.swing.JFrame {
         Listfuntion.add("lookup");
         Listfuntion.add("translate");
         
+        controlpanel.eventLookupGUI(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                controlpanel.setSelect(controlpanel.LOOKUP);
+                change(controlpanel.LOOKUP);
+            }
+            
+        });
+        
+        controlpanel.eventTranslateGUI(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                controlpanel.setSelect(controlpanel.TRANSLATE);
+                change(controlpanel.TRANSLATE);
+            }
+            
+        });
+        
+        controlpanel.eventAddGUI(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                AddGUI add = new AddGUI();
+                add.eventOK(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if (SwingUtilities.isLeftMouseButton(e)) {
+                            Word tmp = add.getWord();
+                            if (!dictionaryManagement.validWord(tmp.getWord_target())) {
+                                JOptionPane.showMessageDialog(workPanel, "Invalid English Word!\nAn English word can only have alphabet character!!!");
+                            } else{
+                                dictionaryManagement.insertWord(tmp);
+                                JOptionPane.showMessageDialog(workPanel, "Successful!");
+                                GlassPanePopup.closePopupLast();
+                            }
+                        }
+                    }
+                
+                });
+                GlassPanePopup.showPopup(add);
+            }
+            
+        });
+        
+
     }
     
-    public static void change(int select) {
+    private void change(int select) {
         CardLayout c = (CardLayout)(workPanel.getLayout());
         c.show(workPanel, Listfuntion.get(select));  
     }
@@ -162,6 +207,6 @@ public class DictionaryGUI extends javax.swing.JFrame {
     private GUI.roundComponent.Button button1;
     private GUI.ControlPanel.controlPanel controlpanel;
     private GUI.ControlPanel.resultPanel resultPanel1;
-    private static javax.swing.JPanel workPanel;
+    private javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }

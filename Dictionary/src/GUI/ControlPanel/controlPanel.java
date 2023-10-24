@@ -1,8 +1,13 @@
 package GUI.ControlPanel;
 
 import GUI.roundComponent.RoundedPanel;
+import java.awt.event.MouseAdapter;
 
 public class controlPanel extends RoundedPanel {
+    public static int LOOKUP = 0;
+    public static int TRANSLATE = 1;
+    public static int LEARN = 2;
+    public static int EXPORT = 3;
 
     public controlPanel() {
         super(0, 0, 40, 40);
@@ -62,6 +67,32 @@ public class controlPanel extends RoundedPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void setSelect(int item) {
+        menu.unSelectAll();
+        menu.setSelectedItem(item);
+    }
+    
+    public void eventLookupGUI(MouseAdapter event) {
+        menu.eventLookup(event);
+    }
+    
+    public void eventTranslateGUI(MouseAdapter event) {
+        menu.eventTranslate(event);
+    }
+    
+    public void eventAddGUI(MouseAdapter event) {
+        menu.eventAdd(event);
+    }
+    
+    public void eventLearnGUI(MouseAdapter event) {
+        menu.eventLearn(event);
+    }
+    
+    public void eventExportGUI(MouseAdapter event) {
+        menu.eventExport(event);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.circleComponent Logo;
