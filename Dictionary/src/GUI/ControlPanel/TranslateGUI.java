@@ -11,9 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javazoom.jl.decoder.JavaLayerException;
 
 public class TranslateGUI extends javax.swing.JPanel {
     private TranslateController controller;
+    
+    private String target;
+    private String result;
 
     public TranslateGUI() {
         initComponents();
@@ -36,6 +40,8 @@ public class TranslateGUI extends javax.swing.JPanel {
         Language1 = new GUI.ControlPanel.Search.ResultBoard();
         Language2 = new GUI.ControlPanel.Search.ResultBoard();
         jLabel1 = new javax.swing.JLabel();
+        read1 = new GUI.roundComponent.Button();
+        read2 = new GUI.roundComponent.Button();
         languageSelect1 = new GUI.ControlPanel.Translate.LanguagePanel();
         languageSelect2 = new GUI.ControlPanel.Translate.LanguagePanel();
         iconTranslate = new GUI.roundComponent.circleComponent();
@@ -61,22 +67,49 @@ public class TranslateGUI extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel1.setOpaque(true);
 
+        read1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/audio.png"))); // NOI18N
+        read1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                read1MousePressed(evt);
+            }
+        });
+
+        read2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/audio.png"))); // NOI18N
+        read2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                read2MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(Language1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Language1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(read1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(Language2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Language2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(read2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Language1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-            .addComponent(Language2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Language1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(Language2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(read2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(read1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         languageSelect1.setBackground(new java.awt.Color(245, 242, 242));
@@ -115,7 +148,7 @@ public class TranslateGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(iconTranslate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(textBar, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
@@ -146,7 +179,7 @@ public class TranslateGUI extends javax.swing.JPanel {
                         .addComponent(iconTranslate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,7 +205,11 @@ public class TranslateGUI extends javax.swing.JPanel {
 
     private void textBarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            processing();
+            if (!textBar.getText().isEmpty()) {
+                if (!textBar.getShow()) {
+                    processing();   
+                }
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (textBar.getShow()) {
                 textBar.close_searching();    
@@ -184,13 +221,65 @@ public class TranslateGUI extends javax.swing.JPanel {
         if (SwingUtilities.isLeftMouseButton(evt)) {
             if (textBar.checkMouseOver(evt.getPoint())) {
                 if (!textBar.getShow()) {
-                    processing();
+                    if (!textBar.getText().isEmpty()) {
+                        processing();
+                    }
                 } else {
                     textBar.close_searching();
                 }
             }
         }
     }//GEN-LAST:event_textBarMousePressed
+
+    private Thread thread;
+    private void read1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_read1MousePressed
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            if (target != null && !target.isEmpty()) {
+                if (thread != null) {
+                    thread.interrupt();
+                }
+                thread = new Thread(() -> {
+                    try {
+                        controller.readMessage(target,
+                                controller.getLanguageCode(languageSelect1.getText()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (JavaLayerException ex) {
+                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                
+                thread.setDaemon(false);
+                
+                thread.start();
+                
+            }
+        }
+    }//GEN-LAST:event_read1MousePressed
+
+    private void read2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_read2MousePressed
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            if (result != null && !result.isEmpty()) {
+                if (thread != null) {
+                    thread.interrupt();
+                }
+                thread = new Thread(() -> {
+                    try {
+                        controller.readMessage(result,
+                                controller.getLanguageCode(languageSelect2.getText()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (JavaLayerException ex) {
+                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                
+                thread.setDaemon(false);
+                
+                thread.start();
+            }
+        }
+    }//GEN-LAST:event_read2MousePressed
 
     private void changeVisible(boolean visible) {
         jPanel2.setVisible(visible);
@@ -199,7 +288,7 @@ public class TranslateGUI extends javax.swing.JPanel {
     private void processing() {
         try {
             textBar.execute_searching();
-            String result = controller.translateWord(textBar.getText(),
+            result = controller.translateWord(textBar.getText(),
                     controller.getLanguageCode(languageSelect1.getText()), 
                     controller.getLanguageCode(languageSelect2.getText()));
             Timer timer = new Timer(600, new ActionListener() {
@@ -209,7 +298,8 @@ public class TranslateGUI extends javax.swing.JPanel {
                     if (textBar.getShow()) {
                         textBar.close_searching();
                         if (result != null) {
-                            Language1.setData(textBar.getText());
+                            target = textBar.getText();
+                            Language1.setData(target);
                             Language2.setData(result);
                             
                             changeVisible(false);
@@ -235,6 +325,8 @@ public class TranslateGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private GUI.ControlPanel.Translate.LanguagePanel languageSelect1;
     private GUI.ControlPanel.Translate.LanguagePanel languageSelect2;
+    private GUI.roundComponent.Button read1;
+    private GUI.roundComponent.Button read2;
     private GUI.ControlPanel.Search.TextFieldAnimation textBar;
     private javax.swing.JLabel transfer;
     // End of variables declaration//GEN-END:variables

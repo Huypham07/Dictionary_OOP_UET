@@ -6,20 +6,24 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
-
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import org.json.JSONException;
 
 public class Translate {
 
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final String API_URL = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t";
+    private static final String API_URL_TTS = "http://translate.google.com/translate_tts?ie=UTF-8&tl=";
 
     private final List<String> languages = new ArrayList<>();
 
@@ -98,6 +102,23 @@ public class Translate {
             }
         }
     }
+    
+    private InputStream getAudio(String text, String languageOutput)
+            throws IOException {
+        URL url = new URL(API_URL_TTS + languageOutput + "&client=tw-ob&q="
+                + text.replace(" ", "%20"));
+        URLConnection urlConn = url.openConnection();
+        urlConn.addRequestProperty("User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                        + "Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59");
+        return urlConn.getInputStream();
+    }
+
+    public void read(String text, String languageOutput) throws IOException, JavaLayerException {
+        InputStream sound = getAudio(text, languageOutput);
+        new Player(sound).play();
+    }
+    
 
     public static void main(String[] args) throws IOException {
         // test translateFile function

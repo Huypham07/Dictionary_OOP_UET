@@ -164,7 +164,7 @@
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelMouseReleased"/>
       </Events>
     </Component>
     <Component class="GUI.roundComponent.Button" name="Delete">
@@ -214,7 +214,7 @@
         <Property name="text" type="java.lang.String" value="Add meaning"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addMeaningMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addMeaningMouseReleased"/>
       </Events>
     </Component>
     <Component class="GUI.roundComponent.RoundedTextField" name="Type">

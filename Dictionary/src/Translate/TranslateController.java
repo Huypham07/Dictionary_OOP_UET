@@ -2,6 +2,7 @@ package Translate;
 
 import java.io.*;
 import java.util.*;
+import javazoom.jl.decoder.JavaLayerException;
 
 
 public class TranslateController {
@@ -25,5 +26,9 @@ public class TranslateController {
 
     public void translateFile(String sourceLanguage, String targetLanguage, String sourceFile, String targetFile) throws IOException {
         this.translate.translateFile(sourceLanguage, targetLanguage, sourceFile, targetFile);
+    }
+    
+    public void readMessage(String Text, String language) throws IOException, JavaLayerException {
+        this.translate.read(Text, language);
     }
 }

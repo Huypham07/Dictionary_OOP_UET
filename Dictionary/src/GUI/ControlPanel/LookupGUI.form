@@ -43,14 +43,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="iconSearch" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="textBar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>
@@ -99,7 +98,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="WordTarget" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="button2" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="readButton" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="editButton" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
@@ -120,7 +119,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="editButton" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="button2" pref="0" max="32767" attributes="0"/>
+                              <Component id="readButton" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -187,12 +186,15 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editButtonMousePressed"/>
           </Events>
         </Component>
-        <Component class="GUI.roundComponent.Button" name="button2">
+        <Component class="GUI.roundComponent.Button" name="readButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/data/img/audio.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="readButtonMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

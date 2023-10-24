@@ -75,18 +75,19 @@ public class DictionaryGUI extends javax.swing.JFrame {
                 AddGUI add = new AddGUI();
                 add.eventOK(new MouseAdapter() {
                     @Override
-                    public void mousePressed(MouseEvent e) {
+                    public void mouseReleased(MouseEvent e) {
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             Word tmp = add.getWord();
                             if (!dictionaryManagement.validWord(tmp.getWord_target())) {
                                 JOptionPane.showMessageDialog(workPanel, "Invalid English Word!\nAn English word can only have alphabet character!!!");
+//                                if(JOptionPane.co)
                             } else{
                                 dictionaryManagement.insertWord(tmp);
                                 JOptionPane.showMessageDialog(workPanel, "Successful!");
                                 GlassPanePopup.closePopupLast();
                             }
                         }
-                    }
+                    }                   
                 
                 });
                 GlassPanePopup.showPopup(add);

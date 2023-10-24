@@ -104,8 +104,8 @@ public class EditGUI extends RoundedPanel {
 
         cancel.setText("Cancel");
         cancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cancelMousePressed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cancelMouseReleased(evt);
             }
         });
 
@@ -134,8 +134,8 @@ public class EditGUI extends RoundedPanel {
 
         addMeaning.setText("Add meaning");
         addMeaning.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addMeaningMousePressed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addMeaningMouseReleased(evt);
             }
         });
 
@@ -205,13 +205,7 @@ public class EditGUI extends RoundedPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMousePressed
-        if (SwingUtilities.isLeftMouseButton(evt)) {
-            GlassPanePopup.closePopupLast();
-        }
-    }//GEN-LAST:event_cancelMousePressed
-
-    private void addMeaningMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMeaningMousePressed
+    private void addMeaningMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMeaningMouseReleased
         if (SwingUtilities.isLeftMouseButton(evt)) {
             RoundedTextField meaning = new RoundedTextField();
             meaning.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -224,7 +218,13 @@ public class EditGUI extends RoundedPanel {
             }
             panel.repaint();
         }
-    }//GEN-LAST:event_addMeaningMousePressed
+    }//GEN-LAST:event_addMeaningMouseReleased
+
+    private void cancelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseReleased
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            GlassPanePopup.closePopupLast();
+        }
+    }//GEN-LAST:event_cancelMouseReleased
     
     public void eventOK(MouseAdapter event) {
         Ok.addMouseListener(event);
