@@ -315,4 +315,57 @@ public class DictionaryManagement {
             }
         }
     }
+    // review vocabulary
+    public void VocabularyReview() {
+    	//quick review
+    	//review all
+        Scanner scanner = new Scanner(System.in);
+        VocabularyList vocabularyList = new VocabularyList(); // Đây là lớp chứa danh sách từ vựng của một chủ đề
+
+        System.out.println("Choose a vocabulary topic to review:");
+        System.out.println("1. Foods");
+        System.out.println("2. Jobs");
+        System.out.println("3. Animals");
+        System.out.println("4. Transportations");
+        System.out.println("5. Holidays");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
+
+        switch (choice) {
+            case 1:
+                vocabularyList.loadVocabulary("data/vocabulary.txt", "Foods");
+                break;
+            case 2:
+                vocabularyList.loadVocabulary("data/vocabulary.txt", "Jobs");
+                break;
+            case 3:
+                vocabularyList.loadVocabulary("data/vocabulary.txt", "Animals");
+                break;
+            case 4:
+                vocabularyList.loadVocabulary("data/vocabulary.txt", "Transportations");
+                break;
+            case 5:
+                vocabularyList.loadVocabulary("data/vocabulary.txt", "Holidays");
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                return;
+        }
+
+        System.out.println("Choose review mode:");
+        System.out.println("1. Quick Review (10 words)");
+        System.out.println("2. Review All (30 words)");
+
+        int reviewMode = scanner.nextInt();
+        scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
+
+        if (reviewMode == 1) {
+            vocabularyList.reviewQuick();
+        } else if (reviewMode == 2) {
+            vocabularyList.reviewAll();
+        } else {
+            System.out.println("Invalid review mode.");
+        }
+    }
 }
