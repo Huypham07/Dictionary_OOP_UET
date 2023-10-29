@@ -106,7 +106,7 @@ public class Menu extends javax.swing.JPanel {
         learn.addMouseListener(event);
     }
     
-    public void eventExport(MouseAdapter event) { //maybe delete
+    public void eventExport(MouseAdapter event) {
         export.addMouseListener(event);
     }
     

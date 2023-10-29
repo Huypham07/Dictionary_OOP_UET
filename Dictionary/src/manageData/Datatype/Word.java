@@ -16,6 +16,9 @@ public class Word {
 
     // setters
     public void copy(Word other) {
+        if (other == null) {
+            return;
+        }
         this.word_explain = new ArrayList<>(other.word_explain);
         this.word_target = new String(other.word_target);
         this.wordType = new String(other.wordType);

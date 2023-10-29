@@ -8,9 +8,11 @@ import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import manageData.Datatype.Word;
 import raven.glasspanepopup.GlassPanePopup;
+import jnafilechooser.api.JnaFileChooser;
 
 public class DictionaryGUI extends javax.swing.JFrame {
     private CardLayout cardLayout;
@@ -79,11 +81,10 @@ public class DictionaryGUI extends javax.swing.JFrame {
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             Word tmp = add.getWord();
                             if (!dictionaryManagement.validWord(tmp.getWord_target())) {
-                                JOptionPane.showMessageDialog(workPanel, "Invalid English Word!\nAn English word can only have alphabet character!!!");
-//                                if(JOptionPane.co)
+                                JOptionPane.showMessageDialog(add, "Invalid English Word!\nAn English word can only have alphabet character!!!");
                             } else{
                                 dictionaryManagement.insertWord(tmp);
-                                JOptionPane.showMessageDialog(workPanel, "Successful!");
+                                JOptionPane.showMessageDialog(add, "Successful!");
                                 GlassPanePopup.closePopupLast();
                             }
                         }
@@ -95,7 +96,13 @@ public class DictionaryGUI extends javax.swing.JFrame {
             
         });
         
-
+        controlpanel.eventExportGUI(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                ExportToFile(e);
+            }
+            
+        });
     }
     
     private void change(int select) {
@@ -103,7 +110,15 @@ public class DictionaryGUI extends javax.swing.JFrame {
         c.show(workPanel, Listfuntion.get(select));  
     }
     
-    
+    private void ExportToFile(MouseEvent e) {
+        JnaFileChooser fc = new JnaFileChooser();
+        boolean save = fc.showSaveDialog(this);
+        fc.addFilter("test", "txt");
+        if (save) {
+            File file = fc.getSelectedFile();
+            dictionaryManagement.dictionaryExportToFile(file.getAbsolutePath());
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -120,6 +135,11 @@ public class DictionaryGUI extends javax.swing.JFrame {
         setTitle("Dictionary");
         setBackground(new java.awt.Color(245, 245, 245));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         workPanel.setBackground(new java.awt.Color(255, 255, 255));
         workPanel.setOpaque(false);
@@ -175,6 +195,10 @@ public class DictionaryGUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+//        dictionaryManagement.dictionaryExportToFile("src/data/dictionary.txt");
+    }//GEN-LAST:event_formWindowClosing
 
 
     public static void main(String args[]) {

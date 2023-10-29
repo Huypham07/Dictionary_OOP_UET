@@ -435,7 +435,7 @@ public class DictionaryCommandline extends DictionaryManagement{
 
             case 9: {
                 cls();
-                this.dictionaryExportToFile();
+                this.dictionaryExportToFile("src/data/dictionary.txt");
             } break;
 
             default:

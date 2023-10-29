@@ -34,8 +34,8 @@ public class LookupGUI extends javax.swing.JPanel {
         this.Dictmng = Dictmng;
     }
     
-    private Word result;
-    private Word pre_result;
+    private Word result ;
+    private Word pre_result ;
 
     private JPopupMenu menu;
     private searchSuggestPanel suggestPanel;
@@ -298,10 +298,10 @@ public class LookupGUI extends javax.swing.JPanel {
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         Word tmp = edit.getWord();
                         if (!Dictmng.validWord(tmp.getWord_target())) {
-                            JOptionPane.showMessageDialog(menu, "Invalid English Word!\nAn English word can only have alphabet character!!!");
+                            JOptionPane.showMessageDialog(edit, "Invalid English Word!\nAn English word can only have alphabet character!!!");
                         } else{
                             Dictmng.editWord(result.getWord_target(), tmp);
-                            JOptionPane.showMessageDialog(menu, "Successful!");
+                            JOptionPane.showMessageDialog(edit, "Successful!");
                             GlassPanePopup.closePopupLast();
                         }
                     }
@@ -313,8 +313,10 @@ public class LookupGUI extends javax.swing.JPanel {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if (Dictmng.deleteWord(result.getWord_target())) {
-                            JOptionPane.showMessageDialog(menu, "Successful!");
+                            JOptionPane.showMessageDialog(edit, "Successful!");
                             GlassPanePopup.closePopupLast();
+                        } else {
+                            JOptionPane.showMessageDialog(edit, "Not found Word to delete\nOr this word was deleted!");
                         }
                     }
                 }
@@ -348,7 +350,15 @@ public class LookupGUI extends javax.swing.JPanel {
 
     private void processing() {
         textBar.execute_searching();
-        result = Dictmng.findWord(textBar.getText().trim());
+        Word tmp = Dictmng.findWord(textBar.getText().trim());
+        if (tmp != null) {
+            if (result == null) {
+                result = new Word();
+            }
+            result.copy(tmp);
+        } else {
+            result = null;
+        }
         Timer timer = new Timer(600, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -371,7 +381,9 @@ public class LookupGUI extends javax.swing.JPanel {
                         changeVisible(true);
                         pre_result = result;
                     } else {
+                        changeVisible(false);
                         result = pre_result;
+                        JOptionPane.showMessageDialog(jPanel1, "Not found");
                     }
                 }
             }

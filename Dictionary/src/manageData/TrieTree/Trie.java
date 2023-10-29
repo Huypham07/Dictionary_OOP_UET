@@ -33,7 +33,7 @@ public class Trie {
     }
 
     public void insert(String key, int indexArray) {
-        String l_key = key.toLowerCase();
+        String l_key = key.toLowerCase().trim();
         TrieNode tmpNode = this.root;
         for (int i = 0; i < l_key.length(); i++) {
             int index = l_key.charAt(i) - 'a';
@@ -46,7 +46,7 @@ public class Trie {
     }
 
     public int search(String key) {
-        String l_key = key.toLowerCase();
+        String l_key = key.toLowerCase().trim();
         TrieNode tmpNode = this.root;
         for (int i = 0; i < l_key.length(); i++) {
             int index = l_key.charAt(i) - 'a';
@@ -79,7 +79,7 @@ public class Trie {
     }
 
     public ArrayList<String> findWordsWithPrefix(String prefix) {
-        String l_prefix = prefix.toLowerCase();
+        String l_prefix = prefix.toLowerCase().trim();
         ArrayList<String> list = new ArrayList<>();
         TrieNode lastNode = this.root;
         StringBuffer curr = new StringBuffer(l_prefix);
@@ -98,7 +98,7 @@ public class Trie {
     // remove word
     public boolean remove(String key)
     {
-        String l_key = key.toLowerCase();
+        String l_key = key.toLowerCase().trim();
         TrieNode tmpNode = this.root;
         for (int i = 0; i < l_key.length(); i++) {
             int index = l_key.charAt(i) - 'a';

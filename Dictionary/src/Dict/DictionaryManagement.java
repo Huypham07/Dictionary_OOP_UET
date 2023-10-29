@@ -83,9 +83,9 @@ public class DictionaryManagement {
     public boolean deleteWord(String key) {
         int id = this.TrieOfDict.search(key);
         if (id < 0) return false;
-        this.dictionary.getDict().remove(id);
+        this.dictionary.getDict().get(id).setWordTarget("");
         return this.TrieOfDict.remove(key);
-    }
+    }// bug when delete it suffles all word
     
     //search prefix
     public ArrayList<String> findWordsWithPrefix(String key) {
@@ -138,20 +138,24 @@ public class DictionaryManagement {
         }
     }
         //export to file
-    public boolean dictionaryExportToFile(){
+    public boolean dictionaryExportToFile(String path){
         try {
-            FileWriter fw = new FileWriter("src/data/exported_dictionary.txt");
+            FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (Word w : this.getDictionary().getDict()) {
-                bw.write(w.getWord_target() + "\t");
+                if (w.getWord_target() != null && !w.getWord_target().isEmpty()) {
+                    bw.write(w.getWord_target() + "\t");
 
-                ArrayList<String> w_explain = w.getWord_explain();
-                for (String meaning : w_explain) {
-                    bw.write(meaning + "\t");
+                    ArrayList<String> w_explain = w.getWord_explain();
+                    for (String meaning : w_explain) {
+                        bw.write(meaning + "\t");
+                    }
+
+                    bw.write(w.getWordType() + "\t");
+
+                    bw.write("\n");
                 }
-
-                bw.write("\n");
             }
 
             System.out.println("Export successful !!");
