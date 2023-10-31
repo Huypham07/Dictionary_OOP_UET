@@ -317,10 +317,8 @@ public class DictionaryManagement {
     }
     // review vocabulary
     public void VocabularyReview() {
-    	//quick review
-    	//review all
         Scanner scanner = new Scanner(System.in);
-        VocabularyList vocabularyList = new VocabularyList(); // Đây là lớp chứa danh sách từ vựng của một chủ đề
+        VocabularyList vocabularyList = new VocabularyList();
 
         System.out.println("Choose a vocabulary topic to review:");
         System.out.println("1. Foods");
@@ -328,26 +326,31 @@ public class DictionaryManagement {
         System.out.println("3. Animals");
         System.out.println("4. Transportations");
         System.out.println("5. Holidays");
+        System.out.println("6. Search History");
 
         int choice = scanner.nextInt();
         scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
 
+        String topic;
         switch (choice) {
             case 1:
-                vocabularyList.loadVocabulary("data/vocabulary.txt", "Foods");
+                topic = "Foods";
                 break;
             case 2:
-                vocabularyList.loadVocabulary("data/vocabulary.txt", "Jobs");
+                topic = "Jobs";
                 break;
             case 3:
-                vocabularyList.loadVocabulary("data/vocabulary.txt", "Animals");
+                topic = "Animals";
                 break;
             case 4:
-                vocabularyList.loadVocabulary("data/vocabulary.txt", "Transportations");
+                topic = "Transportations";
                 break;
             case 5:
-                vocabularyList.loadVocabulary("data/vocabulary.txt", "Holidays");
+                topic = "Holidays";
                 break;
+            case 6:
+            	topic = "SearchHistory";
+            	break;
             default:
                 System.out.println("Invalid choice.");
                 return;
@@ -358,14 +361,16 @@ public class DictionaryManagement {
         System.out.println("2. Review All (30 words)");
 
         int reviewMode = scanner.nextInt();
-        scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
+        scanner.nextLine();
 
         if (reviewMode == 1) {
+            vocabularyList.loadVocabulary("data/vocabulary.txt", topic);
             vocabularyList.reviewQuick();
         } else if (reviewMode == 2) {
+            vocabularyList.loadVocabulary("data/vocabulary.txt", topic);
             vocabularyList.reviewAll();
         } else {
             System.out.println("Invalid review mode.");
         }
-    }
+	}
 }
