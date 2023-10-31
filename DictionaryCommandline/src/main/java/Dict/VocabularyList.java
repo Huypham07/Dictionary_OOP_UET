@@ -32,8 +32,8 @@ class VocabularyList {
     }
 
     public void reviewQuick() {
-        Collections.shuffle(vocabularies); // Xáo trộn danh sách từ vựng
-        int count = Math.min(10, vocabularies.size()); // Chọn tối đa 10 từ
+        Collections.shuffle(vocabularies); 
+        int count = Math.min(10, vocabularies.size()); 
         for (int i = 0; i < count; i++) {
             Vocabulary vocabulary = vocabularies.get(i);
             System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nDefinition: ");
@@ -61,8 +61,8 @@ class VocabularyList {
     }
 
     public void reviewSearchHistory(List<Vocabulary> searchHistory) {
-        Collections.shuffle(searchHistory); // Xáo trộn danh sách từ vựng từ SearchHistory
-        int count = Math.min(10, searchHistory.size()); // Chọn tối đa 10 từ
+        Collections.shuffle(searchHistory); 
+        int count = Math.min(10, searchHistory.size()); 
         for (int i = 0; i < count; i++) {
             Vocabulary vocabulary = searchHistory.get(i);
             System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nDefinition: ");
