@@ -4,6 +4,51 @@ import java.util.*;
 
 class VocabularyList {
     private List<Vocabulary> vocabularies = new ArrayList<>();
+    
+    public void addVocabulary(String topic, Vocabulary vocabulary) {
+        try {
+            String filePath = "data/WordsBySubject.txt";
+
+            // Tạo danh sách tạm thời để lưu dữ liệu từ file
+            LinkedList<String> lines = new LinkedList<>();
+
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
+
+            boolean foundTopic = false;
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                lines.add(line);
+
+                if (line.startsWith("# " + topic)) {
+                    foundTopic = true;
+                }
+
+                if (foundTopic && line.isEmpty()) {
+                    // Chủ đề đã kết thúc, thêm vocabulary vào chủ đề
+                    lines.add(vocabulary.getWord() + "   " + vocabulary.getMeaning() + "   " + vocabulary.getWordType());
+                    foundTopic = false;
+                }
+            }
+
+            scanner.close();
+            
+            FileWriter fileWriter = new FileWriter(filePath);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while adding vocabulary to the file.");
+            e.printStackTrace();
+        }
+    }
+
 
     public void loadVocabulary(String filePath, String topic) {
         try {
