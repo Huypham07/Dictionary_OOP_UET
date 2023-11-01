@@ -26,7 +26,6 @@ class VocabularyList {
                 }
 
                 if (foundTopic && line.isEmpty()) {
-                    // Chủ đề đã kết thúc, thêm vocabulary vào chủ đề
                     lines.add(vocabulary.getWord() + "   " + vocabulary.getMeaning() + "   " + vocabulary.getWordType());
                     foundTopic = false;
                 }
@@ -67,7 +66,7 @@ class VocabularyList {
                         vocabularies.add(new Vocabulary(word, meaning, wordType));
                     }
                 } else if (isTopic && line.isEmpty()) {
-                    break; // Kết thúc khi gặp dòng trống
+                    break; 
                 }
             }
             reader.close();
