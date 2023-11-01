@@ -1,200 +1,171 @@
 # Foods
-apple quả táo noun
-banana quả chuối noun
-bread bánh mì noun
-chocolate sô cô la noun
-coffee cà phê noun
-hamburger bánh mì kẹp thịt noun
-ice cream kem noun
-orange quả cam noun
-pizza bánh pizza noun
-rice cơm noun
-sandwich bánh mì kẹp noun
-spaghetti mì Ý noun
-strawberry dâu tây noun
-watermelon dưa hấu noun
-cheese phô mai noun
-cookie bánh quy noun
-grapes nho noun
-milk sữa noun
-potato khoai tây noun
-steak bò bít tết noun
-bake nướng verb
-cook nấu verb
-eat ăn verb
-drink uống verb
-peel bóc verb
-slice cắt verb
-taste nếm verb
-roast nướng verb
-fry chiên verb
-boil luộc verb
-sweet ngọt adj
-sour chua adj
-spicy cay adj
-fresh tươi adj
-hot nóng adj
-cold lạnh adj
+apple  quả táo  noun
+banana  quả chuối  noun
+bread  bánh mì  noun
+butter  bơ  noun
+carrot  cà rốt  noun
+cheese  phô mai  noun
+chicken  gà  noun
+chocolate  sô cô la  noun
+coconut  dừa  noun
+coffee  cà phê  noun
+egg  quả trứng  noun
+fish  cá  noun
+grape  nho  noun
+honey  mật ong  noun
+lemon  quả chanh  noun
+milk  sữa  noun
+orange  quả cam  noun
+pasta  mì  noun
+rice  gạo  noun
+salt  muối  noun
+sugar  đường  noun
+tomato  cà chua  noun
+vegetable  rau  noun
+water  nước  noun
+wine  rượu  noun
+eat  ăn  verb
+drink  uống  verb
+cook  nấu nướng  verb
+bake  nướng  verb
+fry  chiên  verb
+roast  nướng  verb
+slice  cắt lát  verb
+boil  đun sôi  verb
+steam  hấp  verb
+grill  nướng trên bếp than  verb
+hot  nóng  adjective
+cold  lạnh  adjective
+fresh  tươi  adjective
+spicy  cay  adjective
+sweet  ngọt  adjective
+salty  mặn  adjective
+bitter  đắng  adjective
+sour  chua  adjective
+delicious  ngon  adjective
+tasty  ngon miệng  adjective
 
 # Jobs
-doctor bác sĩ noun
-engineer kỹ sư noun
-firefighter lính cứu hỏa noun
-teacher giáo viên noun
-waiter phục vụ noun
-pilot phi công noun
-nurse y tá noun
-lawyer luật sư noun
-artist nghệ sĩ noun
-chef đầu bếp noun
-mechanic thợ máy noun
-writer nhà văn noun
-police cảnh sát noun
-dentist nha sĩ noun
-actor diễn viên noun
-farmer nông dân noun
-builder thợ xây noun
-scientist nhà khoa học noun
-veterinarian bác sĩ thú y noun
-musician nhạc sĩ noun
-sing hát verb
-dance nhảy verb
-teach dạy verb
-serve phục vụ verb
-fly bay verb
-treat chữa trị verb
-create tạo ra verb
-repair sửa chữa verb
-write viết verb
-grow trồng verb
-busy bận adj
-creative sáng tạo adj
-helpful hữu ích adj
-friendly thân thiện adj
-busy bận adj
-smart thông minh adj
-patient kiên nhẫn adj
+artist  nghệ sĩ  noun
+baker  người làm bánh mì  noun
+chef  đầu bếp  noun
+dentist  nha sĩ  noun
+doctor  bác sĩ  noun
+engineer  kỹ sư  noun
+farmer  nông dân  noun
+firefighter  lính cứu hỏa  noun
+fisherman  ngư dân  noun
+florist  người bán hoa  noun
+cook  nấu nướng  verb
+paint  vẽ tranh  verb
+write  viết  verb
+teach  dạy  verb
+heal  chữa lành  verb
+build  xây dựng  verb
+plant  trồng cây  verb
+catch  bắt  verb
+sell  bán  verb
+sing  hát  verb
+happy  hạnh phúc  adjective
+sad  buồn  adjective
+angry  tức giận  adjective
+tired  mệt mỏi  adjective
+strong  mạnh  adjective
+weak  yếu  adjective
+kind  tử tế  adjective
+friendly  thân thiện  adjective
+brave  dũng cảm  adjective
+scary  đáng sợ  adjective
 
 # Animals
-cat con mèo noun
-dog con chó noun
-elephant con voi noun
-lion con sư tử noun
-tiger con hổ noun
-horse con ngựa noun
-bear con gấu noun
-snake con rắn noun
-rabbit con thỏ noun
-penguin con chim cánh cụt noun
-kangaroo con chuột túi noun
-zebra con ngựa vằn noun
-panda con gấu trúc noun
-giraffe con hươu cao cổ noun
-octopus bạch tuộc noun
-dolphin cá heo noun
-shark con cá mập noun
-crocodile cá sấu noun
-gorilla con khỉ đột noun
-ostrich con đà điểu noun
-jump nhảy verb
-swim bơi verb
-crawl bò verb
-roar gầm verb
-hunt săn verb
-climb leo verb
-fly bay verb
-sleep ngủ verb
-waddle đi lảo đảo verb
-slither trườn verb
-wild hoang dã adj
-furry lông xù adj
-savage hung dữ adj
-graceful duyên dáng adj
-tiny nhỏ bé adj
-strong mạnh adj
-noisy ồn ào adj
-dangerous nguy hiểm adj
-timid nhút nhát adj
-powerful mạnh mẽ adj
+cat  con mèo  noun
+dog  con chó  noun
+elephant  con voi  noun
+giraffe  con hươu cao cổ  noun
+lion  con sư tử  noun
+monkey  con khỉ  noun
+penguin  chim cánh cụt  noun
+polar bear  gấu Bắc Cực  noun
+tiger  con hổ  noun
+zebra  ngựa vằn  noun
+swim  bơi  verb
+fly  bay  verb
+run  chạy  verb
+jump  nhảy  verb
+climb  leo  verb
+crawl  bò  verb
+hunt  săn bắn  verb
+sleep  ngủ  verb
+eat  ăn  verb
+drink  uống  verb
+big  to  adjective
+small  nhỏ  adjective
+fast  nhanh  adjective
+slow  chậm  adjective
+fierce  hung dữ  adjective
+gentle  hiền lành  adjective
+wild  hoang dã  adjective
+domestic  nuôi trong nhà  adjective
+nocturnal  về đêm  adjective
+diurnal  ban ngày  adjective
 
 # Transportations
-bicycle xe đạp noun
-car xe hơi noun
-motorcycle xe máy noun
-bus xe buýt noun
-train tàu hỏa noun
-subway tàu điện ngầm noun
-airplane máy bay noun
-ship tàu biển noun
-helicopter trực thăng noun
-scooter xe máy noun
-truck xe tải noun
-boat thuyền noun
-taxi taxi noun
-tram xe điện noun
-van xe chở hàng noun
-cruise tàu du lịch noun
-skateboard ván trượt noun
-sailboat thuyền buồm noun
-rocket tên lửa noun
-hot air balloon khí cầu nóng noun
-ride lái verb
-drive lái verb
-sail buộc verb
-fly bay verb
-swim bơi verb
-float nổi verb
-climb leo verb
-walk đi bộ verb
-speed tốc độ verb
-board lên verb
-fast nhanh adj
-slow chậm adj
-old cũ adj
-modern hiện đại adj
-loud ồn ào adj
-silent yên lặng adj
-massive khổng lồ adj
-compact nhỏ gọn adj
-luxurious sang trọng adj
+bicycle  xe đạp  noun
+bus  xe buýt  noun
+car  xe hơi  noun
+helicopter  trực thăng  noun
+motorcycle  xe máy  noun
+plane  máy bay  noun
+ship  tàu  noun
+subway  tàu điện ngầm  noun
+taxi  xe tắc xi  noun
+train  tàu hỏa  noun
+drive  lái xe  verb
+ride  đi xe  verb
+fly  bay  verb
+sail  đi biển  verb
+swim  bơi  verb
+stop  dừng lại  verb
+board  lên tàu, máy bay  verb
+land  hạ cánh  verb
+park  đỗ xe  verb
+crash  va chạm  verb
+fast  nhanh  adjective
+slow  chậm  adjective
+comfortable  thoải mái  adjective
+crowded  đông đúc  adjective
+dangerous  nguy hiểm  adjective
+safe  an toàn  adjective
+expensive  đắt tiền  adjective
+cheap  rẻ  adjective
+convenient  thuận tiện  adjective
+inconvenient  không thuận tiện  adjective
 
 # Holidays
-birthday ngày sinh nhật noun
-christmas lễ Giáng Sinh noun
-halloween lễ hóa trang noun
-valentine ngày Valentine noun
-easter lễ Phục Sinh noun
-thanksgiving lễ tạ ơn noun
-new year năm mới noun
-independence day ngày độc lập noun
-wedding lễ cưới noun
-anniversary kỷ niệm noun
-vacation kỳ nghỉ noun
-holiday ngày lễ noun
-carnival lễ hội noun
-diwali lễ Diwali noun
-eid lễ Eid noun
-hanukkah lễ Hanukkah noun
-labour day ngày lao động noun
-memorial day ngày tưởng nhớ noun
-eclipse ngày thiên văn noun
-solstice ngày độ dài đêm ngắn nhất noun
-celebrate kỷ niệm verb
-decorate trang trí verb
-dress mặc verb
-exchange trao đổi verb
-gather tập trung verb
-parade diễu hành verb
-remember nhớ lại verb
-travel đi du lịch verb
-wish chúc verb
-light chiếu sáng adj
-colorful đầy màu sắc adj
-traditional truyền thống adj
-festive tráng lệ adj
-exciting thú vị adj
-religious tôn giáo adj
-bright sáng adj
-ceremonial trang trọng adj
-memorable đáng nhớ adj
-warm ấm áp adj
+birthday  ngày sinh nhật  noun
+Christmas  Giáng Sinh  noun
+Easter  Lễ Phục Sinh  noun
+Halloween  Halloween  noun
+New Year  Năm mới  noun
+holiday  ngày nghỉ  noun
+celebrate  tổ chức  verb
+give  tặng  verb
+receive  nhận  verb
+decorate  trang trí  verb
+gather  tụ họp  verb
+eat  ăn  verb
+drink  uống  verb
+party  tiệc  verb
+fireworks  pháo hoa  noun
+gift  quà tặng  noun
+family  gia đình  noun
+friend  người bạn  noun
+fun  vui vẻ  adjective
+exciting  thú vị  adjective
+traditional  truyền thống  adjective
+festive  phần mừng  adjective
+happy  hạnh phúc  adjective
+memorable  đáng nhớ  adjective
+quiet  yên bình  adjective
+noisy  ồn ào  adjective
+peaceful  yên bình  adjective
