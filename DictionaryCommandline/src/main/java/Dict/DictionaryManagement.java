@@ -380,10 +380,10 @@ public class DictionaryManagement {
         scanner.nextLine();
 
         if (reviewMode == 1) {
-            vocabularyList.loadVocabulary("data/vocabulary.txt", topic);
+            vocabularyList.loadVocabulary("data/WordsBySubject.txt", topic);
             vocabularyList.review(10);
         } else if (reviewMode == 2) {
-            vocabularyList.loadVocabulary("data/vocabulary.txt", topic);
+            vocabularyList.loadVocabulary("data/WordsBySubject.txt", topic);
             vocabularyList.review(30);
         } else {
             System.out.println("Invalid review mode.");
