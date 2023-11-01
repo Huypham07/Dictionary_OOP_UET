@@ -31,48 +31,15 @@ class VocabularyList {
         }
     }
 
-    public void reviewQuick() {
-        Collections.shuffle(vocabularies); 
-        int count = Math.min(10, vocabularies.size()); 
+    public void review(int wordCount) {
+        Collections.shuffle(vocabularies);
+        int count = Math.min(wordCount, vocabularies.size());
         for (int i = 0; i < count; i++) {
             Vocabulary vocabulary = vocabularies.get(i);
-            System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nDefinition: ");
+            System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nPress Enter for the meaning.");
             Scanner scanner = new Scanner(System.in);
-            String userAnswer = scanner.nextLine();
-            if (userAnswer.equalsIgnoreCase(vocabulary.getMeaning())) {
-                System.out.println("Correct!");
-            } else {
-                System.out.println("Incorrect. The correct answer is: " + vocabulary.getMeaning());
-            }
-        }
-    }
-
-    public void reviewAll() {
-        for (Vocabulary vocabulary : vocabularies) {
-            System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nDefinition: ");
-            Scanner scanner = new Scanner(System.in);
-            String userAnswer = scanner.nextLine();
-            if (userAnswer.equalsIgnoreCase(vocabulary.getMeaning())) {
-                System.out.println("Correct!");
-            } else {
-                System.out.println("Incorrect. The correct answer is: " + vocabulary.getMeaning());
-            }
-        }
-    }
-
-    public void reviewSearchHistory(List<Vocabulary> searchHistory) {
-        Collections.shuffle(searchHistory); 
-        int count = Math.min(10, searchHistory.size()); 
-        for (int i = 0; i < count; i++) {
-            Vocabulary vocabulary = searchHistory.get(i);
-            System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nDefinition: ");
-            Scanner scanner = new Scanner(System.in);
-            String userAnswer = scanner.nextLine();
-            if (userAnswer.equalsIgnoreCase(vocabulary.getMeaning())) {
-                System.out.println("Correct!");
-            } else {
-                System.out.println("Incorrect. The correct answer is: " + vocabulary.getMeaning());
-            }
+            scanner.nextLine();
+            System.out.println("Meaning: " + vocabulary.getMeaning());
         }
     }
 }
