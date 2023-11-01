@@ -58,7 +58,7 @@ class VocabularyList {
                 if (line.startsWith("# " + topic)) {
                     isTopic = true;
                 } else if (isTopic && !line.isEmpty()) {
-                    String[] parts = line.split(" ");
+                    String[] parts = line.split("  ");
                     if (parts.length >= 3) {
                         String word = parts[0];
                         String meaning = parts[1];
