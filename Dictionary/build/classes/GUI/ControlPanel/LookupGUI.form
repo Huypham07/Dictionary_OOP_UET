@@ -102,12 +102,12 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="editButton" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="wordType" pref="543" max="32767" attributes="0"/>
+                      <Component id="wordType" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="resultBoard" alignment="1" max="32767" attributes="0"/>
+              <Component id="resultBoard" alignment="1" min="-2" pref="555" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -130,7 +130,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="line" min="-2" pref="1" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="resultBoard" pref="305" max="32767" attributes="0"/>
+                  <Component id="resultBoard" min="-2" pref="305" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

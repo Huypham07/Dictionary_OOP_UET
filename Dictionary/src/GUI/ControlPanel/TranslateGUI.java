@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
@@ -104,8 +105,8 @@ public class TranslateGUI extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Language1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                    .addComponent(Language2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Language1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Language2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(read2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,10 +243,8 @@ public class TranslateGUI extends javax.swing.JPanel {
                     try {
                         controller.readMessage(target,
                                 controller.getLanguageCode(languageSelect1.getText()));
-                    } catch (IOException ex) {
-                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (JavaLayerException ex) {
-                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException | JavaLayerException ex) {
+                        JOptionPane.showMessageDialog(this, "Can't read Text");
                     }
                 });
                 
@@ -267,10 +266,8 @@ public class TranslateGUI extends javax.swing.JPanel {
                     try {
                         controller.readMessage(result,
                                 controller.getLanguageCode(languageSelect2.getText()));
-                    } catch (IOException ex) {
-                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (JavaLayerException ex) {
-                        Logger.getLogger(TranslateGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException | JavaLayerException ex) {
+                        JOptionPane.showMessageDialog(this, "Can't read Text");
                     }
                 });
                 

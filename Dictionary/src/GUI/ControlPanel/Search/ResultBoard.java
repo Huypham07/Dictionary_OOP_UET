@@ -32,6 +32,7 @@ public class ResultBoard extends javax.swing.JPanel {
             txt.setText("•      " + data.get(i));
             panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
         }
+        panel.repaint();
     }
     
     public void setData(String data) {
@@ -47,6 +48,7 @@ public class ResultBoard extends javax.swing.JPanel {
         txt.setEditable(false);
         txt.setText(data);
         panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
+        panel.repaint();
     }
 
     public void scrollToTop() {

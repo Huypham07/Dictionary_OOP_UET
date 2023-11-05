@@ -4,6 +4,7 @@ import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
 import GUI.ControlPanel.AddWord.AddGUI;
+import GUI.ControlPanel.Learn.LearnGUI;
 import GUI.ControlPanel.TranslateGUI;
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
@@ -21,6 +22,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     
     private LookupGUI lookupGUI;
     private TranslateGUI translateGUI;
+    private LearnGUI learnGUI;
     
     private ArrayList<String> Listfuntion = new ArrayList<>();
     
@@ -44,14 +46,18 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         translateGUI = new TranslateGUI();
         
+        learnGUI = new LearnGUI();
+        
         
         workPanel.setLayout(cardLayout);
         
         workPanel.add("lookup",lookupGUI);
         workPanel.add("translate", translateGUI);
+        workPanel.add("learn", learnGUI);
         
         Listfuntion.add("lookup");
         Listfuntion.add("translate");
+        Listfuntion.add("learn");
         
         controlpanel.eventLookupGUI(new MouseAdapter() {
             @Override
@@ -96,6 +102,15 @@ public class DictionaryGUI extends javax.swing.JFrame {
             
         });
         
+        controlpanel.eventLearnGUI(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                controlpanel.setSelect(controlpanel.LEARN);
+                change(controlpanel.LEARN);
+            }
+            
+        });
+        
         controlpanel.eventExportGUI(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -112,8 +127,9 @@ public class DictionaryGUI extends javax.swing.JFrame {
     
     private void ExportToFile(MouseEvent e) {
         JnaFileChooser fc = new JnaFileChooser();
+        fc.setTitle("Export to File");
         boolean save = fc.showSaveDialog(this);
-        fc.addFilter("test", "txt");
+        
         if (save) {
             File file = fc.getSelectedFile();
             dictionaryManagement.dictionaryExportToFile(file.getAbsolutePath());

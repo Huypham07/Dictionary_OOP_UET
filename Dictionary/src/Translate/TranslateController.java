@@ -29,6 +29,6 @@ public class TranslateController {
     }
     
     public void readMessage(String Text, String language) throws IOException, JavaLayerException {
-        this.translate.read(Text, language);
+        this.translate.playSound(Text, language);
     }
 }
