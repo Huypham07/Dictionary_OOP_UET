@@ -1,4 +1,4 @@
-package GUI.ControlPanel.Translate;
+package GUI.ControlPanel.Learn;
 
 import GUI.ControlPanel.Search.EventClick;
 import GUI.ControlPanel.Search.searchSuggestPanel;
@@ -10,18 +10,22 @@ import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+public class SubjectChoosePanel extends RoundedPanel {
 
-public class LanguagePanel extends RoundedPanel {
     private JPopupMenu menu;
     private searchSuggestPanel suggestPanel;
-    private ArrayList<String> languages;
+    private ArrayList<String> subjects;
 
-    public ArrayList<String> getLanguages() {
-        return languages;
+    public ArrayList<String> getSubjects() {
+        return subjects;
     }
 
-    public void setLanguages(ArrayList<String> languages) {
-        this.languages = languages;
+    public void setSubjects(ArrayList<String> subjects) {
+        this.subjects = subjects;
+    }
+    
+    public int getChoose() {
+        return subjects.indexOf(subject.getText());
     }
     
     private boolean show = false;
@@ -34,18 +38,22 @@ public class LanguagePanel extends RoundedPanel {
         this.show = show;
     }
     
+    public void setMenuVisible(boolean show) {
+        menu.setVisible(show);
+    }
+    
     public void setText(String language) {
-        this.language.setText(language);
+        this.subject.setText(language);
     }
     
     public String getText() {
-        return language.getText();
+        return subject.getText();
     }
-
-    public LanguagePanel() {
+    
+    public SubjectChoosePanel() {
         initComponents();
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         menu = new JPopupMenu();
         suggestPanel = new searchSuggestPanel();
         suggestPanel.setPathIcon(null);
@@ -53,36 +61,27 @@ public class LanguagePanel extends RoundedPanel {
         menu.setBorder(BorderFactory.createLineBorder(new Color(245, 242, 242)));
         menu.add(suggestPanel);
         menu.setFocusable(false);
-        suggestPanel.addEventClick(new EventClick() {
-            @Override
-            public void itemClick(String data) {
-                language.setText(data);
-                menu.setVisible(false);
-                show = false;
-            }
-        });
+    }
+    
+    public void eventClickSugestPanel(EventClick e) {
+        suggestPanel.addEventClick(e);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        language = new javax.swing.JLabel();
+        subject = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setRoundBottomLeft(20);
-        setRoundBottomRight(20);
-        setRoundTopLeft(20);
-        setRoundTopRight(20);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
             }
         });
 
-        language.setBackground(new java.awt.Color(245, 242, 242));
-        language.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        subject.setBackground(new java.awt.Color(245, 242, 242));
+        subject.setFont(new java.awt.Font("SansSerif", 3, 20)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel2.setText("▼\t");
@@ -93,7 +92,7 @@ public class LanguagePanel extends RoundedPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(language, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(subject, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap())
@@ -103,8 +102,8 @@ public class LanguagePanel extends RoundedPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(language, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                    .addComponent(subject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -115,7 +114,7 @@ public class LanguagePanel extends RoundedPanel {
                 menu.setVisible(false);
                 show = false;
             } else {
-                suggestPanel.setSuggestData(languages);
+                suggestPanel.setSuggestData(subjects);
                 if (suggestPanel.getItemSize() > 0) {
                     menu.show(this, 0, getHeight());
                     menu.setPopupSize(getWidth(), (suggestPanel.getItemSize() * 35) + 2);
@@ -129,6 +128,6 @@ public class LanguagePanel extends RoundedPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel language;
+    private javax.swing.JLabel subject;
     // End of variables declaration//GEN-END:variables
 }

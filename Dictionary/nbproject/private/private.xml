@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/LearnGUI.java</file>
             <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/LookupGUI.java</file>
             <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Translate/Translate.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Search/ResultBoard.java</file>
             <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Dict/DictionaryManagement.java</file>
-            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/DictionaryGUI.java</file>
+            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Learn/WordPanel.java</file>
+            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/roundComponent/RoundedPanel.java</file>
+            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/Learn/SlideRoundedPanel.java</file>
             <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/ControlPanel/TranslateGUI.java</file>
+            <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/GUI/DictionaryGUI.java</file>
             <file>file:/C:/Users/huyho/OneDrive/Desktop/BTL/Dictionary/src/Translate/TranslateController.java</file>
         </group>
     </open-files>

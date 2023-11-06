@@ -1,4 +1,4 @@
-package GUI.ControlPanel.EditGUI;
+package GUI.ControlPanel;
 
 import GUI.roundComponent.RoundedPanel;
 import GUI.roundComponent.RoundedTextField;

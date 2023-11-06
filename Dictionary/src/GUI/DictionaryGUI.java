@@ -3,14 +3,18 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
-import GUI.ControlPanel.AddWord.AddGUI;
-import GUI.ControlPanel.Learn.LearnGUI;
+import GUI.ControlPanel.AddGUI;
+import GUI.ControlPanel.Learn.WordPanel;
+import GUI.ControlPanel.LearnGUI;
 import GUI.ControlPanel.TranslateGUI;
+import GUI.ControlPanel.controlPanel;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import manageData.Datatype.Word;
 import raven.glasspanepopup.GlassPanePopup;
 import jnafilechooser.api.JnaFileChooser;
@@ -47,7 +51,14 @@ public class DictionaryGUI extends javax.swing.JFrame {
         translateGUI = new TranslateGUI();
         
         learnGUI = new LearnGUI();
+        List<Component> list = new ArrayList<>();
+        list.add(new WordPanel("Dog", "noun", "Con chó"));
+        list.add(new WordPanel("Bird", "noun", "Con chim"));
+        learnGUI.addComponent(list);
         
+        ArrayList<String> subs = new ArrayList<>();
+        subs.add("Animal");
+        learnGUI.setSubjectChoose(subs);
         
         workPanel.setLayout(cardLayout);
         
@@ -62,8 +73,8 @@ public class DictionaryGUI extends javax.swing.JFrame {
         controlpanel.eventLookupGUI(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                controlpanel.setSelect(controlpanel.LOOKUP);
-                change(controlpanel.LOOKUP);
+                controlpanel.setSelect(controlPanel.LOOKUP);
+                change(controlPanel.LOOKUP);
             }
             
         });
@@ -71,8 +82,8 @@ public class DictionaryGUI extends javax.swing.JFrame {
         controlpanel.eventTranslateGUI(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                controlpanel.setSelect(controlpanel.TRANSLATE);
-                change(controlpanel.TRANSLATE);
+                controlpanel.setSelect(controlPanel.TRANSLATE);
+                change(controlPanel.TRANSLATE);
             }
             
         });
@@ -104,9 +115,11 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         controlpanel.eventLearnGUI(new MouseAdapter(){
             @Override
-            public void mousePressed(MouseEvent e) {
-                controlpanel.setSelect(controlpanel.LEARN);
-                change(controlpanel.LEARN);
+            public void mouseReleased(MouseEvent e) {
+                controlpanel.setSelect(controlPanel.LEARN);
+                change(controlPanel.LEARN);
+                learnGUI.startLearn();
+                JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
             }
             
         });

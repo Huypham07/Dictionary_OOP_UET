@@ -6,7 +6,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import Dict.DictionaryManagement;
-import GUI.ControlPanel.EditGUI.EditGUI;
 import Translate.TranslateController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
