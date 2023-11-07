@@ -1,41 +1,38 @@
-package GUI.ControlPanel.Search;
+package GUI.ControlPanel.Learn;
 
+import GUI.ControlPanel.Search.EventClick;
+import GUI.ControlPanel.Search.SearchItem;
 import GUI.roundComponent.RoundedPanel;
+import GUI.roundComponent.ScrollBarCustom;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import net.miginfocom.swing.MigLayout;
 
-public class searchSuggestPanel extends RoundedPanel {
+public class topicSuggestPanel extends RoundedPanel {
     private EventClick event;
     private int SelectedIndex = -1;
-    private String pathIcon;
     
-    public void setPathIcon(String pathIcon) {
-        this.pathIcon = pathIcon;
+    public topicSuggestPanel() {
+        initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.setHorizontalScrollBar(null);
+        jPanel1.setLayout(new MigLayout("fillx", "0[]0", "0[]0"));
     }
     
     public void addEventClick(EventClick event) {
         this.event = event;
     }
-
-    public searchSuggestPanel() {
-        super(10, 10, 10, 10);
-        initComponents();
-        setLayout(new MigLayout("fillx", "0[]0", "0[]0"));
-    }
-
+    
     public void setSuggestData(ArrayList<String> data) {
         SelectedIndex = -1;
         showSelected();
-        this.removeAll();
-        int cnt = 0;
+        jPanel1.removeAll();
         for (String d : data) {
-            if (cnt >= 8) break; // max of suggest can show
             
             SearchItem item = new SearchItem(d);
-            item.setIcon(pathIcon);
+            item.setIcon(null);
             //  add event
             item.addEvent(new ActionListener() {
                 @Override
@@ -44,9 +41,8 @@ public class searchSuggestPanel extends RoundedPanel {
                     event.itemClick(d);
                 }
             });
-            this.add(item, "wrap");
+            jPanel1.add(item, "wrap");
             //  wrap mean add to new row after this add
-            cnt++;
         }
         repaint();
         revalidate();
@@ -54,63 +50,55 @@ public class searchSuggestPanel extends RoundedPanel {
     }
     
     public int getItemSize() {
-        return getComponentCount();
-    }
-    
-    public void keyUp() {
-        int size = getComponentCount();
-        if (size > 0) {
-            if (SelectedIndex <= 0) {
-                SelectedIndex = size-1;
-            } else {
-                SelectedIndex--;
-            }
-            showSelected();
-        }
-    }
-    
-    public void keyDown() {
-        int size = getComponentCount();
-        if (size > 0) {
-            if (SelectedIndex >= size-1) {
-                SelectedIndex = 0;
-            } else {
-                SelectedIndex++;
-            }
-            showSelected();
-        }
+        return jPanel1.getComponentCount();
     }
     
     private void showSelected() {
-        Component com[] = getComponents();
+        Component com[] = jPanel1.getComponents();
         for (int i = 0; i < com.length; i++) {
             ((SearchItem)com[i]).setSelected(i == SelectedIndex);
         }
-    }
-    
-    public String getSelectedText() {
-        if (SelectedIndex != -1 && SelectedIndex < getComponentCount()) {
-            return ((SearchItem)getComponent(SelectedIndex)).getText();
-        }
-        return "";
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+
+        setRoundBottomLeft(10);
+        setRoundBottomRight(10);
+        setRoundTopLeft(10);
+        setRoundTopRight(10);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 388, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

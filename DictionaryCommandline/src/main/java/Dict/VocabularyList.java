@@ -1,72 +1,96 @@
 package Dict;
 import java.io.*;
 import java.util.*;
+import manageData.Datatype.Word;
 
-class VocabularyList {
-    private List<Vocabulary> vocabularies = new ArrayList<>();
-    
-    public void addVocabulary(String topic, Vocabulary vocabulary) {
-        try {
-            String filePath = "data/WordsBySubject.txt";
+public class VocabularyList {
+    private List<List<Word>> vocabularies = new ArrayList<>();
+    private List<String> topics = new ArrayList<>();
 
-            // Tạo danh sách tạm thời để lưu dữ liệu từ file
-            LinkedList<String> lines = new LinkedList<>();
+    public List<String> getTopics() {
+        return topics;
+    }
 
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
+    public void addTopic(String topic) {
+        topics.add(topic);
+    }
 
-            boolean foundTopic = false;
+    public void addNewVocabulary(String topic, Word word) {
+        if (topics.contains(topic)) {
+            vocabularies.get(topics.indexOf(topic)).add(word);
+        } else {
+            topics.add(topic);
+            List<Word> newList = new ArrayList<>();
+            newList.add(word);
+            vocabularies.add(newList);
+        }
+    }
 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                lines.add(line);
+    private boolean saveFile = false;
 
-                if (line.startsWith("# " + topic)) {
-                    foundTopic = true;
+    public boolean isSaveFile() {
+        return saveFile;
+    }
+
+    public void saveFileVocabulary(String topic, Word vocabulary) {
+        if (saveFile) {
+            try {
+                String filePath = "src/main/java/data/WordsBySubject.txt";
+                FileWriter fw = new FileWriter(filePath);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                for (int i = 0; i < topics.size(); ++i) {
+                    bw.write("# " + topics.get(i) + "\n");
+
+                    for (Word w : vocabularies.get(i)) {
+                        if (w.getWord_target() != null && !w.getWord_target().isEmpty()) {
+                            bw.write(w.getWord_target() + "\t");
+
+                            ArrayList<String> w_explain = w.getWord_explain();
+                            for (String meaning : w_explain) {
+                                bw.write(meaning + "\t");
+                            }
+
+                            bw.write(w.getWordType() + "\t");
+
+                            bw.write("\n");
+                        }
+                    }
+                    bw.write("\n");
                 }
 
-                if (foundTopic && line.isEmpty()) {
-                    lines.add(vocabulary.getWord() + "   " + vocabulary.getMeaning() + "   " + vocabulary.getWordType());
-                    foundTopic = false;
-                }
+                System.out.println("successful !!");
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
+                System.out.println("Export failed!!!");
+                System.out.println("Sorry. An error occurred while exporting data.");
             }
-
-            scanner.close();
-            
-            FileWriter fileWriter = new FileWriter(filePath);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
-
-            for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
-            }
-
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while adding vocabulary to the file.");
-            e.printStackTrace();
         }
     }
 
 
-    public void loadVocabulary(String filePath, String topic) {
+    public void loadVocabulary(String filePath) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
-            boolean isTopic = false;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("# " + topic)) {
-                    isTopic = true;
-                } else if (isTopic && !line.isEmpty()) {
+                if (line.startsWith("# ")) {
+                    String topic = line.substring(2);
+                    topics.add(topic);
+                    vocabularies.add(new ArrayList<>());
+                } else if (!line.isEmpty()) {
                     String[] parts = line.split("  ");
                     if (parts.length >= 3) {
-                        String word = parts[0];
+                        String english = parts[0];
                         String meaning = parts[1];
                         String wordType = parts[2];
-                        vocabularies.add(new Vocabulary(word, meaning, wordType));
+                        Word word = new Word();
+                        word.setWordTarget(english);
+                        word.setWordType(wordType);
+                        word.addExplain(meaning);
+                        vocabularies.get(topics.size() - 1).add(word);
                     }
-                } else if (isTopic && line.isEmpty()) {
-                    break; 
                 }
             }
             reader.close();
@@ -75,15 +99,15 @@ class VocabularyList {
         }
     }
 
-    public void review(int wordCount) {
-        Collections.shuffle(vocabularies);
-        int count = Math.min(wordCount, vocabularies.size());
+    public void review(int wordCount, int topic) {
+        Collections.shuffle(vocabularies.get(topic));
+        int count = Math.min(wordCount, vocabularies.get(topic).size());
         for (int i = 0; i < count; i++) {
-            Vocabulary vocabulary = vocabularies.get(i);
-            System.out.print("Word: " + vocabulary.getWord() + " (" + vocabulary.getWordType() + ")\nPress Enter for the meaning.");
+            Word vocabulary = vocabularies.get(topic).get(i);
+            System.out.print("Word: " + vocabulary.getWord_target()+ " (" + vocabulary.getWordType() + ")\nPress Enter for the meaning.");
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
-            System.out.println("Meaning: " + vocabulary.getMeaning());
+            System.out.println("Meaning: " + vocabulary.getWord_explain().get(0));
         }
     }
 }

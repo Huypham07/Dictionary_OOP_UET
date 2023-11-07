@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
+import Dict.VocabularyList;
 import GUI.ControlPanel.AddGUI;
 import GUI.ControlPanel.Learn.WordPanel;
 import GUI.ControlPanel.LearnGUI;
@@ -51,14 +52,17 @@ public class DictionaryGUI extends javax.swing.JFrame {
         translateGUI = new TranslateGUI();
         
         learnGUI = new LearnGUI();
-        List<Component> list = new ArrayList<>();
-        list.add(new WordPanel("Dog", "noun", "Con chó"));
-        list.add(new WordPanel("Bird", "noun", "Con chim"));
-        learnGUI.addComponent(list);
-        
-        ArrayList<String> subs = new ArrayList<>();
-        subs.add("Animal");
-        learnGUI.setSubjectChoose(subs);
+        VocabularyList vocabs = new VocabularyList();
+        vocabs.loadVocabulary("src/data/WordsBySubject.txt");
+        learnGUI.setTopicChoose(vocabs.getTopics());
+        List<List<Word>> temp = vocabs.getVocabularies();
+        for (int i = 0; i < temp.size(); ++i) {
+            List<Component> list = new ArrayList<>();
+            for (Word w : temp.get(i)) {
+                list.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
+            }
+            learnGUI.addComponent(list);
+        } 
         
         workPanel.setLayout(cardLayout);
         
@@ -227,6 +231,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 //        dictionaryManagement.dictionaryExportToFile("src/data/dictionary.txt");
+//save file learn
     }//GEN-LAST:event_formWindowClosing
 
 

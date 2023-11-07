@@ -22,8 +22,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="328" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="showButton" min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="shuffleButton" min="-2" pref="62" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="prevButton" min="-2" pref="62" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -33,8 +35,8 @@
           <Component id="slideroundedPanel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="subjectChoose" min="-2" pref="219" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="topicChoose" min="-2" pref="219" max="-2" attributes="0"/>
+              <EmptySpace pref="345" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,7 +44,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Component id="subjectChoose" min="-2" max="-2" attributes="0"/>
+              <Component id="topicChoose" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="slideroundedPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -50,6 +52,7 @@
                   <Component id="showButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="prevButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nextButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="shuffleButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
@@ -59,9 +62,6 @@
   <SubComponents>
     <Component class="GUI.roundComponent.Button" name="showButton">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Show"/>
       </Properties>
       <Events>
@@ -70,9 +70,6 @@
     </Component>
     <Component class="GUI.roundComponent.Button" name="prevButton">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Prev"/>
       </Properties>
       <Events>
@@ -81,9 +78,6 @@
     </Component>
     <Component class="GUI.roundComponent.Button" name="nextButton">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Next"/>
       </Properties>
       <Events>
@@ -108,7 +102,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="GUI.ControlPanel.Learn.SubjectChoosePanel" name="subjectChoose">
+    <Component class="GUI.ControlPanel.Learn.TopicChoosePanel" name="topicChoose">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -118,6 +112,14 @@
         <Property name="roundTopLeft" type="int" value="20"/>
         <Property name="roundTopRight" type="int" value="20"/>
       </Properties>
+    </Component>
+    <Component class="GUI.roundComponent.Button" name="shuffleButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Shuffle"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shuffleButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -1,17 +1,17 @@
 package Dict;
 
-import Dict.Word;
-
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import manageData.Datatype.Word;
 
-public class DictionaryCommandline extends DictionaryManagement {
+public class DictionaryCommandline extends DictionaryManagement{
+    private Scanner sc;
     // Constructor
     public DictionaryCommandline() {
-        super();
+        sc = new Scanner(System.in);
     }
 
-    // METHODS
+    //------------------METHOD-----------------
 
     //clr screen
     private static void cls() throws IOException, InterruptedException
@@ -19,11 +19,12 @@ public class DictionaryCommandline extends DictionaryManagement {
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     }
 
+    // Show ALl
     public void showAllWords() {
         ArrayList<Word> allWords = new ArrayList<>(this.getDictionary().getDict());
         // check if dictionary is empty
         if (allWords.isEmpty()) {
-            System.out.println("Dict.Dictionary is empty.\nPlease add new words first!");
+            System.out.println("Dictionary is empty.\nPlease add new words first!");
             return;
         }
 
@@ -39,9 +40,9 @@ public class DictionaryCommandline extends DictionaryManagement {
                     System.out.print("You want to sort word list by Ascending (ASC) or Descending (DES)? ");
                     boolean sortOrder = getUserSortOrder();
                     sortWords(allWords, Comparator.comparing(Word::getWord_target), sortOrder);
-                    System.out.println("Dict.Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
+                    System.out.println("Word list was sorted by " + (sortOrder ? "Ascending order" : "Descending order"));
                 } else if (userOption.equals("NO")) {
-                    System.out.println("Dict.Word list will be shown on default order");
+                    System.out.println("Word list will be shown on default order");
                 } else {
                     System.out.println("Invalid option!");
                 }
@@ -137,9 +138,252 @@ public class DictionaryCommandline extends DictionaryManagement {
         System.out.println();
     }
 
-    // Game mod
-    public void GameMode() {
-        System.out.println("Sorry");
+    // look up method
+    public void Lookup() {
+        System.out.println("Enter the word you want to lookup:");
+
+        String w_target = this.sc.nextLine();
+        while(!validWord(w_target))
+        {
+            if (!w_target.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            w_target = this.sc.nextLine();
+        }
+
+        Word foundWord = this.findWord(w_target);
+        if (foundWord == null) {
+            System.out.println("Sorry, We did not find your word in our Dictionary!");
+        } else {
+            ArrayList<String> ans = foundWord.getWord_explain();
+            String add = (ans.size() > 1) ? "s" : "";
+            System.out.println("We found " + ans.size() + " result" + add);
+
+            for (String i : ans) {
+                System.out.println("- " + i);
+            }
+        }
+    }
+
+    //insert method
+    public void insertFromCommandline() {
+        int n = -1;
+        System.out.println("Enter number of words :");
+        while (n < 0)
+        {
+            try {
+                n = Integer.parseInt(this.sc.nextLine());
+                if (n < 0) {
+                    System.out.println("Sorry. You must enter a natural number !!!");
+                    System.out.println("Please enter again!!!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Sorry. You must enter a natural number !!!");
+                System.out.println("Please sc again!!!");
+            }
+        }
+
+        System.out.println();
+
+        for (int i = 1; i <= n; i++) {
+
+            Word w = new Word();
+            System.out.print("Please enter English word: ");
+            String English = this.sc.nextLine();
+            while(!validWord(English))
+            {
+                if (!English.isEmpty()) {
+                    System.out.println("Please enter again!!!");
+                }
+                English = this.sc.nextLine();
+            }
+            w.setWordTarget(English);
+            boolean endOfExplain = false;
+            String explain;
+            System.out.println("Give us the meaning of English word, press ENTER to save it.\n" +
+                    "Enter # to end the process.");
+            int cnt = 1;
+            do {
+                System.out.print(cnt + ". ");
+                explain = this.sc.nextLine();
+                if (explain.equals("#")) endOfExplain = true;
+                else if (!explain.isEmpty()) {
+                    w.getWord_explain().add(explain);
+                    cnt++;
+                }
+            } while(!endOfExplain);
+            this.insertWord(w);
+        }
+    }
+
+    // edit method
+    public void updateWord() {
+        System.out.print("Enter the English Word you want to update: ");
+        String oldEnglishWord = this.sc.nextLine();
+
+        while(!validWord(oldEnglishWord))
+        {
+            if (!oldEnglishWord.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            oldEnglishWord = this.sc.nextLine();
+        }
+
+        Word w = this.findWord(oldEnglishWord);
+        if (w == null) {
+            System.out.println("We didn't find the word " + oldEnglishWord);
+        } else {
+            System.out.println("We found:\n");
+            System.out.printf("%-15s |", w.getWord_target());
+
+            for(String meaning : w.getWord_explain()){
+                System.out.printf(" %-20s", meaning);
+            }
+            System.out.println("\n");
+            System.out.println("Enter '1' to edit the English word\nEnter '2' to add the meaning\nEnter other number to reset the meaning");
+
+            int select = 0;
+            boolean chooseNumber;
+            do {
+                // Exception handling
+                try {
+                    select = Integer.parseInt(this.sc.nextLine());
+                    chooseNumber = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Oops...!Action not supported.");
+                    System.out.println("Please Select again!");
+                    chooseNumber = false;
+                }
+            } while (!chooseNumber);
+
+            if (select == 1) {
+                System.out.println("Give us the new English word");
+                String newEnglishWord = this.sc.nextLine();
+                w.setWordTarget(newEnglishWord);
+
+                this.deleteWord(oldEnglishWord);//
+                this.insertWord(w);
+            } else if (select == 2){
+                System.out.println("Give us the new meaning of English word");
+                String newMeaning = this.sc.nextLine();
+                w.addExplain(newMeaning);
+            } else {
+                ArrayList<String> newMeaning = new ArrayList<>();
+                boolean endOfExplain = false;
+                String explain;
+                System.out.println("Give us the meaning of English word, press ENTER to save it.\n" +
+                        "Enter # to end the process.");
+                int cnt = 1;
+                do {
+                    System.out.print(cnt + ". ");
+                    explain = this.sc.nextLine();
+                    if (explain.equals("#")) endOfExplain = true;
+                    else if (!explain.isEmpty()) {
+                        newMeaning.add(explain);
+                        cnt++;
+                    }
+                } while(!endOfExplain);
+                w.setWordExplain(newMeaning);
+            }
+            System.out.println("Successful");
+        }
+
+    }
+
+    //remove method
+    public void removeWord() {
+        System.out.println("Enter the English word : ");
+        String English = this.sc.nextLine();
+        while(!validWord(English))
+        {
+            if (!English.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            English = this.sc.nextLine();
+        }
+
+        if (this.deleteWord(English)) {
+            System.out.println("Successful");
+            System.out.println("The word " + English + " has been removed!");
+        } else {
+            System.out.println("Can't remove this word !! You can try again. Thanks!");
+        }
+    }
+
+    // search with prefix
+    public void searcher() {
+        System.out.print("You want to find words beginning with: ");
+        String prefix = this.sc.nextLine();
+        while(!validWord(prefix))
+        {
+            if (!prefix.isEmpty()) {
+                System.out.println("Please enter again!!!");
+            }
+            prefix = this.sc.nextLine();
+        }
+        ArrayList<String> result = this.findWordsWithPrefix(prefix);
+
+        System.out.println("We found " + result.size() + " words beginning with " + prefix + ": ");
+
+        if (result.isEmpty()) return;// not found
+
+        System.out.println("Do you want to print the meaning of these words? YES or NO");
+
+        String ans = this.sc.nextLine();
+
+        if (ans.equalsIgnoreCase("yes")) {
+            System.out.println(result.size() + " results are:");
+            for (int i = 1; i <= result.size(); i++) {
+                Word w = this.findWord(result.get(i-1));
+                System.out.printf("%-3s| %-15s |", i, w.getWord_target());
+
+                for(String meaning : w.getWord_explain()){
+                    System.out.printf(" %-20s", meaning);
+                }
+                System.out.println();
+            }
+        } else {
+            System.out.println(result.size() + " Words are:");
+
+            for (int i = 1; i <= result.size(); i++) {
+                System.out.println(i + ". " + result.get(i-1));
+            }
+        }
+    }
+
+    // review vocabulary
+    public void VocabularyReview() {
+        Scanner scanner = new Scanner(System.in);
+        VocabularyList vocabularyList = new VocabularyList();
+        vocabularyList.loadVocabulary("src/main/java/data/WordsBySubject.txt");
+
+        System.out.println("Choose a vocabulary topic to review:");
+        for (int i = 0; i < vocabularyList.getTopics().size(); i++) {
+            System.out.println((i + 1) + ". " + vocabularyList.getTopics().get(i));
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
+
+        if (choice <= 0 && choice > vocabularyList.getTopics().size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        System.out.println("Choose review mode:");
+        System.out.println("1. Quick Review (10 words)");
+        System.out.println("2. Review (30 words)");
+
+        int reviewMode = scanner.nextInt();
+        scanner.nextLine();
+
+        if (reviewMode == 1) {
+            vocabularyList.review(10, choice - 1);
+        } else if (reviewMode == 2) {
+            vocabularyList.review(30, choice - 1);
+        } else {
+            System.out.println("Invalid review mode.");
+        }
     }
 
     // advanced
@@ -153,7 +397,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                 "   [4] Display\n" +
                 "   [5] Lookup\n" +
                 "   [6] Search\n" +
-                "   [7] Game\n" +
+                "   [7] Learn\n" +
                 "   [8] Import from file\n" +
                 "   [9] Export to file");
         sc = new Scanner(System.in);
@@ -211,7 +455,7 @@ public class DictionaryCommandline extends DictionaryManagement {
 
             case 7: {
                 cls();
-                this.GameMode();
+                this.VocabularyReview();
             } break;
 
             case 8: {
@@ -221,7 +465,7 @@ public class DictionaryCommandline extends DictionaryManagement {
 
             case 9: {
                 cls();
-                this.dictionaryExportToFile();
+                this.dictionaryExportToFile("src/data/dictionary.txt");
             } break;
 
             default:

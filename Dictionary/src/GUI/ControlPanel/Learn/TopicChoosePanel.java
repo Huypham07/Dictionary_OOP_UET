@@ -6,26 +6,28 @@ import GUI.roundComponent.RoundedPanel;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-public class SubjectChoosePanel extends RoundedPanel {
+public class TopicChoosePanel extends RoundedPanel {
 
     private JPopupMenu menu;
-    private searchSuggestPanel suggestPanel;
-    private ArrayList<String> subjects;
+    private topicSuggestPanel suggestPanel;
+    private List<String> topics = new ArrayList<>();
 
-    public ArrayList<String> getSubjects() {
-        return subjects;
+    public List<String> getTopics() {
+        return topics;
     }
 
-    public void setSubjects(ArrayList<String> subjects) {
-        this.subjects = subjects;
+    public void setTopics(List<String> topics) {
+        this.topics = topics;
     }
+
     
     public int getChoose() {
-        return subjects.indexOf(subject.getText());
+        return topics.indexOf(topic.getText());
     }
     
     private boolean show = false;
@@ -43,20 +45,19 @@ public class SubjectChoosePanel extends RoundedPanel {
     }
     
     public void setText(String language) {
-        this.subject.setText(language);
+        this.topic.setText(language);
     }
     
     public String getText() {
-        return subject.getText();
+        return topic.getText();
     }
     
-    public SubjectChoosePanel() {
+    public TopicChoosePanel() {
         initComponents();
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         menu = new JPopupMenu();
-        suggestPanel = new searchSuggestPanel();
-        suggestPanel.setPathIcon(null);
+        suggestPanel = new topicSuggestPanel();
 
         menu.setBorder(BorderFactory.createLineBorder(new Color(245, 242, 242)));
         menu.add(suggestPanel);
@@ -71,7 +72,7 @@ public class SubjectChoosePanel extends RoundedPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        subject = new javax.swing.JLabel();
+        topic = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,8 +81,8 @@ public class SubjectChoosePanel extends RoundedPanel {
             }
         });
 
-        subject.setBackground(new java.awt.Color(245, 242, 242));
-        subject.setFont(new java.awt.Font("SansSerif", 3, 20)); // NOI18N
+        topic.setBackground(new java.awt.Color(245, 242, 242));
+        topic.setFont(new java.awt.Font("SansSerif", 3, 20)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel2.setText("▼\t");
@@ -92,7 +93,7 @@ public class SubjectChoosePanel extends RoundedPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(subject, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(topic, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap())
@@ -102,7 +103,7 @@ public class SubjectChoosePanel extends RoundedPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(subject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -114,7 +115,7 @@ public class SubjectChoosePanel extends RoundedPanel {
                 menu.setVisible(false);
                 show = false;
             } else {
-                suggestPanel.setSuggestData(subjects);
+                suggestPanel.setSuggestData((ArrayList<String>) topics);
                 if (suggestPanel.getItemSize() > 0) {
                     menu.show(this, 0, getHeight());
                     menu.setPopupSize(getWidth(), (suggestPanel.getItemSize() * 35) + 2);
@@ -128,6 +129,6 @@ public class SubjectChoosePanel extends RoundedPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel subject;
+    private javax.swing.JLabel topic;
     // End of variables declaration//GEN-END:variables
 }

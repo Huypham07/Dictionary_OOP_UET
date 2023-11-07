@@ -350,10 +350,40 @@ public class DictionaryCommandline extends DictionaryManagement{
             }
         }
     }
+    
+    // review vocabulary
+    public void VocabularyReview() {
+        Scanner scanner = new Scanner(System.in);
+        VocabularyList vocabularyList = new VocabularyList();
+        vocabularyList.loadVocabulary("src/data/WordsBySubject.txt");
 
-    // Game mod
-    public void GameMode() {
-        System.out.println("Sorry");
+        System.out.println("Choose a vocabulary topic to review:");
+        for (int i = 0; i < vocabularyList.getTopics().size(); i++) {
+            System.out.println((i + 1) + ". " + vocabularyList.getTopics().get(i));
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Đọc ký tự xuống dòng sau lựa chọn
+    
+        if (choice <= 0 && choice > vocabularyList.getTopics().size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        System.out.println("Choose review mode:");
+        System.out.println("1. Quick Review (10 words)");
+        System.out.println("2. Review (30 words)");
+
+        int reviewMode = scanner.nextInt();
+        scanner.nextLine();
+
+        if (reviewMode == 1) {
+            vocabularyList.review(10, choice - 1);
+        } else if (reviewMode == 2) {
+            vocabularyList.review(30, choice - 1);
+        } else {
+            System.out.println("Invalid review mode.");
+        }
     }
 
     // advanced
@@ -367,7 +397,7 @@ public class DictionaryCommandline extends DictionaryManagement{
                 "   [4] Display\n" +
                 "   [5] Lookup\n" +
                 "   [6] Search\n" +
-                "   [7] Game\n" +
+                "   [7] Learn\n" +
                 "   [8] Import from file\n" +
                 "   [9] Export to file");
         sc = new Scanner(System.in);
@@ -425,7 +455,7 @@ public class DictionaryCommandline extends DictionaryManagement{
 
             case 7: {
                 cls();
-                this.GameMode();
+                this.VocabularyReview();
             } break;
 
             case 8: {

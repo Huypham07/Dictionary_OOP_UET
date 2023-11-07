@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd17fbb0-6614-4256-8a09-8b9ea405ded4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dictionary/build/classes/data/exported_dictionary.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dictionary/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Dictionary/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dictionary/src/data/exported_dictionary.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dict/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/DictionaryCommandline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dict/DictionaryCommandline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/DictionaryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dict/DictionaryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/Trie.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/Vocabulary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/VocabularyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Dict/VocabularyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dict/Word.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -31,9 +40,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "API-Google-Translate",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/UET/2nd/OOP/Dictionary_OOP_UET/DictionaryCommandline",
     "onboarding.tips.debug.path": "C:/Users/huyho/OneDrive/Desktop/Dictionary/DictionaryCommandline/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",

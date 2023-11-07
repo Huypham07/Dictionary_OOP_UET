@@ -168,8 +168,8 @@ public class DictionaryManagement {
             return false;
         }
     }
-    public static void main(String[] args) {
-        DictionaryManagement dc = new DictionaryManagement();
-        System.out.println(dc.validWord("ư"));
+    
+    // review vocabulary
+    public void VocabularyReview() {
     }
 }
