@@ -76,9 +76,9 @@ public class SlideRoundedPanel extends javax.swing.JPanel {
         listComponent.clear();
     }
     
-    public void show(int index) {
+    public void show(int index) throws IndexOutOfBoundsException {
         if (!timer.isRunning()) {
-            if (listComponent.size() >= 2 && index < listComponent.size() && index >= 0 && index != currentShowing) {
+            if (listComponent.size() >= 2 && index != currentShowing) {
                 comShow = listComponent.get(index);
                 comExit = listComponent.get(currentShowing);
                 animateRight = index < currentShowing;

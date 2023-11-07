@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class LearnGUI extends JPanel {
@@ -18,6 +19,7 @@ public class LearnGUI extends JPanel {
         prevButton.setBackground(new Color(153, 204, 255));
         nextButton.setBackground(new Color(153, 204, 255));
         shuffleButton.setBackground(new Color(153, 204, 255));
+        addVocab.setBackground(new Color(153, 204, 255));
         
         topicChoose.eventClickSugestPanel(new EventClick() {
             @Override
@@ -72,6 +74,7 @@ public class LearnGUI extends JPanel {
         slideroundedPanel = new GUI.ControlPanel.Learn.SlideRoundedPanel();
         topicChoose = new GUI.ControlPanel.Learn.TopicChoosePanel();
         shuffleButton = new GUI.roundComponent.Button();
+        addVocab = new GUI.roundComponent.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -126,12 +129,14 @@ public class LearnGUI extends JPanel {
             }
         });
 
+        addVocab.setText("Add new vocab");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(248, Short.MAX_VALUE)
                 .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(shuffleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,13 +149,17 @@ public class LearnGUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topicChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addVocab, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(topicChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(topicChoose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addVocab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(slideroundedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -165,17 +174,26 @@ public class LearnGUI extends JPanel {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-        slideroundedPanel.show(slideroundedPanel.getCurrentShowing() + 1);
-        WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-        curr.ShowExplain(false);
-        changeStateOfshowButton(curr.isShow());
+        try {
+            slideroundedPanel.show(slideroundedPanel.getCurrentShowing() + 1);
+            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
+            curr.ShowExplain(false);
+            changeStateOfshowButton(curr.isShow());
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(slideroundedPanel, "Congratulations!\nIt's all words.");
+        }
+
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        slideroundedPanel.show(slideroundedPanel.getCurrentShowing() - 1);
-        WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-        curr.ShowExplain(false);
-        changeStateOfshowButton(curr.isShow());
+        try {
+            slideroundedPanel.show(slideroundedPanel.getCurrentShowing() - 1);
+            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
+            curr.ShowExplain(false);
+            changeStateOfshowButton(curr.isShow());
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(slideroundedPanel, "Sorry, Can't show previous word!\nIt's the first word.");
+        }
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
@@ -199,11 +217,15 @@ public class LearnGUI extends JPanel {
             slideroundedPanel.clear();
             slideroundedPanel.addComponent(copyList);
             slideroundedPanel.startShow();
+            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
+            curr.ShowExplain(false);
+            changeStateOfshowButton(curr.isShow());
         }
     }//GEN-LAST:event_shuffleButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.roundComponent.Button addVocab;
     private GUI.roundComponent.Button nextButton;
     private GUI.roundComponent.Button prevButton;
     private GUI.roundComponent.Button showButton;
