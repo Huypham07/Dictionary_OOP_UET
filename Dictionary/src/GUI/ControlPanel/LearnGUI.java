@@ -1,5 +1,6 @@
 package GUI.ControlPanel;
 
+import Dict.VocabularyList;
 import GUI.ControlPanel.Learn.AddnewTopic;
 import GUI.ControlPanel.Learn.WordPanel;
 import GUI.ControlPanel.Search.EventClick;
@@ -16,10 +17,23 @@ import manageData.Datatype.Word;
 import raven.glasspanepopup.GlassPanePopup;
 
 public class LearnGUI extends JPanel {
+    private VocabularyList vocabs;
     private List<List<Component>> list = new ArrayList<>();
     
     public LearnGUI() {
         initComponents();
+        vocabs = new VocabularyList();
+        vocabs.loadVocabulary("src/data/WordsBySubject.txt");
+        topicChoose.setTopics(vocabs.getTopics());
+        List<List<Word>> temp = vocabs.getVocabularies();
+        for (int i = 0; i < temp.size(); ++i) {
+            List<Component> comps = new ArrayList<>();
+            for (Word w : temp.get(i)) {
+                comps.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
+            }
+            list.add(comps);
+        } 
+        
         showButton.setBackground(new Color(153, 204, 255));
         prevButton.setBackground(new Color(153, 204, 255));
         nextButton.setBackground(new Color(153, 204, 255));
@@ -42,18 +56,6 @@ public class LearnGUI extends JPanel {
         });
     }
     
-    public void addComponent(Component ...com) {
-        slideroundedPanel.addComponent(com);
-    }
-    
-    public void addComponent(List<Component> com) {
-        list.add(com);
-    }
-    
-    public void setTopicChoose(List<String> topics) {
-        topicChoose.setTopics(topics);
-    }
-    
     public void startLearn() {
         topicChoose.setText("Topics");
         slideroundedPanel.clear();
@@ -67,6 +69,10 @@ public class LearnGUI extends JPanel {
         } else {
             showButton.setText("Show");
         }
+    }
+    
+    public void saveFile() {
+        vocabs.saveFileVocabulary();
     }
 
     @SuppressWarnings("unchecked")
@@ -234,25 +240,37 @@ public class LearnGUI extends JPanel {
     }//GEN-LAST:event_shuffleButtonActionPerformed
 
     private void addnew(String topic, Word word) {
-        for (String s : topicChoose.getTopics()) {
-            if (s.equals(topic)) {
-                
-            }
+        int newIndex = vocabs.addNewVocabulary(topic, word);
+        topicChoose.setTopics(vocabs.getTopics());
+        if (list.size() != vocabs.getTopics().size()) {
+            List<Component> newList = new ArrayList<>();
+            newList.add(new WordPanel(word.getWord_target(), word.getWordType(), word.getWord_explain().get(0)));
+            list.add(newList);
+            topicChoose.setTopics(vocabs.getTopics());
+        } else {
+            list.get(newIndex).add(new WordPanel(word.getWord_target(), word.getWordType(), word.getWord_explain().get(0)));
         }
     }
     
     private void addVocabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addVocabMouseReleased
-        AddnewTopic addnew = new AddnewTopic();
-        addnew.eventOK(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                Word tmp = addnew.getWord();
-                addnew(addnew.getTopic(), tmp);
-                GlassPanePopup.closePopupLast();
-            }
-            
-        });
-        GlassPanePopup.showPopup(addnew);
+        if (!topicChoose.getText().equalsIgnoreCase("Topics")) {
+            AddnewTopic addnew = new AddnewTopic(topicChoose.getText());
+            addnew.eventOK(new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    Word word = addnew.getWord();
+                    String topic = addnew.getTopic();
+                    if (word == null || topic == null || topic.isEmpty()) {
+                        JOptionPane.showMessageDialog(slideroundedPanel, "Can't add new vocabulary!\nYou must fill all blanks with a-z character.");
+                    } else {
+                        addnew(topic, word);
+                        GlassPanePopup.closePopupLast();
+                    }
+                }
+
+            });
+            GlassPanePopup.showPopup(addnew);
+        }
     }//GEN-LAST:event_addVocabMouseReleased
 
 

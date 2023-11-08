@@ -52,18 +52,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         translateGUI = new TranslateGUI();
         
         learnGUI = new LearnGUI();
-        VocabularyList vocabs = new VocabularyList();
-        vocabs.loadVocabulary("src/data/WordsBySubject.txt");
-        learnGUI.setTopicChoose(vocabs.getTopics());
-        List<List<Word>> temp = vocabs.getVocabularies();
-        for (int i = 0; i < temp.size(); ++i) {
-            List<Component> list = new ArrayList<>();
-            for (Word w : temp.get(i)) {
-                list.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
-            }
-            learnGUI.addComponent(list);
-        } 
-        
+               
         workPanel.setLayout(cardLayout);
         
         workPanel.add("lookup",lookupGUI);

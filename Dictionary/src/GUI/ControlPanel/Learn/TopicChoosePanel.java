@@ -1,7 +1,6 @@
 package GUI.ControlPanel.Learn;
 
 import GUI.ControlPanel.Search.EventClick;
-import GUI.ControlPanel.Search.searchSuggestPanel;
 import GUI.roundComponent.RoundedPanel;
 import java.awt.Color;
 import java.awt.Cursor;

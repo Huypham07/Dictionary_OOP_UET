@@ -15,20 +15,18 @@ public class VocabularyList {
         return vocabularies;
     }
     
-    public void addTopic(String topic) {
-        topics.add(topic);
-    }
-    
-    public void addNewVocabulary(String topic, Word word) {
+    public int addNewVocabulary(String topic, Word word) {
+        saveFile = true;
         if (topics.contains(topic)) {
             vocabularies.get(topics.indexOf(topic)).add(word);
+            return topics.indexOf(topic); // exist topic
         } else {
             topics.add(topic);
             List<Word> newList = new ArrayList<>();
             newList.add(word);
             vocabularies.add(newList);
+            return topics.size() - 1;
         }
-        saveFile = true;
     }
     
     private boolean saveFile = false;
@@ -37,7 +35,7 @@ public class VocabularyList {
         return saveFile;
     }
     
-    public void saveFileVocabulary(String topic, Word vocabulary) {
+    public void saveFileVocabulary() {
         if (saveFile) {
             try {
                 String filePath = "src/data/WordsBySubject.txt";
