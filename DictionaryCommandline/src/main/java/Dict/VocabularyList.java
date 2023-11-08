@@ -11,10 +11,14 @@ public class VocabularyList {
         return topics;
     }
 
+    public List<List<Word>> getVocabularies() {
+        return vocabularies;
+    }
+    
     public void addTopic(String topic) {
         topics.add(topic);
     }
-
+    
     public void addNewVocabulary(String topic, Word word) {
         if (topics.contains(topic)) {
             vocabularies.get(topics.indexOf(topic)).add(word);
@@ -24,34 +28,32 @@ public class VocabularyList {
             newList.add(word);
             vocabularies.add(newList);
         }
+        saveFile = true;
     }
-
+    
     private boolean saveFile = false;
 
     public boolean isSaveFile() {
         return saveFile;
     }
-
+    
     public void saveFileVocabulary(String topic, Word vocabulary) {
         if (saveFile) {
             try {
-                String filePath = "src/main/java/data/WordsBySubject.txt";
+                String filePath = "src/data/WordsBySubject.txt";
                 FileWriter fw = new FileWriter(filePath);
                 BufferedWriter bw = new BufferedWriter(fw);
 
                 for (int i = 0; i < topics.size(); ++i) {
                     bw.write("# " + topics.get(i) + "\n");
-
+                    
                     for (Word w : vocabularies.get(i)) {
                         if (w.getWord_target() != null && !w.getWord_target().isEmpty()) {
-                            bw.write(w.getWord_target() + "\t");
+                            bw.write(w.getWord_target() + "  ");
 
-                            ArrayList<String> w_explain = w.getWord_explain();
-                            for (String meaning : w_explain) {
-                                bw.write(meaning + "\t");
-                            }
+                            bw.write(w.getWord_explain().get(0) + "  ");
 
-                            bw.write(w.getWordType() + "\t");
+                            bw.write(w.getWordType() + "  ");
 
                             bw.write("\n");
                         }

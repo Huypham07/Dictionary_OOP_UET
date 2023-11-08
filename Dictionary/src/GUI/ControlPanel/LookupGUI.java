@@ -294,7 +294,7 @@ public class LookupGUI extends javax.swing.JPanel {
                 public void mouseReleased(MouseEvent e) {
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         Word tmp = edit.getWord();
-                        if (!Dictmng.validWord(tmp.getWord_target())) {
+                        if (!DictionaryManagement.validWord(tmp.getWord_target())) {
                             JOptionPane.showMessageDialog(edit, "Invalid English Word!\nAn English word can only have alphabet character!!!");
                         } else{
                             Dictmng.editWord(result.getWord_target(), tmp);

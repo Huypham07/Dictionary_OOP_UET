@@ -49,14 +49,11 @@ public class VocabularyList {
                     
                     for (Word w : vocabularies.get(i)) {
                         if (w.getWord_target() != null && !w.getWord_target().isEmpty()) {
-                            bw.write(w.getWord_target() + "\t");
+                            bw.write(w.getWord_target() + "  ");
 
-                            ArrayList<String> w_explain = w.getWord_explain();
-                            for (String meaning : w_explain) {
-                                bw.write(meaning + "\t");
-                            }
+                            bw.write(w.getWord_explain().get(0) + "  ");
 
-                            bw.write(w.getWordType() + "\t");
+                            bw.write(w.getWordType() + "  ");
 
                             bw.write("\n");
                         }

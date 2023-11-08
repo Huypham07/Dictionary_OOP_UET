@@ -1,14 +1,19 @@
 package GUI.ControlPanel;
 
+import GUI.ControlPanel.Learn.AddnewTopic;
 import GUI.ControlPanel.Learn.WordPanel;
 import GUI.ControlPanel.Search.EventClick;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import manageData.Datatype.Word;
+import raven.glasspanepopup.GlassPanePopup;
 
 public class LearnGUI extends JPanel {
     private List<List<Component>> list = new ArrayList<>();
@@ -130,6 +135,11 @@ public class LearnGUI extends JPanel {
         });
 
         addVocab.setText("Add new vocab");
+        addVocab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addVocabMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,6 +232,28 @@ public class LearnGUI extends JPanel {
             changeStateOfshowButton(curr.isShow());
         }
     }//GEN-LAST:event_shuffleButtonActionPerformed
+
+    private void addnew(String topic, Word word) {
+        for (String s : topicChoose.getTopics()) {
+            if (s.equals(topic)) {
+                
+            }
+        }
+    }
+    
+    private void addVocabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addVocabMouseReleased
+        AddnewTopic addnew = new AddnewTopic();
+        addnew.eventOK(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                Word tmp = addnew.getWord();
+                addnew(addnew.getTopic(), tmp);
+                GlassPanePopup.closePopupLast();
+            }
+            
+        });
+        GlassPanePopup.showPopup(addnew);
+    }//GEN-LAST:event_addVocabMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

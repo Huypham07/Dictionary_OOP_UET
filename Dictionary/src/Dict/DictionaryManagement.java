@@ -27,7 +27,7 @@ public class DictionaryManagement {
     //------------------METHOD-----------------
 
     // check valid word
-    public boolean validWord(String s) {
+    public static boolean validWord(String s) {
         for(int i = 0; i < s.length(); i++)
         {
             char ch = s.charAt(i);
