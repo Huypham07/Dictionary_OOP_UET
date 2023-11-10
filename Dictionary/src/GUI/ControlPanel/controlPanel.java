@@ -1,16 +1,16 @@
 package GUI.ControlPanel;
 
+import GUI.roundComponent.GradientRoundedPanel;
 import GUI.roundComponent.RoundedPanel;
 import java.awt.event.MouseAdapter;
 
-public class controlPanel extends RoundedPanel {
+public class controlPanel extends GradientRoundedPanel {
     public static int LOOKUP = 0;
     public static int TRANSLATE = 1;
     public static int LEARN = 2;
     public static int EXPORT = 3;
 
     public controlPanel() {
-        super(0, 0, 40, 40);
         initComponents();
     }
 
@@ -24,6 +24,8 @@ public class controlPanel extends RoundedPanel {
         menu = new GUI.ControlPanel.Menu.Menu();
 
         setBackground(new java.awt.Color(29, 42, 87));
+        setRoundBottomLeft(40);
+        setRoundBottomRight(40);
 
         Logo.setBackground(new java.awt.Color(254, 236, 166));
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/logo.png"))); // NOI18N

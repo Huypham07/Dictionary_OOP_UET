@@ -70,6 +70,12 @@ public class RoundedPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
+        g2.fill(getArea());
+        g2.dispose();
+        super.paintComponent(grphcs);
+    }
+    
+    public Area getArea() {
         Area area = new Area(createRoundTopLeft());
         if (roundTopRight > 0) {
             area.intersect(new Area(createRoundTopRight()));
@@ -80,9 +86,7 @@ public class RoundedPanel extends JPanel {
         if (roundBottomRight > 0) {
             area.intersect(new Area(createRoundBottomRight()));
         }
-        g2.fill(area);
-        g2.dispose();
-        super.paintComponent(grphcs);
+        return area;  
     }
 
     private Shape createRoundTopLeft() {
