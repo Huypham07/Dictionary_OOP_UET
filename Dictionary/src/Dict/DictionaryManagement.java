@@ -110,12 +110,15 @@ public class DictionaryManagement {
 
                 if (parts.length >= 1) {
                     String w_target = parts[0];
-                    ArrayList<WordExplain> w_explain = new ArrayList<>();
+                    String pronounce = parts[1];
+                    String type = parts[2];
+                    String define = parts[3];
+                    String meaning = parts[4];
+
                     Word temp = new Word();
                     temp.setWordTarget(w_target);
-                    temp.setWordType(parts[2]);
-                    w_explain.add(new WordExplain(parts[2], parts[3]));
-                    temp.setWordExplain(w_explain);
+                    temp.setPronounce(pronounce);
+                    temp.addExplain(new WordExplain(type, define, meaning));
 
                     if (validWord(w_target)) {
                         this.insertWord(temp);
@@ -148,7 +151,7 @@ public class DictionaryManagement {
 
                     ArrayList<WordExplain> w_explain = w.getWord_explain();
                     for (WordExplain ex : w_explain) {
-                        bw.write(w.getWord_target() + "\t" + w.getWordType() + "\t" + ex.getDefinition() + "\n" + ex.getMeaning());
+                        bw.write(w.getWord_target() + "\t" + w.getPronounce()+ "\t" + ex.getType() + "\t" + ex.getDefinition() + "\n" + ex.getMeaning());
                     }
                     bw.write("\n");
                 }
@@ -170,7 +173,7 @@ public class DictionaryManagement {
         
     }
     
-    private static final String dbConn = "jdbc:mysql://localhost:3306/connector";
+    private static final String dbConn = "jdbc:mysql://localhost:3306/dictionary";
     private static final String username = "root";
     private static final String password = "nhienhy6714";
     
@@ -180,19 +183,16 @@ public class DictionaryManagement {
     
     private void setupFromDB() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             sqlConn = DriverManager.getConnection(dbConn, username, password);
-            pst = sqlConn.prepareStatement("""
-                                           select W.English, Type, Definition, Meaning
-                                           from words W inner join worddefinitions WD
-                                           on W.English = WD.English;""");
+            pst = sqlConn.prepareStatement("select * from words natural join worddefinitions;");
             
             rs = pst.executeQuery();
             while (rs.next()) {
                 Word word = new Word();
                 word.setWordTarget(rs.getString(1));
-                word.setWordType(rs.getString(2));
-                word.addExplain(new WordExplain(rs.getString(3), rs.getString(4)));
+                word.setPronounce(rs.getString(2));
+                word.addExplain(new WordExplain(rs.getString(3), rs.getString(4), rs.getString(5)));
                 insertWord(word);
             }
             
@@ -203,7 +203,7 @@ public class DictionaryManagement {
     
     private void GetListVocabFromDB() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             sqlConn = DriverManager.getConnection(dbConn, username, password);
             pst = sqlConn.prepareStatement("select * from WordTopics;");
             

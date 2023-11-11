@@ -1,7 +1,6 @@
 package GUI.ControlPanel;
 
 import Dict.VocabularyList;
-import GUI.ControlPanel.Learn.AddnewTopic;
 import GUI.ControlPanel.Learn.WordPanel;
 import GUI.ControlPanel.Search.EventClick;
 import java.awt.Color;
@@ -20,25 +19,23 @@ public class LearnGUI extends JPanel {
     private VocabularyList vocabs;
     private List<List<Component>> list = new ArrayList<>();
     
-    public LearnGUI() {
+    public LearnGUI(VocabularyList vocabs) {
         initComponents();
-        vocabs = new VocabularyList();
-        vocabs.loadVocabulary("src/data/WordsBySubject.txt");
+        this.vocabs = vocabs;
         topicChoose.setTopics(vocabs.getTopics());
         List<List<Word>> temp = vocabs.getVocabularies();
-        for (int i = 0; i < temp.size(); ++i) {
-            List<Component> comps = new ArrayList<>();
-            for (Word w : temp.get(i)) {
-                comps.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
-            }
-            list.add(comps);
-        } 
+//        for (int i = 0; i < temp.size(); ++i) {
+//            List<Component> comps = new ArrayList<>();
+//            for (Word w : temp.get(i)) {
+//                comps.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
+//            }
+//            list.add(comps);
+//        } 
         
         showButton.setBackground(new Color(153, 204, 255));
         prevButton.setBackground(new Color(153, 204, 255));
         nextButton.setBackground(new Color(153, 204, 255));
         shuffleButton.setBackground(new Color(153, 204, 255));
-        addVocab.setBackground(new Color(153, 204, 255));
         
         topicChoose.eventClickSugestPanel(new EventClick() {
             @Override
@@ -70,10 +67,6 @@ public class LearnGUI extends JPanel {
             showButton.setText("Show");
         }
     }
-    
-    public void saveFile() {
-        vocabs.saveFileVocabulary();
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -85,7 +78,6 @@ public class LearnGUI extends JPanel {
         slideroundedPanel = new GUI.ControlPanel.Learn.SlideRoundedPanel();
         topicChoose = new GUI.ControlPanel.Learn.TopicChoosePanel();
         shuffleButton = new GUI.roundComponent.Button();
-        addVocab = new GUI.roundComponent.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,13 +132,6 @@ public class LearnGUI extends JPanel {
             }
         });
 
-        addVocab.setText("Add new vocab");
-        addVocab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                addVocabMouseReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,17 +150,13 @@ public class LearnGUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topicChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addVocab, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(topicChoose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addVocab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(topicChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(slideroundedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -239,43 +220,9 @@ public class LearnGUI extends JPanel {
         }
     }//GEN-LAST:event_shuffleButtonActionPerformed
 
-    private void addnew(String topic, Word word) {
-        int newIndex = vocabs.addNewVocabulary(topic, word);
-        topicChoose.setTopics(vocabs.getTopics());
-        if (list.size() != vocabs.getTopics().size()) {
-            List<Component> newList = new ArrayList<>();
-            newList.add(new WordPanel(word.getWord_target(), word.getWordType(), word.getWord_explain().get(0)));
-            list.add(newList);
-            topicChoose.setTopics(vocabs.getTopics());
-        } else {
-            list.get(newIndex).add(new WordPanel(word.getWord_target(), word.getWordType(), word.getWord_explain().get(0)));
-        }
-    }
-    
-    private void addVocabMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addVocabMouseReleased
-        if (!topicChoose.getText().equalsIgnoreCase("Topics")) {
-            AddnewTopic addnew = new AddnewTopic(topicChoose.getText());
-            addnew.eventOK(new MouseAdapter() {
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    Word word = addnew.getWord();
-                    String topic = addnew.getTopic();
-                    if (word == null || topic == null || topic.isEmpty()) {
-                        JOptionPane.showMessageDialog(slideroundedPanel, "Can't add new vocabulary!\nYou must fill all blanks with a-z character.");
-                    } else {
-                        addnew(topic, word);
-                        GlassPanePopup.closePopupLast();
-                    }
-                }
-
-            });
-            GlassPanePopup.showPopup(addnew);
-        }
-    }//GEN-LAST:event_addVocabMouseReleased
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.roundComponent.Button addVocab;
     private GUI.roundComponent.Button nextButton;
     private GUI.roundComponent.Button prevButton;
     private GUI.roundComponent.Button showButton;

@@ -3,19 +3,15 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
-import Dict.VocabularyList;
 import GUI.ControlPanel.AddGUI;
-import GUI.ControlPanel.Learn.WordPanel;
 import GUI.ControlPanel.LearnGUI;
 import GUI.ControlPanel.TranslateGUI;
 import GUI.ControlPanel.controlPanel;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import manageData.Datatype.Word;
 import raven.glasspanepopup.GlassPanePopup;
 import jnafilechooser.api.JnaFileChooser;
@@ -42,7 +38,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         setIconImage(iconApp.getImage());
         
         dictionaryManagement = new DictionaryManagement();
-        dictionaryManagement.insertFromFile();
+//        dictionaryManagement.insertFromFile();
         
         cardLayout = new CardLayout(0, 0);
         
@@ -51,17 +47,17 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         translateGUI = new TranslateGUI();
         
-        learnGUI = new LearnGUI();
+//        learnGUI = new LearnGUI();
                
         workPanel.setLayout(cardLayout);
         
         workPanel.add("lookup",lookupGUI);
         workPanel.add("translate", translateGUI);
-        workPanel.add("learn", learnGUI);
+//        workPanel.add("learn", learnGUI);
         
         Listfuntion.add("lookup");
         Listfuntion.add("translate");
-        Listfuntion.add("learn");
+//        Listfuntion.add("learn");
         
         controlpanel.eventLookupGUI(new MouseAdapter() {
             @Override
@@ -106,16 +102,16 @@ public class DictionaryGUI extends javax.swing.JFrame {
             
         });
         
-        controlpanel.eventLearnGUI(new MouseAdapter(){
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                controlpanel.setSelect(controlPanel.LEARN);
-                change(controlPanel.LEARN);
-                learnGUI.startLearn();
-                JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
-            }
-            
-        });
+//        controlpanel.eventLearnGUI(new MouseAdapter(){
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//                controlpanel.setSelect(controlPanel.LEARN);
+//                change(controlPanel.LEARN);
+//                learnGUI.startLearn();
+//                JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
+//            }
+//            
+//        });
         
         controlpanel.eventExportGUI(new MouseAdapter(){
             @Override

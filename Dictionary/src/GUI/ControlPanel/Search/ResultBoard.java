@@ -47,8 +47,32 @@ public class ResultBoard extends javax.swing.JPanel {
         txt.setOpaque(false);
         txt.setEditable(false);
         txt.setText(data);
-        panel.add(txt, "growx, align left, w 100::90%, wrap, gaptop 10");
+        panel.add(txt, "growx, align left, w 100::95%, wrap, gaptop 10");
         panel.repaint();
+    }
+    
+    public void addData(String s1, String s2) {
+        JTextPane txt1 = new JTextPane();
+        txt1.setBackground(Color.WHITE);
+        txt1.setFont(new Font("sansserif", 2, 18));
+        txt1.setForeground(new Color(0,51,153));
+        txt1.setSelectionColor(new Color(150, 150, 150));
+        txt1.setBorder(null);
+        txt1.setOpaque(false);
+        txt1.setEditable(false);
+        txt1.setText("  -  " + s1);
+        
+        JTextPane txt2 = new JTextPane();
+        txt2.setBackground(Color.WHITE);
+        txt2.setFont(new Font("sansserif", 1, 22));
+        txt2.setForeground(new Color(80, 80, 80));
+        txt2.setSelectionColor(new Color(150, 150, 150));
+        txt2.setBorder(null);
+        txt2.setOpaque(false);
+        txt2.setEditable(false);
+        txt2.setText("      •   " + s2);
+        panel.add(txt1, "growx, align left, w 100::95%, wrap, gaptop 10");
+        panel.add(txt2, "growx, align left, w 100::95%, wrap, gaptop 10");
     }
 
     public void scrollToTop() {
@@ -77,11 +101,11 @@ public class ResultBoard extends javax.swing.JPanel {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 329, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panel);
@@ -94,7 +118,7 @@ public class ResultBoard extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

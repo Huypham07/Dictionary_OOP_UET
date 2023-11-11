@@ -37,8 +37,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topicChoose" min="-2" pref="219" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="addVocab" min="-2" pref="117" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,10 +44,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="topicChoose" max="32767" attributes="0"/>
-                  <Component id="addVocab" max="32767" attributes="0"/>
-              </Group>
+              <Component id="topicChoose" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="slideroundedPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -124,14 +119,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shuffleButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="GUI.roundComponent.Button" name="addVocab">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add new vocab"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addVocabMouseReleased"/>
       </Events>
     </Component>
   </SubComponents>

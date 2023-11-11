@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Word {
     private String word_target;
+    private String pronounce;
     private ArrayList<WordExplain> word_explain;
-    private String wordType;
 
     //constructors
     public Word() {
         word_target = "";
         word_explain = new ArrayList<>();
-        wordType = "";
+        pronounce = "";
     }
 
     // setters
@@ -21,7 +21,7 @@ public class Word {
         }
         this.word_explain = new ArrayList<>(other.word_explain);
         this.word_target = new String(other.word_target);
-        this.wordType = new String(other.wordType);
+        this.pronounce = new String(other.pronounce);
     }
     
     public void setWordTarget(String word_target) {
@@ -31,15 +31,8 @@ public class Word {
     public void setWordExplain(ArrayList<WordExplain> word_explain) {
         this.word_explain = new ArrayList<>(word_explain);
     }
-    
-    
-    public void setWordType(String wordType) {
-        this.wordType = wordType;
-    }
 
     public void addExplain(WordExplain newExplain) {
-        if (this.word_explain == null)
-            this.word_explain = new ArrayList<>();
         this.word_explain.add(newExplain);
     }
 
@@ -51,8 +44,13 @@ public class Word {
     public ArrayList<WordExplain> getWord_explain() {
         return this.word_explain;
     }
-    
-    public String getWordType() {
-        return wordType;
+
+    public String getPronounce() {
+        return pronounce;
     }
+
+    public void setPronounce(String pronounce) {
+        this.pronounce = pronounce;
+    }
+    
 }

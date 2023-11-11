@@ -13,12 +13,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import manageData.Datatype.Word;
+import manageData.Datatype.WordExplain;
 import raven.glasspanepopup.GlassPanePopup;
+import GUI.ControlPanel.Search.ResultBoard;
 
 
 public class LookupGUI extends javax.swing.JPanel {
@@ -42,8 +46,6 @@ public class LookupGUI extends javax.swing.JPanel {
         
         controller = new TranslateController();
         
-        changeVisible(false);
-        
         menu = new JPopupMenu();
         suggestPanel = new searchSuggestPanel();
         suggestPanel.setPathIcon("src/data/img/search_1.png");
@@ -61,10 +63,8 @@ public class LookupGUI extends javax.swing.JPanel {
                 menu.setVisible(false);
             }
         });
-    }
-    
-    private void changeVisible(boolean visible) {
-        jPanel1.setVisible(visible);
+        
+        jPanel1.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,12 +74,11 @@ public class LookupGUI extends javax.swing.JPanel {
         iconSearch = new GUI.roundComponent.circleComponent();
         jPanel1 = new javax.swing.JPanel();
         WordTarget = new javax.swing.JLabel();
-        wordType = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         line = new javax.swing.JLabel();
-        resultBoard = new GUI.ControlPanel.Search.ResultBoard();
         editButton = new GUI.roundComponent.Button();
         readButton = new GUI.roundComponent.Button();
+        materialTabbed1 = new GUI.roundComponent.MaterialTabbed();
         textBar = new GUI.ControlPanel.Search.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -105,10 +104,6 @@ public class LookupGUI extends javax.swing.JPanel {
         WordTarget.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         WordTarget.setForeground(new java.awt.Color(45, 45, 45));
         WordTarget.setText("Word");
-
-        wordType.setFont(new java.awt.Font("SansSerif", 3, 14)); // NOI18N
-        wordType.setForeground(new java.awt.Color(0, 48, 97));
-        wordType.setText("word type - từ loại");
 
         jLabel1.setBackground(new java.awt.Color(220, 220, 220));
         jLabel1.setOpaque(true);
@@ -144,10 +139,11 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addComponent(readButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(wordType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(resultBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(materialTabbed1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,14 +155,12 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(readButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(4, 4, 4)
-                .addComponent(wordType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(0, 0, 0)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(materialTabbed1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
         );
 
         textBar.setBackground(new java.awt.Color(245, 242, 242));
@@ -211,7 +205,7 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,7 +213,7 @@ public class LookupGUI extends javax.swing.JPanel {
         if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && 
                 evt.getKeyCode() != KeyEvent.VK_ENTER && evt.getKeyCode() != KeyEvent.VK_ESCAPE) {
             String text = textBar.getText().trim();
-            if (!this.Dictmng.validWord(text)) {
+            if (!DictionaryManagement.validWord(text)) {
                 suggestPanel.setSuggestData(this.Dictmng.findWordsWithPrefix(""));
                 if (suggestPanel.getItemSize() > 0) {
                     //  * 2 top and bot border
@@ -287,8 +281,8 @@ public class LookupGUI extends javax.swing.JPanel {
 
     private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
         if (SwingUtilities.isLeftMouseButton(evt)) {
-            EditGUI edit = new EditGUI();
-            edit.setDatatoEdit(result);
+            AddGUI edit = new AddGUI();
+            edit.changeToEditGUI(result);
             edit.eventOK(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
@@ -305,6 +299,7 @@ public class LookupGUI extends javax.swing.JPanel {
                 }
                 
             });
+
             edit.eventDelete(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
@@ -361,22 +356,30 @@ public class LookupGUI extends javax.swing.JPanel {
                 if (textBar.getShow()) {
                     textBar.close_searching();
                     if (result != null) {
+                        materialTabbed1.removeAll();
+                        materialTabbed1.revalidate();
                         WordTarget.setText(result.getWord_target());
-                        resultBoard.setData(result.getWord_explain());
-                        
-                        String type = result.getWordType();
-                        if (type.equals("noun")) {
-                            wordType.setText(type + " - danh từ");
-                        } else if (type.equals("adj")) {
-                            wordType.setText(type + " - tính từ");
-                        } else if (type.equals("verb")) {
-                            wordType.setText(type + " - động từ");
+                        List<String> listType = new ArrayList<>();
+                        List<ResultBoard> listBoard = new ArrayList<>();
+        
+                        for (WordExplain w : result.getWord_explain()) {                        
+                            if(listType.contains(w.getType())) {
+                                listBoard.get(listType.indexOf(w.getType())).addData(w.getDefinition(), w.getMeaning());
+                            } else {
+                                listType.add(w.getType());
+                                ResultBoard r = new ResultBoard();
+                                r.addData(w.getDefinition(), w.getMeaning());
+                                listBoard.add(r);
+                                materialTabbed1.addTab(w.getType(), r);
+                            }
                         }
-                        changeVisible(false);
-                        changeVisible(true);
+                        materialTabbed1.repaint();
+                        if (!jPanel1.isVisible()) {
+                            jPanel1.setVisible(true);
+                        }
                         pre_result = result;
                     } else {
-                        changeVisible(false);
+                        jPanel1.setVisible(false);
                         result = pre_result;
                         JOptionPane.showMessageDialog(jPanel1, "Not found");
                     }
@@ -397,9 +400,8 @@ public class LookupGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel line;
+    private GUI.roundComponent.MaterialTabbed materialTabbed1;
     private GUI.roundComponent.Button readButton;
-    private GUI.ControlPanel.Search.ResultBoard resultBoard;
     private GUI.ControlPanel.Search.TextFieldAnimation textBar;
-    private javax.swing.JLabel wordType;
     // End of variables declaration//GEN-END:variables
 }
