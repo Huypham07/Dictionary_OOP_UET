@@ -72,7 +72,6 @@ public class DictionaryManagement {
                 for (WordExplain j : wordExist) {
                     if (i.equals(j)) {
                         existExplain = true;
-                        break;
                     }
                 }
 
@@ -94,6 +93,20 @@ public class DictionaryManagement {
     public boolean deleteWord(String key) {
         int id = this.TrieOfDict.search(key);
         if (id < 0) return false;
+
+        boolean check = false;
+        for (int i = 0; i < vocabs.getVocabularies().size(); i++) {
+            if (check) {
+                break;
+            }
+            for (Word w : vocabs.getVocabularies().get(i)) {
+                if (key.equals(w.getWord_target())) {
+                    vocabs.getVocabularies().remove(w);
+                    check = true;
+                }
+            }
+        }
+        
         this.dictionary.getDict().get(id).setWordTarget("");
         return this.TrieOfDict.remove(key);
     }
@@ -178,7 +191,8 @@ public class DictionaryManagement {
         
     }
     
-    private static final String dbConn = "jdbc:mysql://localhost:3306/dictionary";
+    private static final String port = "3306";
+    private static final String dbConn = "jdbc:mysql://localhost:" + port + "/dictionary";
     private static final String username = "root";
     private static final String password = "nhienhy6714";
     
@@ -292,5 +306,14 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
     }
-    
+    public String getTopicOfWord(String key) {
+        for (int i = 0; i < vocabs.getVocabularies().size(); i++) {
+            for (Word w : vocabs.getVocabularies().get(i)) {
+                if (key.equals(w.getWord_target())) {
+                    return vocabs.getTopics().get(i);
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -29,6 +29,7 @@ public class EditGUI extends javax.swing.JDialog {
     private final List<EditPanel> list = new ArrayList<>();
     private DictionaryManagement Dictmng;
     private Word wordNeedtoDelete = null;
+    private String topicOfWordNeedtoEdit = null;
 
     public boolean isNewTopic() {
         return chooseNewTopic.isSelected();
@@ -41,6 +42,11 @@ public class EditGUI extends javax.swing.JDialog {
     public boolean isChooseATopic() {
         return chooseTopic.isSelected();
     }
+    
+    private JPanel noTopic = new JPanel();
+    private RoundedTextField newTopic = new RoundedTextField();
+    private TopicChoosePanel topicChoose = new TopicChoosePanel();
+    
     private ItemListener itemListener;
     
     private final JFrame frame;
@@ -59,14 +65,14 @@ public class EditGUI extends javax.swing.JDialog {
         CardLayout cardLayout = new CardLayout(0, 0);
         panel.setLayout(cardLayout);
         
-        JPanel noTopic = new JPanel();
+        
         noTopic.setBackground(new Color(215,246,248));
         panel.setOpaque(false);
-        RoundedTextField newTopic = new RoundedTextField();
+        
         newTopic.setFont(new java.awt.Font("SansSerif", 0, 16));
         newTopic.setHintText("New Topic ...");
-        TopicChoosePanel topicChoose = new TopicChoosePanel();
-        topicChoose.setText("Topic");
+        
+        topicChoose.setText("Choose...");
         topicChoose.setTopics(dict.getVocabs().getTopics());
         
         panel.add("noTopic", noTopic);
@@ -89,6 +95,7 @@ public class EditGUI extends javax.swing.JDialog {
                     } else if (e.getItem() == chooseTopic) {
                         chooseNoTopic.setSelected(false);
                         chooseNewTopic.setSelected(false);
+                        topicChoose.setText("Choose...");
                         cardLayout.show(panel, "chooseTopic");
                     }
                 }
@@ -220,6 +227,13 @@ public class EditGUI extends javax.swing.JDialog {
                 list.add(e);
                 materialTabbed1.addTab(w.getType(), e);
             }
+        }
+        topicOfWordNeedtoEdit = Dictmng.getTopicOfWord(word.getWord_target());
+        if (topicOfWordNeedtoEdit == null) {
+            chooseNoTopic.setSelected(true);
+        } else {
+            chooseTopic.setSelected(true);
+            topicChoose.setText(topicOfWordNeedtoEdit);
         }
         materialTabbed1.repaint();
     }
@@ -438,12 +452,16 @@ public class EditGUI extends javax.swing.JDialog {
     private void DeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseReleased
         if (SwingUtilities.isLeftMouseButton(evt)) {
             if (Dictmng.deleteWord(wordNeedtoDelete.getWord_target())) {
-//                Dictmng.deleteInDB(wordNeedtoDelete.getWord_target());
+                if (topicOfWordNeedtoEdit == null) {
+//                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), false);
+                } else {
+//                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), true); 
+                }
                 JOptionPane.showMessageDialog(this, "Successful!");
                 startAnimator(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Not found Word to delete\nOr this word was deleted!");
+                return;
             }
+            JOptionPane.showMessageDialog(this, "Not found Word to delete\nOr this word was deleted!");
         }
     }//GEN-LAST:event_DeleteMouseReleased
 
@@ -455,18 +473,25 @@ public class EditGUI extends javax.swing.JDialog {
             } else if (!DictionaryManagement.validWord(tmp.getWord_target())) {
                 JOptionPane.showMessageDialog(this, "Invalid English Word!\nAn English word can only have alphabet character!!!");
             } else{
-                if (wordNeedtoDelete == null) {
-                    if (Dictmng.deleteWord(tmp.getWord_target())) {
-//                        Dictmng.deleteInDB(tmp.getWord_target());
+                if (wordNeedtoDelete != null) {
+                    if (Dictmng.findWord(tmp.getWord_target()) != null) {
+                        JOptionPane.showMessageDialog(this, "This word exists in Dictionary!");
+                        return;
                     }
                 } else {
-                    if (Dictmng.deleteWord(wordNeedtoDelete.getWord_target())) {
-//                        Dictmng.deleteInDB(wordNeedtoDelete.getWord_target());
-                    }            
+                    Dictmng.insertWord(tmp);
+                    // add to db
+//                    Dictmng.insertWordIntoDB(tmp);
+                    if (chooseTopic.isSelected()) {
+                        if (topicChoose.getText().equals("Choose...")) {
+                            JOptionPane.showMessageDialog(this, "Choose a topic!");
+                            return;
+                        }
+//                        Dictmng.insertWordTopicIntoDB(topicChoose.getText(), tmp);      
+                    } else if (chooseNewTopic.isSelected()) {
+//                        Dictmng.insertWordTopicIntoDB(newTopic.getText(), tmp);
+                    }
                 }
-                Dictmng.insertWord(tmp);
-//                Dictmng.insertWordIntoDB(tmp);
-                // add to db
                 JOptionPane.showMessageDialog(this, "Successful!");
                 startAnimator(false);
             }

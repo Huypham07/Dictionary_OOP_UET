@@ -3,26 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Learn/AddnewTopic.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Menu/MenuItem.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Menu/Menu.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/EditGUI.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/VocabularyList.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/circleComponent.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/RoundedPanel.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Learn/TopicChoosePanel.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/controlPanel.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/Dictionary.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/AddGUI.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Learn/SlideRoundedPanel.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/GradientRoundedPanel.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/manageData/Datatype/WordExplain.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/roundComponent/MaterialTabbed.java</file>
             <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/DictionaryManagement.java</file>
             <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/LearnGUI.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/EditGUI.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Edit/Glass.java</file>
             <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/DictionaryGUI.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Search/ResultBoard.java</file>
-            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/manageData/Datatype/Word.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/VocabularyList.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/Dict/Dictionary.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Edit/EditPanel.java</file>
+            <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/Learn/SlideRoundedPanel.java</file>
             <file>file:/D:/UET/2nd/OOP/Dictionary_OOP_UET/Dictionary/src/GUI/ControlPanel/LookupGUI.java</file>
         </group>
     </open-files>
