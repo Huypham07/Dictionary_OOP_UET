@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
-import GUI.ControlPanel.AddGUI;
+import GUI.ControlPanel.EditGUI;
 import GUI.ControlPanel.LearnGUI;
 import GUI.ControlPanel.TranslateGUI;
 import GUI.ControlPanel.controlPanel;
@@ -12,8 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import manageData.Datatype.Word;
-import raven.glasspanepopup.GlassPanePopup;
 import jnafilechooser.api.JnaFileChooser;
 
 public class DictionaryGUI extends javax.swing.JFrame {
@@ -30,10 +28,11 @@ public class DictionaryGUI extends javax.swing.JFrame {
     public DictionaryGUI() {
         initComponents();
         init();
-        GlassPanePopup.install(this);
     }
     
     private void init() {
+        JFrame f = this;
+        
         ImageIcon iconApp = new ImageIcon("src/data/img/logo.png");
         setIconImage(iconApp.getImage());
         
@@ -44,6 +43,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         lookupGUI = new LookupGUI();
         lookupGUI.setDictionay(dictionaryManagement);
+        lookupGUI.setframe(f);
         
         translateGUI = new TranslateGUI();
         
@@ -59,6 +59,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         Listfuntion.add("translate");
 //        Listfuntion.add("learn");
         
+
         controlpanel.eventLookupGUI(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -79,25 +80,9 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         controlpanel.eventAddGUI(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                AddGUI add = new AddGUI();
-                add.eventOK(new MouseAdapter() {
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        if (SwingUtilities.isLeftMouseButton(e)) {
-                            Word tmp = add.getWord();
-                            if (!dictionaryManagement.validWord(tmp.getWord_target())) {
-                                JOptionPane.showMessageDialog(add, "Invalid English Word!\nAn English word can only have alphabet character!!!");
-                            } else{
-                                dictionaryManagement.insertWord(tmp);
-                                JOptionPane.showMessageDialog(add, "Successful!");
-                                GlassPanePopup.closePopupLast();
-                            }
-                        }
-                    }                   
-                
-                });
-                GlassPanePopup.showPopup(add);
+            public void mouseReleased(MouseEvent e) {
+                EditGUI add = new EditGUI(f, " Add Word", dictionaryManagement);
+                add.showDialog();
             }
             
         });

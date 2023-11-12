@@ -29,6 +29,10 @@ public class DictionaryManagement {
     public Trie getTrieOfDict() {
         return this.TrieOfDict;
     }
+    
+    public VocabularyList getVocabs() {
+        return this.vocabs;
+    }
 
     //------------------METHOD-----------------
 
@@ -76,6 +80,7 @@ public class DictionaryManagement {
                     wordExist.add(i);
                 }
             }
+            
         }
     }
 
@@ -91,7 +96,7 @@ public class DictionaryManagement {
         if (id < 0) return false;
         this.dictionary.getDict().get(id).setWordTarget("");
         return this.TrieOfDict.remove(key);
-    }// bug when delete it suffles all word
+    }
     
     //search prefix
     public ArrayList<String> findWordsWithPrefix(String key) {
@@ -218,4 +223,74 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
     }
+    public void deleteInDB(String key, boolean wordInTopic) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            if (wordInTopic) {
+                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
+                                   "DELETE FROM wordtopics WHERE english = ?; " +
+                                   "DELETE FROM words WHERE english = ?;";
+
+                pst = sqlConn.prepareStatement(deleteSql);
+                pst.setString(1, key);
+                pst.setString(2, key);
+                pst.setString(3, key);
+                pst.executeUpdate();
+            } else {
+                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
+                                   "DELETE FROM words WHERE english = ?;";
+
+                pst = sqlConn.prepareStatement(deleteSql);
+                pst.setString(1, key);
+                pst.setString(2, key);
+                pst.executeUpdate();
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertWordIntoDB(Word word) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            // Insert into Words table
+            pst = sqlConn.prepareStatement("INSERT INTO Words (English, pronounce) VALUES (?, ?)");
+            pst.setString(1, word.getWord_target());
+            pst.setString(2, word.getPronounce());
+            pst.executeUpdate();
+
+            // Insert into WordDefinitions table
+            for (WordExplain we : word.getWord_explain()) {
+                pst = sqlConn.prepareStatement("INSERT INTO WordDefinitions (English, type, Definition, Meaning) VALUES (?, ?, ?, ?)");
+                pst.setString(1, word.getWord_target());
+                pst.setString(2, we.getType());
+                pst.setString(3, we.getDefinition());
+                pst.setString(4, we.getMeaning());
+                pst.executeUpdate();
+            }    
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertWordTopicIntoDB(String topic, Word word) {
+        vocabs.addNewVocabulary(topic, word);
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            pst = sqlConn.prepareStatement("INSERT INTO WordTopics (TopicName, english) VALUES (?, ?);");
+            pst.setString(1, topic);
+            pst.setString(2, word.getWord_target());
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

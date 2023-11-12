@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import manageData.Datatype.Word;
-import raven.glasspanepopup.GlassPanePopup;
 
 public class LearnGUI extends JPanel {
     private VocabularyList vocabs;

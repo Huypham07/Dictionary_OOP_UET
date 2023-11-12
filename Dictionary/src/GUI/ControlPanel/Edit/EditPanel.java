@@ -204,17 +204,19 @@ public class EditPanel extends javax.swing.JPanel {
 
     private void delMeaningMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delMeaningMouseReleased
         if (SwingUtilities.isLeftMouseButton(evt)) {
-            explains.remove(explains.size()-1);
-            explains.remove(explains.size()-1);
-            panel.removeAll();
-            panel.revalidate();
-            for (int i = 0; i < explains.size(); i += 2) {
-               panel.add(createTitle("Definition"), "growx, align left, w 100::90%, wrap");
-               panel.add(explains.get(i), "growx, align left, w 100::90%, wrap, gaptop 10");
-               panel.add(createTitle("Meaning"), "growx, align left, w 100::90%, wrap, gaptop 10");
-               panel.add(explains.get(i + 1), "growx, align left, w 100::90%, wrap, gaptop 10");
-            }
-            panel.repaint(); 
+            if (explains.size() >= 4) {
+                explains.remove(explains.size()-1);
+                explains.remove(explains.size()-1);
+                panel.removeAll();
+                panel.revalidate();
+                for (int i = 0; i < explains.size(); i += 2) {
+                   panel.add(createTitle("Definition"), "growx, align left, w 100::90%, wrap");
+                   panel.add(explains.get(i), "growx, align left, w 100::90%, wrap, gaptop 10");
+                   panel.add(createTitle("Meaning"), "growx, align left, w 100::90%, wrap, gaptop 10");
+                   panel.add(explains.get(i + 1), "growx, align left, w 100::90%, wrap, gaptop 10");
+                }
+                panel.repaint();                
+            } 
         }
     }//GEN-LAST:event_delMeaningMouseReleased
 

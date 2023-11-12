@@ -1,5 +1,6 @@
 package GUI.ControlPanel;
 
+import GUI.ControlPanel.EditGUI;
 import GUI.ControlPanel.Search.EventClick;
 import GUI.ControlPanel.Search.searchSuggestPanel;
 import java.awt.Color;
@@ -21,8 +22,8 @@ import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import manageData.Datatype.Word;
 import manageData.Datatype.WordExplain;
-import raven.glasspanepopup.GlassPanePopup;
 import GUI.ControlPanel.Search.ResultBoard;
+import javax.swing.JFrame;
 
 
 public class LookupGUI extends javax.swing.JPanel {
@@ -36,6 +37,7 @@ public class LookupGUI extends javax.swing.JPanel {
     }
     
     private Word result ;
+
     private Word pre_result ;
 
     private JPopupMenu menu;
@@ -79,6 +81,7 @@ public class LookupGUI extends javax.swing.JPanel {
         editButton = new GUI.roundComponent.Button();
         readButton = new GUI.roundComponent.Button();
         materialTabbed1 = new GUI.roundComponent.MaterialTabbed();
+        Pronounce = new javax.swing.JLabel();
         textBar = new GUI.ControlPanel.Search.TextFieldAnimation();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -113,8 +116,8 @@ public class LookupGUI extends javax.swing.JPanel {
 
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/edit.png"))); // NOI18N
         editButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                editButtonMousePressed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                editButtonMouseReleased(evt);
             }
         });
 
@@ -125,10 +128,16 @@ public class LookupGUI extends javax.swing.JPanel {
             }
         });
 
+        Pronounce.setFont(new java.awt.Font("SansSerif", 3, 14)); // NOI18N
+        Pronounce.setText("/ pronounce /");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(materialTabbed1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +148,9 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addComponent(readButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Pronounce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(materialTabbed1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,12 +162,14 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(readButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(4, 4, 4)
+                .addComponent(Pronounce)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(0, 0, 0)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(materialTabbed1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+                .addComponent(materialTabbed1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         textBar.setBackground(new java.awt.Color(245, 242, 242));
@@ -205,7 +214,7 @@ public class LookupGUI extends javax.swing.JPanel {
                         .addComponent(textBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -279,43 +288,9 @@ public class LookupGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_textBarMousePressed
 
-    private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
-        if (SwingUtilities.isLeftMouseButton(evt)) {
-            AddGUI edit = new AddGUI();
-            edit.changeToEditGUI(result);
-            edit.eventOK(new MouseAdapter() {
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isLeftMouseButton(e)) {
-                        Word tmp = edit.getWord();
-                        if (!DictionaryManagement.validWord(tmp.getWord_target())) {
-                            JOptionPane.showMessageDialog(edit, "Invalid English Word!\nAn English word can only have alphabet character!!!");
-                        } else{
-                            Dictmng.editWord(result.getWord_target(), tmp);
-                            JOptionPane.showMessageDialog(edit, "Successful!");
-                            GlassPanePopup.closePopupLast();
-                        }
-                    }
-                }
-                
-            });
-
-            edit.eventDelete(new MouseAdapter() {
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isLeftMouseButton(e)) {
-                        if (Dictmng.deleteWord(result.getWord_target())) {
-                            JOptionPane.showMessageDialog(edit, "Successful!");
-                            GlassPanePopup.closePopupLast();
-                        } else {
-                            JOptionPane.showMessageDialog(edit, "Not found Word to delete\nOr this word was deleted!");
-                        }
-                    }
-                }
-            });
-            GlassPanePopup.showPopup(edit);
-        }
-    }//GEN-LAST:event_editButtonMousePressed
+    public void eventEdit(MouseAdapter event) {
+        editButton.addMouseListener(event);
+    }
 
     private Thread thread;
     
@@ -338,6 +313,19 @@ public class LookupGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_readButtonMousePressed
 
+    private JFrame frame;
+    
+    public void setframe(JFrame frame) {
+        this.frame = frame;
+    }
+    private void editButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseReleased
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            EditGUI edit = new EditGUI(frame, " Edit Word", Dictmng);
+            edit.changeToEditGUI(result);
+            edit.showDialog();
+        }
+    }//GEN-LAST:event_editButtonMouseReleased
+
     private void processing() {
         textBar.execute_searching();
         Word tmp = Dictmng.findWord(textBar.getText().trim());
@@ -359,6 +347,7 @@ public class LookupGUI extends javax.swing.JPanel {
                         materialTabbed1.removeAll();
                         materialTabbed1.revalidate();
                         WordTarget.setText(result.getWord_target());
+                        Pronounce.setText("/ " + result.getPronounce() + " /");
                         List<String> listType = new ArrayList<>();
                         List<ResultBoard> listBoard = new ArrayList<>();
         
@@ -394,6 +383,7 @@ public class LookupGUI extends javax.swing.JPanel {
             
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Pronounce;
     private javax.swing.JLabel WordTarget;
     private GUI.roundComponent.Button editButton;
     private GUI.roundComponent.circleComponent iconSearch;

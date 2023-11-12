@@ -61,12 +61,20 @@ public class TopicChoosePanel extends RoundedPanel {
         menu.setBorder(BorderFactory.createLineBorder(new Color(245, 242, 242)));
         menu.add(suggestPanel);
         menu.setFocusable(false);
+        suggestPanel.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(String data) {
+                topic.setText(data);
+                menu.setVisible(false);
+                show = false;
+            }
+        });
     }
     
     public void eventClickSugestPanel(EventClick e) {
         suggestPanel.addEventClick(e);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,6 +82,11 @@ public class TopicChoosePanel extends RoundedPanel {
         topic = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(245, 242, 242));
+        setRoundBottomLeft(20);
+        setRoundBottomRight(20);
+        setRoundTopLeft(20);
+        setRoundTopRight(20);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
@@ -92,8 +105,8 @@ public class TopicChoosePanel extends RoundedPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(topic, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(topic, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
