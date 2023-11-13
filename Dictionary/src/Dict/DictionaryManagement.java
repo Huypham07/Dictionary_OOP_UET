@@ -169,9 +169,8 @@ public class DictionaryManagement {
 
                     ArrayList<WordExplain> w_explain = w.getWord_explain();
                     for (WordExplain ex : w_explain) {
-                        bw.write(w.getWord_target() + "\t" + w.getPronounce()+ "\t" + ex.getType() + "\t" + ex.getDefinition() + "\n" + ex.getMeaning());
+                        bw.write(w.getWord_target() + "\t" + w.getPronounce()+ "\t" + ex.getType() + "\t" + ex.getDefinition() + "\t" + ex.getMeaning() + "\n");
                     }
-                    bw.write("\n");
                 }
             }
 
@@ -184,11 +183,6 @@ public class DictionaryManagement {
             System.out.println("Sorry. An error occurred while exporting data.");
             return false;
         }
-    }
-    
-    // review vocabulary
-    public void VocabularyReview() {
-        
     }
     
     private static final String port = "3306";
@@ -293,7 +287,6 @@ public class DictionaryManagement {
     }
     
     public void insertWordTopicIntoDB(String topic, Word word) {
-        vocabs.addNewVocabulary(topic, word);
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             sqlConn = DriverManager.getConnection(dbConn, username, password);
@@ -305,6 +298,10 @@ public class DictionaryManagement {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void insertWordTopic(String topic, Word word) {
+        vocabs.addNewVocabulary(topic, word);
     }
     public String getTopicOfWord(String key) {
         for (int i = 0; i < vocabs.getVocabularies().size(); i++) {

@@ -1,35 +1,43 @@
 package GUI.ControlPanel;
 
+import Dict.DictionaryManagement;
 import Dict.VocabularyList;
-import GUI.ControlPanel.Learn.WordPanel;
+import GUI.ControlPanel.Learn.Question;
 import GUI.ControlPanel.Search.EventClick;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import manageData.Datatype.Word;
+import manageData.Datatype.WordExplain;
 
 public class LearnGUI extends JPanel {
     private VocabularyList vocabs;
     private List<List<Component>> list = new ArrayList<>();
     
-    public LearnGUI(VocabularyList vocabs) {
+    public LearnGUI(DictionaryManagement Dictmng) {
         initComponents();
-        this.vocabs = vocabs;
+        this.vocabs = Dictmng.getVocabs();
         topicChoose.setTopics(vocabs.getTopics());
         List<List<Word>> temp = vocabs.getVocabularies();
-//        for (int i = 0; i < temp.size(); ++i) {
-//            List<Component> comps = new ArrayList<>();
-//            for (Word w : temp.get(i)) {
-//                comps.add(new WordPanel(w.getWord_target(), w.getWordType(), w.getWord_explain().get(0)));
-//            }
-//            list.add(comps);
-//        } 
+        for (int i = 0; i < temp.size(); ++i) {
+            List<Component> comps = new ArrayList<>();
+            for (Word w : temp.get(i)) {
+                List<Word> random4Word = new ArrayList<>(Dictmng.getDictionary().getDict());
+                random4Word.remove(w);
+                Collections.shuffle(random4Word);
+                random4Word = random4Word.subList(0, 3);
+                
+                WordExplain explain = w.getWord_explain().get(0);
+                comps.add(new Question(explain.getDefinition(), explain.getType(), explain.getMeaning(),
+                        w.getWord_target(), random4Word.get(0).getWord_target(),
+                        random4Word.get(1).getWord_target(), random4Word.get(2).getWord_target()));
+            }
+            list.add(comps);
+        } 
         
         showButton.setBackground(new Color(153, 204, 255));
         prevButton.setBackground(new Color(153, 204, 255));
@@ -45,9 +53,7 @@ public class LearnGUI extends JPanel {
                 slideroundedPanel.clear();
                 slideroundedPanel.addComponent(list.get(topicChoose.getChoose()));
                 slideroundedPanel.startShow();
-                WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-                curr.ShowExplain(false);
-                changeStateOfshowButton(curr.isShow());
+
             }
         });
     }
@@ -55,16 +61,8 @@ public class LearnGUI extends JPanel {
     public void startLearn() {
         topicChoose.setText("Topics");
         slideroundedPanel.clear();
-        slideroundedPanel.addComponent(new WordPanel("English", "type", "Explain"));
+        slideroundedPanel.addComponent(new Question("Definition", "/ word type /", "Correct Answer is A", "A", "B", "C", "D"));
         slideroundedPanel.startShow();
-    }
-    
-    private void changeStateOfshowButton(boolean show) {
-        if (show) {
-            showButton.setText("Hide");
-        } else {
-            showButton.setText("Show");
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -101,12 +99,6 @@ public class LearnGUI extends JPanel {
             }
         });
 
-        slideroundedPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                slideroundedPanelMousePressed(evt);
-            }
-        });
-
         javax.swing.GroupLayout slideroundedPanelLayout = new javax.swing.GroupLayout(slideroundedPanel);
         slideroundedPanel.setLayout(slideroundedPanelLayout);
         slideroundedPanelLayout.setHorizontalGroup(
@@ -119,10 +111,6 @@ public class LearnGUI extends JPanel {
         );
 
         topicChoose.setBackground(new java.awt.Color(153, 204, 255));
-        topicChoose.setRoundBottomLeft(20);
-        topicChoose.setRoundBottomRight(20);
-        topicChoose.setRoundTopLeft(20);
-        topicChoose.setRoundTopRight(20);
 
         shuffleButton.setText("Shuffle");
         shuffleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +124,7 @@ public class LearnGUI extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
+                .addContainerGap(288, Short.MAX_VALUE)
                 .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(shuffleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,9 +160,8 @@ public class LearnGUI extends JPanel {
         // TODO add your handling code here:
         try {
             slideroundedPanel.show(slideroundedPanel.getCurrentShowing() + 1);
-            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-            curr.ShowExplain(false);
-            changeStateOfshowButton(curr.isShow());
+            Question curr = (Question)slideroundedPanel.getCurrentComponent();
+            curr.restart();
         } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(slideroundedPanel, "Congratulations!\nIt's all words.");
         }
@@ -184,25 +171,17 @@ public class LearnGUI extends JPanel {
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
         try {
             slideroundedPanel.show(slideroundedPanel.getCurrentShowing() - 1);
-            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-            curr.ShowExplain(false);
-            changeStateOfshowButton(curr.isShow());
+            Question curr = (Question)slideroundedPanel.getCurrentComponent();
+            curr.restart();
         } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(slideroundedPanel, "Sorry, Can't show previous word!\nIt's the first word.");
         }
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
-        WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-        curr.ShowExplain(!curr.isShow());
-        changeStateOfshowButton(curr.isShow());
+        Question curr = (Question)slideroundedPanel.getCurrentComponent();
+        curr.showCorrectAns();
     }//GEN-LAST:event_showButtonActionPerformed
-
-    private void slideroundedPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slideroundedPanelMousePressed
-        WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-        curr.ShowExplain(!curr.isShow());
-        changeStateOfshowButton(curr.isShow());
-    }//GEN-LAST:event_slideroundedPanelMousePressed
 
     private void shuffleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shuffleButtonActionPerformed
         int choice = topicChoose.getChoose();
@@ -213,9 +192,8 @@ public class LearnGUI extends JPanel {
             slideroundedPanel.clear();
             slideroundedPanel.addComponent(copyList);
             slideroundedPanel.startShow();
-            WordPanel curr = (WordPanel)slideroundedPanel.getCurrentComponent();
-            curr.ShowExplain(false);
-            changeStateOfshowButton(curr.isShow());
+            Question curr = (Question)slideroundedPanel.getCurrentComponent();
+            curr.restart();
         }
     }//GEN-LAST:event_shuffleButtonActionPerformed
 

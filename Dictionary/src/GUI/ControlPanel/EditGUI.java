@@ -453,9 +453,9 @@ public class EditGUI extends javax.swing.JDialog {
         if (SwingUtilities.isLeftMouseButton(evt)) {
             if (Dictmng.deleteWord(wordNeedtoDelete.getWord_target())) {
                 if (topicOfWordNeedtoEdit == null) {
-//                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), false);
+                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), false);
                 } else {
-//                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), true); 
+                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), true);
                 }
                 JOptionPane.showMessageDialog(this, "Successful!");
                 startAnimator(false);
@@ -481,15 +481,17 @@ public class EditGUI extends javax.swing.JDialog {
                 } else {
                     Dictmng.insertWord(tmp);
                     // add to db
-//                    Dictmng.insertWordIntoDB(tmp);
+                    Dictmng.insertWordIntoDB(tmp);
                     if (chooseTopic.isSelected()) {
                         if (topicChoose.getText().equals("Choose...")) {
                             JOptionPane.showMessageDialog(this, "Choose a topic!");
                             return;
                         }
-//                        Dictmng.insertWordTopicIntoDB(topicChoose.getText(), tmp);      
+                        Dictmng.insertWordTopic(topicChoose.getText(), tmp);  
+                        Dictmng.insertWordTopicIntoDB(topicChoose.getText(), tmp);
                     } else if (chooseNewTopic.isSelected()) {
-//                        Dictmng.insertWordTopicIntoDB(newTopic.getText(), tmp);
+                        Dictmng.insertWordTopic(newTopic.getText(), tmp);
+                        Dictmng.insertWordTopicIntoDB(newTopic.getText(), tmp);
                     }
                 }
                 JOptionPane.showMessageDialog(this, "Successful!");

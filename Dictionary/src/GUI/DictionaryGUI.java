@@ -47,17 +47,17 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         translateGUI = new TranslateGUI();
         
-//        learnGUI = new LearnGUI();
+        learnGUI = new LearnGUI(dictionaryManagement);
                
         workPanel.setLayout(cardLayout);
         
         workPanel.add("lookup",lookupGUI);
         workPanel.add("translate", translateGUI);
-//        workPanel.add("learn", learnGUI);
+        workPanel.add("learn", learnGUI);
         
         Listfuntion.add("lookup");
         Listfuntion.add("translate");
-//        Listfuntion.add("learn");
+        Listfuntion.add("learn");
         
 
         controlpanel.eventLookupGUI(new MouseAdapter() {
@@ -87,16 +87,16 @@ public class DictionaryGUI extends javax.swing.JFrame {
             
         });
         
-//        controlpanel.eventLearnGUI(new MouseAdapter(){
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
-//                controlpanel.setSelect(controlPanel.LEARN);
-//                change(controlPanel.LEARN);
-//                learnGUI.startLearn();
-//                JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
-//            }
-//            
-//        });
+        controlpanel.eventLearnGUI(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controlpanel.setSelect(controlPanel.LEARN);
+                change(controlPanel.LEARN);
+                learnGUI.startLearn();
+                JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
+            }
+            
+        });
         
         controlpanel.eventExportGUI(new MouseAdapter(){
             @Override
