@@ -44,7 +44,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Component id="resultPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="roundedPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -54,7 +54,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="controlpanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="resultPanel1" max="32767" attributes="0"/>
+              <Component id="roundedPanel1" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,7 +62,14 @@
   <SubComponents>
     <Component class="GUI.ControlPanel.controlPanel" name="controlpanel">
     </Component>
-    <Container class="GUI.ControlPanel.resultPanel" name="resultPanel1">
+    <Container class="GUI.roundComponent.RoundedPanel" name="roundedPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="roundTopLeft" type="int" value="80"/>
+        <Property name="roundTopRight" type="int" value="80"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">

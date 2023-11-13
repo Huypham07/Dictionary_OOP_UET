@@ -3,21 +3,15 @@ package GUI;
 import javax.swing.*;
 import GUI.ControlPanel.LookupGUI;
 import Dict.DictionaryManagement;
-import Dict.VocabularyList;
-import GUI.ControlPanel.AddGUI;
-import GUI.ControlPanel.Learn.WordPanel;
+import GUI.ControlPanel.EditGUI;
 import GUI.ControlPanel.LearnGUI;
 import GUI.ControlPanel.TranslateGUI;
 import GUI.ControlPanel.controlPanel;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import manageData.Datatype.Word;
-import raven.glasspanepopup.GlassPanePopup;
 import jnafilechooser.api.JnaFileChooser;
 
 public class DictionaryGUI extends javax.swing.JFrame {
@@ -34,24 +28,26 @@ public class DictionaryGUI extends javax.swing.JFrame {
     public DictionaryGUI() {
         initComponents();
         init();
-        GlassPanePopup.install(this);
     }
     
     private void init() {
+        JFrame f = this;
+        
         ImageIcon iconApp = new ImageIcon("src/data/img/logo.png");
         setIconImage(iconApp.getImage());
         
         dictionaryManagement = new DictionaryManagement();
-        dictionaryManagement.insertFromFile();
+//        dictionaryManagement.insertFromFile();
         
         cardLayout = new CardLayout(0, 0);
         
         lookupGUI = new LookupGUI();
         lookupGUI.setDictionay(dictionaryManagement);
+        lookupGUI.setframe(f);
         
         translateGUI = new TranslateGUI();
         
-        learnGUI = new LearnGUI();
+        learnGUI = new LearnGUI(dictionaryManagement);
                
         workPanel.setLayout(cardLayout);
         
@@ -63,6 +59,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         Listfuntion.add("translate");
         Listfuntion.add("learn");
         
+
         controlpanel.eventLookupGUI(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -83,25 +80,9 @@ public class DictionaryGUI extends javax.swing.JFrame {
         
         controlpanel.eventAddGUI(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                AddGUI add = new AddGUI();
-                add.eventOK(new MouseAdapter() {
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        if (SwingUtilities.isLeftMouseButton(e)) {
-                            Word tmp = add.getWord();
-                            if (!dictionaryManagement.validWord(tmp.getWord_target())) {
-                                JOptionPane.showMessageDialog(add, "Invalid English Word!\nAn English word can only have alphabet character!!!");
-                            } else{
-                                dictionaryManagement.insertWord(tmp);
-                                JOptionPane.showMessageDialog(add, "Successful!");
-                                GlassPanePopup.closePopupLast();
-                            }
-                        }
-                    }                   
-                
-                });
-                GlassPanePopup.showPopup(add);
+            public void mouseReleased(MouseEvent e) {
+                EditGUI add = new EditGUI(f, " Add Word", dictionaryManagement);
+                add.showDialog();
             }
             
         });
@@ -148,7 +129,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
 
         button1 = new GUI.roundComponent.Button();
         controlpanel = new GUI.ControlPanel.controlPanel();
-        resultPanel1 = new GUI.ControlPanel.resultPanel();
+        roundedPanel1 = new GUI.roundComponent.RoundedPanel();
         workPanel = new javax.swing.JPanel();
 
         button1.setText("button1");
@@ -162,6 +143,10 @@ public class DictionaryGUI extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundTopLeft(80);
+        roundedPanel1.setRoundTopRight(80);
 
         workPanel.setBackground(new java.awt.Color(255, 255, 255));
         workPanel.setOpaque(false);
@@ -177,18 +162,18 @@ public class DictionaryGUI extends javax.swing.JFrame {
             .addGap(0, 570, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout resultPanel1Layout = new javax.swing.GroupLayout(resultPanel1);
-        resultPanel1.setLayout(resultPanel1Layout);
-        resultPanel1Layout.setHorizontalGroup(
-            resultPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
+        roundedPanel1.setLayout(roundedPanel1Layout);
+        roundedPanel1Layout.setHorizontalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(workPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(95, Short.MAX_VALUE))
         );
-        resultPanel1Layout.setVerticalGroup(
-            resultPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanel1Layout.createSequentialGroup()
+        roundedPanel1Layout.setVerticalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(workPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -203,7 +188,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
                 .addComponent(controlpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(resultPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -211,7 +196,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(controlpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(resultPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(roundedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,7 +239,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.Button button1;
     private GUI.ControlPanel.controlPanel controlpanel;
-    private GUI.ControlPanel.resultPanel resultPanel1;
+    private GUI.roundComponent.RoundedPanel roundedPanel1;
     private javax.swing.JPanel workPanel;
     // End of variables declaration//GEN-END:variables
 }

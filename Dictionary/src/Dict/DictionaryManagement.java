@@ -4,16 +4,22 @@ import java.util.*;
 import java.io.*;
 import manageData.Datatype.Word;
 import manageData.TrieTree.Trie;
+import java.sql.*;
+import manageData.Datatype.WordExplain;
 
 public class DictionaryManagement {
 
     private Dictionary dictionary;
     private Trie TrieOfDict;
+    VocabularyList vocabs;
 
     // constructors
     public DictionaryManagement() {
         this.dictionary = new Dictionary();
         TrieOfDict = this.dictionary.getTrieOfTargetWord();
+        vocabs = new VocabularyList();
+        setupFromDB();
+        GetListVocabFromDB();
     }
 
     // getter
@@ -22,6 +28,10 @@ public class DictionaryManagement {
     }
     public Trie getTrieOfDict() {
         return this.TrieOfDict;
+    }
+    
+    public VocabularyList getVocabs() {
+        return this.vocabs;
     }
 
     //------------------METHOD-----------------
@@ -53,23 +63,23 @@ public class DictionaryManagement {
             this.dictionary.getDict().add(w);
             this.TrieOfDict.insert(w.getWord_target(), this.dictionary.getDict().size()-1);
         } else {
-            ArrayList<String> tmp = w.getWord_explain();
-            ArrayList<String> wordExist = this.dictionary.getDict().get(check).getWord_explain();
+            ArrayList<WordExplain> tmp = w.getWord_explain();
+            ArrayList<WordExplain> wordExist = this.dictionary.getDict().get(check).getWord_explain();
 
-            for (String s : tmp) {
+            for (WordExplain i : tmp) {
                 boolean existExplain = false;
 
-                for (String string : wordExist) {
-                    if (s.equals(string)) {
+                for (WordExplain j : wordExist) {
+                    if (i.equals(j)) {
                         existExplain = true;
-                        break;
                     }
                 }
 
                 if (!existExplain) {
-                    wordExist.add(s);
+                    wordExist.add(i);
                 }
             }
+            
         }
     }
 
@@ -83,9 +93,23 @@ public class DictionaryManagement {
     public boolean deleteWord(String key) {
         int id = this.TrieOfDict.search(key);
         if (id < 0) return false;
+
+        boolean check = false;
+        for (int i = 0; i < vocabs.getVocabularies().size(); i++) {
+            if (check) {
+                break;
+            }
+            for (Word w : vocabs.getVocabularies().get(i)) {
+                if (key.equals(w.getWord_target())) {
+                    vocabs.getVocabularies().remove(w);
+                    check = true;
+                }
+            }
+        }
+        
         this.dictionary.getDict().get(id).setWordTarget("");
         return this.TrieOfDict.remove(key);
-    }// bug when delete it suffles all word
+    }
     
     //search prefix
     public ArrayList<String> findWordsWithPrefix(String key) {
@@ -104,18 +128,15 @@ public class DictionaryManagement {
 
                 if (parts.length >= 1) {
                     String w_target = parts[0];
-                    ArrayList<String> w_explain = new ArrayList<>();
+                    String pronounce = parts[1];
+                    String type = parts[2];
+                    String define = parts[3];
+                    String meaning = parts[4];
+
                     Word temp = new Word();
                     temp.setWordTarget(w_target);
-
-                    if (parts.length > 1) {
-                        for (int i = 1; i < parts.length-1; i++) {
-                            w_explain.add(parts[i]);
-                        }
-                        temp.setWordExplain(w_explain);
-                        
-                        temp.setWordType(parts[parts.length-1]);
-                    }
+                    temp.setPronounce(pronounce);
+                    temp.addExplain(new WordExplain(type, define, meaning));
 
                     if (validWord(w_target)) {
                         this.insertWord(temp);
@@ -145,16 +166,11 @@ public class DictionaryManagement {
 
             for (Word w : this.getDictionary().getDict()) {
                 if (w.getWord_target() != null && !w.getWord_target().isEmpty()) {
-                    bw.write(w.getWord_target() + "\t");
 
-                    ArrayList<String> w_explain = w.getWord_explain();
-                    for (String meaning : w_explain) {
-                        bw.write(meaning + "\t");
+                    ArrayList<WordExplain> w_explain = w.getWord_explain();
+                    for (WordExplain ex : w_explain) {
+                        bw.write(w.getWord_target() + "\t" + w.getPronounce()+ "\t" + ex.getType() + "\t" + ex.getDefinition() + "\t" + ex.getMeaning() + "\n");
                     }
-
-                    bw.write(w.getWordType() + "\t");
-
-                    bw.write("\n");
                 }
             }
 
@@ -169,7 +185,132 @@ public class DictionaryManagement {
         }
     }
     
-    // review vocabulary
-    public void VocabularyReview() {
+    private static final String port = "3306";
+    private static final String dbConn = "jdbc:mysql://localhost:" + port + "/dictionary";
+    private static final String username = "root";
+    private static final String password = "nhienhy6714";
+    
+    private Connection sqlConn = null;
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
+    
+    private void setupFromDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            pst = sqlConn.prepareStatement("select * from words natural join worddefinitions;");
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Word word = new Word();
+                word.setWordTarget(rs.getString(1));
+                word.setPronounce(rs.getString(2));
+                word.addExplain(new WordExplain(rs.getString(3), rs.getString(4), rs.getString(5)));
+                insertWord(word);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void GetListVocabFromDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            pst = sqlConn.prepareStatement("select * from WordTopics;");
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String topic = rs.getString(1);
+                Word word = findWord(rs.getString(2));
+                vocabs.addNewVocabulary(topic, word);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteInDB(String key, boolean wordInTopic) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            if (wordInTopic) {
+                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
+                                   "DELETE FROM wordtopics WHERE english = ?; " +
+                                   "DELETE FROM words WHERE english = ?;";
+
+                pst = sqlConn.prepareStatement(deleteSql);
+                pst.setString(1, key);
+                pst.setString(2, key);
+                pst.setString(3, key);
+                pst.executeUpdate();
+            } else {
+                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
+                                   "DELETE FROM words WHERE english = ?;";
+
+                pst = sqlConn.prepareStatement(deleteSql);
+                pst.setString(1, key);
+                pst.setString(2, key);
+                pst.executeUpdate();
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertWordIntoDB(Word word) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            // Insert into Words table
+            pst = sqlConn.prepareStatement("INSERT INTO Words (English, pronounce) VALUES (?, ?)");
+            pst.setString(1, word.getWord_target());
+            pst.setString(2, word.getPronounce());
+            pst.executeUpdate();
+
+            // Insert into WordDefinitions table
+            for (WordExplain we : word.getWord_explain()) {
+                pst = sqlConn.prepareStatement("INSERT INTO WordDefinitions (English, type, Definition, Meaning) VALUES (?, ?, ?, ?)");
+                pst.setString(1, word.getWord_target());
+                pst.setString(2, we.getType());
+                pst.setString(3, we.getDefinition());
+                pst.setString(4, we.getMeaning());
+                pst.executeUpdate();
+            }    
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertWordTopicIntoDB(String topic, Word word) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            sqlConn = DriverManager.getConnection(dbConn, username, password);
+            pst = sqlConn.prepareStatement("INSERT INTO WordTopics (TopicName, english) VALUES (?, ?);");
+            pst.setString(1, topic);
+            pst.setString(2, word.getWord_target());
+            pst.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertWordTopic(String topic, Word word) {
+        vocabs.addNewVocabulary(topic, word);
+    }
+    public String getTopicOfWord(String key) {
+        for (int i = 0; i < vocabs.getVocabularies().size(); i++) {
+            for (Word w : vocabs.getVocabularies().get(i)) {
+                if (key.equals(w.getWord_target())) {
+                    return vocabs.getTopics().get(i);
+                }
+            }
+        }
+        return null;
     }
 }

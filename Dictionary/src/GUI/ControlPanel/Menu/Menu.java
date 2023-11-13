@@ -42,6 +42,7 @@ public class Menu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(29, 42, 87));
         setForeground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
 
         lookup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/look up.png"))); // NOI18N
         lookup.setText("Look up");

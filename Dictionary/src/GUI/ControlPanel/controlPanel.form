@@ -5,6 +5,8 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="57" green="2a" red="1d" type="rgb"/>
     </Property>
+    <Property name="roundBottomLeft" type="int" value="40"/>
+    <Property name="roundBottomRight" type="int" value="40"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
