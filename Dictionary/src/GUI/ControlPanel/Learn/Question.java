@@ -24,6 +24,7 @@ public class Question extends javax.swing.JPanel {
         ans2.setBackground(new Color(254,239,184));
         ans3.setBackground(new Color(254,239,184));
         ans4.setBackground(new Color(254,239,184));
+        repaint();
     }
     
     private void showHint() {
