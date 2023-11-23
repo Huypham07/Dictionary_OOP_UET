@@ -21,6 +21,7 @@ public class controlPanel extends GradientRoundedPanel {
         Logo = new GUI.roundComponent.circleComponent();
         Tiltle = new javax.swing.JLabel();
         circleComponent1 = new GUI.roundComponent.circleComponent();
+        button1 = new GUI.roundComponent.Button();
         menu = new GUI.ControlPanel.Menu.Menu();
 
         setBackground(new java.awt.Color(29, 42, 87));
@@ -37,6 +38,17 @@ public class controlPanel extends GradientRoundedPanel {
         Tiltle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         circleComponent1.setBackground(new java.awt.Color(255, 255, 255));
+
+        button1.setBackground(new java.awt.Color(253, 249, 197));
+        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/exit.png"))); // NOI18N
+        button1.setText("Exit");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        circleComponent1.add(button1);
+        button1.setBounds(20, 30, 70, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,6 +81,10 @@ public class controlPanel extends GradientRoundedPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_button1ActionPerformed
+
     
     public void setSelect(int item) {
         menu.unSelectAll();
@@ -99,6 +115,7 @@ public class controlPanel extends GradientRoundedPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.roundComponent.circleComponent Logo;
     private javax.swing.JLabel Tiltle;
+    private GUI.roundComponent.Button button1;
     private GUI.roundComponent.circleComponent circleComponent1;
     private GUI.ControlPanel.Menu.Menu menu;
     // End of variables declaration//GEN-END:variables

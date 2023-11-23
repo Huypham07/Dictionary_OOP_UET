@@ -92,6 +92,8 @@ public class DictionaryGUI extends javax.swing.JFrame {
             public void mouseReleased(MouseEvent e) {
                 controlpanel.setSelect(controlPanel.LEARN);
                 change(controlPanel.LEARN);
+                dictionaryManagement.GetListVocabFromDB();
+                learnGUI.refresh();
                 learnGUI.startLearn();
                 JOptionPane.showMessageDialog(learnGUI, "Choose a subject to review vocabulary");
             }

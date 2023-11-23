@@ -5,6 +5,9 @@ import java.io.*;
 import manageData.Datatype.Word;
 import manageData.TrieTree.Trie;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jdbc.DatabaseConnection;
 import manageData.Datatype.WordExplain;
 
 public class DictionaryManagement {
@@ -12,14 +15,24 @@ public class DictionaryManagement {
     private Dictionary dictionary;
     private Trie TrieOfDict;
     VocabularyList vocabs;
+    private DatabaseConnection sqlConn;
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
 
     // constructors
     public DictionaryManagement() {
         this.dictionary = new Dictionary();
         TrieOfDict = this.dictionary.getTrieOfTargetWord();
         vocabs = new VocabularyList();
+        sqlConn = DatabaseConnection.getInstance();
+        try {
+            sqlConn.connectToDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(DictionaryManagement.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DictionaryManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
         setupFromDB();
-        GetListVocabFromDB();
     }
 
     // getter
@@ -185,22 +198,9 @@ public class DictionaryManagement {
         }
     }
     
-//    private static final String port = "3306";
-    private static final String port = "3307";
-    private static final String dbConn = "jdbc:mysql://localhost:" + port + "/dictionary";
-    private static final String username = "root";
-    private static final String password = "nhienhy6714";
-//    private static final String password = "";
-    
-    private Connection sqlConn = null;
-    private PreparedStatement pst = null;
-    private ResultSet rs = null;
-    
     private void setupFromDB() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            sqlConn = DriverManager.getConnection(dbConn, username, password);
-            pst = sqlConn.prepareStatement("select * from words natural join worddefinitions;");
+            pst = sqlConn.PrepareQuery("select * from words natural join worddefinitions;");
             
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -216,13 +216,11 @@ public class DictionaryManagement {
         }
     }
     
-    private void GetListVocabFromDB() {
+    public void GetListVocabFromDB() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            sqlConn = DriverManager.getConnection(dbConn, username, password);
-            pst = sqlConn.prepareStatement("select * from WordTopics;");
-            
+            pst = sqlConn.PrepareQuery("select * from WordTopics;");
             rs = pst.executeQuery();
+            vocabs.clear();
             while (rs.next()) {
                 String topic = rs.getString(1);
                 Word word = findWord(rs.getString(2));
@@ -233,49 +231,28 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
     }
-    public void deleteInDB(String key, boolean wordInTopic) {
+    
+    public void deleteInDB(String key) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            sqlConn = DriverManager.getConnection(dbConn, username, password);
-            if (wordInTopic) {
-                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
-                                   "DELETE FROM wordtopics WHERE english = ?; " +
-                                   "DELETE FROM words WHERE english = ?;";
-
-                pst = sqlConn.prepareStatement(deleteSql);
-                pst.setString(1, key);
-                pst.setString(2, key);
-                pst.setString(3, key);
-                pst.executeUpdate();
-            } else {
-                String deleteSql = "DELETE FROM wordDefinitions WHERE english = ?; " +
-                                   "DELETE FROM words WHERE english = ?;";
-
-                pst = sqlConn.prepareStatement(deleteSql);
-                pst.setString(1, key);
-                pst.setString(2, key);
-                pst.executeUpdate();
-            }
-            
-            
-        } catch (Exception e) {
+            String deleteSql = String.format("DELETE FROM words WHERE english = '%s';", key);
+            pst = sqlConn.PrepareQuery(deleteSql);
+            pst.executeUpdate();         
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
     public void insertWordIntoDB(Word word) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            sqlConn = DriverManager.getConnection(dbConn, username, password);
             // Insert into Words table
-            pst = sqlConn.prepareStatement("INSERT INTO Words (English, pronounce) VALUES (?, ?)");
+            pst = sqlConn.PrepareQuery("INSERT INTO Words (English, pronounce) VALUES (?, ?)");
             pst.setString(1, word.getWord_target());
             pst.setString(2, word.getPronounce());
             pst.executeUpdate();
 
             // Insert into WordDefinitions table
             for (WordExplain we : word.getWord_explain()) {
-                pst = sqlConn.prepareStatement("INSERT INTO WordDefinitions (English, type, Definition, Meaning) VALUES (?, ?, ?, ?)");
+                pst = sqlConn.PrepareQuery("INSERT INTO WordDefinitions (English, type, Definition, Meaning) VALUES (?, ?, ?, ?)");
                 pst.setString(1, word.getWord_target());
                 pst.setString(2, we.getType());
                 pst.setString(3, we.getDefinition());
@@ -283,21 +260,19 @@ public class DictionaryManagement {
                 pst.executeUpdate();
             }    
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
     public void insertWordTopicIntoDB(String topic, Word word) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            sqlConn = DriverManager.getConnection(dbConn, username, password);
-            pst = sqlConn.prepareStatement("INSERT INTO WordTopics (TopicName, english) VALUES (?, ?);");
+            pst = sqlConn.PrepareQuery("INSERT INTO WordTopics (TopicName, english) VALUES (?, ?);");
             pst.setString(1, topic);
             pst.setString(2, word.getWord_target());
             pst.executeUpdate();
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

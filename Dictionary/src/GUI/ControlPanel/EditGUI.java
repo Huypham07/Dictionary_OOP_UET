@@ -29,7 +29,6 @@ public class EditGUI extends javax.swing.JDialog {
     private final List<EditPanel> list = new ArrayList<>();
     private DictionaryManagement Dictmng;
     private Word wordNeedtoDelete = null;
-    private String topicOfWordNeedtoEdit = null;
 
     public boolean isNewTopic() {
         return chooseNewTopic.isSelected();
@@ -228,7 +227,7 @@ public class EditGUI extends javax.swing.JDialog {
                 materialTabbed1.addTab(w.getType(), e);
             }
         }
-        topicOfWordNeedtoEdit = Dictmng.getTopicOfWord(word.getWord_target());
+        String topicOfWordNeedtoEdit = Dictmng.getTopicOfWord(word.getWord_target());
         if (topicOfWordNeedtoEdit == null) {
             chooseNoTopic.setSelected(true);
         } else {
@@ -452,11 +451,7 @@ public class EditGUI extends javax.swing.JDialog {
     private void DeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseReleased
         if (SwingUtilities.isLeftMouseButton(evt)) {
             if (Dictmng.deleteWord(wordNeedtoDelete.getWord_target())) {
-                if (topicOfWordNeedtoEdit == null) {
-                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), false);
-                } else {
-                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target(), true);
-                }
+                Dictmng.deleteInDB(wordNeedtoDelete.getWord_target());
                 JOptionPane.showMessageDialog(this, "Successful!");
                 startAnimator(false);
                 return;
@@ -473,26 +468,26 @@ public class EditGUI extends javax.swing.JDialog {
             } else if (!DictionaryManagement.validWord(tmp.getWord_target())) {
                 JOptionPane.showMessageDialog(this, "Invalid English Word!\nAn English word can only have alphabet character!!!");
             } else{
-                if (wordNeedtoDelete != null) {
-                    if (Dictmng.findWord(tmp.getWord_target()) != null) {
-                        JOptionPane.showMessageDialog(this, "This word exists in Dictionary!");
+                if (wordNeedtoDelete != null) {        
+                    Dictmng.deleteWord(wordNeedtoDelete.getWord_target());
+                    Dictmng.deleteInDB(wordNeedtoDelete.getWord_target());
+                }
+                else if (Dictmng.deleteWord(tmp.getWord_target())) {
+                    Dictmng.deleteInDB(tmp.getWord_target());
+                }
+                Dictmng.insertWord(tmp);
+                // add to db
+                Dictmng.insertWordIntoDB(tmp);
+                if (chooseTopic.isSelected()) {
+                    if (topicChoose.getText().equals("Choose...")) {
+                        JOptionPane.showMessageDialog(this, "Choose a topic!");
                         return;
                     }
-                } else {
-                    Dictmng.insertWord(tmp);
-                    // add to db
-                    Dictmng.insertWordIntoDB(tmp);
-                    if (chooseTopic.isSelected()) {
-                        if (topicChoose.getText().equals("Choose...")) {
-                            JOptionPane.showMessageDialog(this, "Choose a topic!");
-                            return;
-                        }
-                        Dictmng.insertWordTopic(topicChoose.getText(), tmp);  
-                        Dictmng.insertWordTopicIntoDB(topicChoose.getText(), tmp);
-                    } else if (chooseNewTopic.isSelected()) {
-                        Dictmng.insertWordTopic(newTopic.getText(), tmp);
-                        Dictmng.insertWordTopicIntoDB(newTopic.getText(), tmp);
-                    }
+                    Dictmng.insertWordTopic(topicChoose.getText(), tmp);  
+                    Dictmng.insertWordTopicIntoDB(topicChoose.getText(), tmp);
+                } else if (chooseNewTopic.isSelected()) {
+                    Dictmng.insertWordTopic(newTopic.getText(), tmp);
+                    Dictmng.insertWordTopicIntoDB(newTopic.getText(), tmp);
                 }
                 JOptionPane.showMessageDialog(this, "Successful!");
                 startAnimator(false);

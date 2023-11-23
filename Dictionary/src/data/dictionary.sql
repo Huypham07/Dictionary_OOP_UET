@@ -1,31 +1,35 @@
-create database dictionary; 
+CREATE DATABASE dictionary; 
 
-use dictionary;
+USE dictionary;
 
-CREATE TABLE Words (
-  English varchar(50) NOT NULL,
-  pronounce varchar(50) NOT NULL,
-  PRIMARY KEY (English)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE Words (	
+	English VARCHAR(50) NOT NULL,
+	pronounce VARCHAR(50) NOT NULL,
+	PRIMARY KEY (English)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE WordDefinitions (
-  English varchar(50) NOT NULL,
-  Type varchar(15) NOT NULL,
-  Definition varchar(255) NOT NULL,
-  Meaning varchar(50) NOT NULL,
-  CONSTRAINT FOREIGN KEY (English) REFERENCES Words (English)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+	English VARCHAR(50) NOT NULL,
+	Type VARCHAR(15) NOT NULL,
+	Definition VARCHAR(255) NOT NULL,
+	Meaning VARCHAR(50) NOT NULL,
+	CONSTRAINT FOREIGN KEY (English) REFERENCES Words (English)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
-create table WordTopics (
-  TopicName varchar(50) NOT NULL,
-  English varchar(50) NOT NULL,
-  CONSTRAINT FOREIGN KEY (English) REFERENCES Words (English)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE WordTopics (
+	TopicName VARCHAR(50) NOT NULL,
+	English VARCHAR(50) NOT NULL,
+	CONSTRAINT FOREIGN KEY (English) REFERENCES Words (English)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 
 /* insert data */
 
 -- Words table
-insert into Words (English, pronounce) values
+INSERT INTO Words (English, pronounce) VALUES
 ('absent', 'æb.sənt'),
 ('acceptable', 'əkˈsɛpt.ə.bəl'),
 ('afternoon', 'ˌæf.tərˈnuːn'),
@@ -56,6 +60,7 @@ insert into Words (English, pronounce) values
 ('coffee', 'ˈkɒf.i'),
 ('crab', 'kræb'),
 ('cucumber', 'ˈkjuː.kʌmbər'),
+('debate', 'dɪˈbeɪt'),
 ('dextrous', 'ˈdɛk.strəs'),
 ('diligent', 'ˈdɪl.ɪ.dʒənt'),
 ('dinner', 'ˈdɪn.ər'),
@@ -172,7 +177,7 @@ insert into Words (English, pronounce) values
 ('young', 'jʌŋ');
 
 -- WordDefinitions table
-insert into WordDefinitions (English, type, Definition, Meaning) values
+INSERT INTO WordDefinitions (English, type, Definition, Meaning) VALUES
 ('absent', 'adj', 'not present', 'vắng mặt'),
 ('acceptable', 'adj', 'able to be agreed on; suitable', 'chấp nhận được'),
 ('afternoon', 'noun', 'the time from noon or lunchtime to evening', 'buổi chiều'),
@@ -205,6 +210,10 @@ insert into WordDefinitions (English, type, Definition, Meaning) values
 ('coffee', 'noun', 'a hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub', 'cà phê'),
 ('crab', 'noun', 'a marine animal with a broad carapace', 'cua'),
 ('cucumber', 'noun', 'a long green-skinned fruit', 'dưa chuột'),
+('debate', 'noun', 'serious discussion of a subject in which many people take part', 'cuộc thảo luận'),
+('debate', 'noun', 'a competition in which teams of people, often students, discuss a subject and the team that is judged to make the best arguments wins', 'cuộc tranh luận'),
+('debate', 'verb', 'to discuss a subject in a formal way', 'bàn luận'),
+('debate', 'verb', 'to try to make a decision about something', 'tranh luận'),
 ('dextrous', 'adj', 'skillful and competent with the hands', 'khéo léo'),
 ('diligent', 'adj', 'characterized by steady, earnest, and energetic effort', 'chăm chỉ'),
 ('diligent', 'adj', 'marked by persevering, painstaking effort', 'siêng năng'),

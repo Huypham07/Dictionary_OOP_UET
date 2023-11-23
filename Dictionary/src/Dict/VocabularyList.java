@@ -16,6 +16,11 @@ public class VocabularyList {
         return vocabularies;
     }
     
+    public void clear() {
+        vocabularies.clear();
+        topics.clear();
+    }
+    
     public int addNewVocabulary(String topic, Word word) {
 //        saveFile = true;
         if (topics.contains(topic)) {

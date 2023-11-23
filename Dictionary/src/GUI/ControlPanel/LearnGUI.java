@@ -17,28 +17,14 @@ import manageData.Datatype.WordExplain;
 public class LearnGUI extends JPanel {
     private VocabularyList vocabs;
     private List<List<Component>> list = new ArrayList<>();
+    private List<Word> totalWord;
     
     public LearnGUI(DictionaryManagement Dictmng) {
         initComponents();
         this.vocabs = Dictmng.getVocabs();
+        totalWord = Dictmng.getDictionary().getDict();
         topicChoose.setTopics(vocabs.getTopics());
-        List<List<Word>> temp = vocabs.getVocabularies();
-        for (int i = 0; i < temp.size(); ++i) {
-            List<Component> comps = new ArrayList<>();
-            for (Word w : temp.get(i)) {
-                List<Word> random4Word = new ArrayList<>(Dictmng.getDictionary().getDict());
-                random4Word.remove(w);
-                Collections.shuffle(random4Word);
-                random4Word = random4Word.subList(0, 3);
-                
-                WordExplain explain = w.getWord_explain().get(0);
-                comps.add(new Question(explain.getDefinition(), explain.getType(), explain.getMeaning(),
-                        w.getWord_target(), random4Word.get(0).getWord_target(),
-                        random4Word.get(1).getWord_target(), random4Word.get(2).getWord_target()));
-            }
-            list.add(comps);
-        } 
-        
+
         showButton.setBackground(new Color(153, 204, 255));
         prevButton.setBackground(new Color(153, 204, 255));
         nextButton.setBackground(new Color(153, 204, 255));
@@ -63,6 +49,34 @@ public class LearnGUI extends JPanel {
         slideroundedPanel.clear();
         slideroundedPanel.addComponent(new Question("Definition", "/ word type /", "Correct Answer is A", "A", "B", "C", "D"));
         slideroundedPanel.startShow();
+    }
+    
+    public void refresh() {
+        topicChoose.setTopics(vocabs.getTopics());
+        list.clear();
+        List<List<Word>> temp = vocabs.getVocabularies();
+        for (int i = 0; i < temp.size(); ++i) {
+            List<Component> comps = new ArrayList<>();
+            for (Word w : temp.get(i)) {
+                List<Word> random4Word = new ArrayList<>(totalWord);
+                random4Word.remove(w);
+                
+                for (int j = 0; j < random4Word.size(); j++) {
+                    if (random4Word.get(j).getWord_target().isEmpty()) {
+                        random4Word.remove(j);
+                    }
+                }
+                
+                Collections.shuffle(random4Word);
+                random4Word = random4Word.subList(0, 3);
+
+                WordExplain explain = w.getWord_explain().get(0);
+                comps.add(new Question(explain.getDefinition(), explain.getType(), explain.getMeaning(),
+                        w.getWord_target(), random4Word.get(0).getWord_target(),
+                        random4Word.get(1).getWord_target(), random4Word.get(2).getWord_target()));
+            }
+            list.add(comps);
+        } 
     }
 
     @SuppressWarnings("unchecked")
