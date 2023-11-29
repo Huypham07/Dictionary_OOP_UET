@@ -137,7 +137,7 @@ public class DictionaryGUI extends javax.swing.JFrame {
         button1.setText("button1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Dictionary");
+        setTitle("Vortaro");
         setBackground(new java.awt.Color(245, 245, 245));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {

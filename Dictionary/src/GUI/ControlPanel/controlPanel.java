@@ -32,14 +32,13 @@ public class controlPanel extends GradientRoundedPanel {
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/logo.png"))); // NOI18N
         Logo.setOpaque(true);
 
-        Tiltle.setFont(new java.awt.Font("Segoe UI Black", 3, 44)); // NOI18N
+        Tiltle.setFont(new java.awt.Font("Imprint MT Shadow", 3, 40)); // NOI18N
         Tiltle.setForeground(new java.awt.Color(255, 255, 255));
-        Tiltle.setText("Dictionary");
+        Tiltle.setText("Vortaro Dictionary");
         Tiltle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         circleComponent1.setBackground(new java.awt.Color(255, 255, 255));
 
-        button1.setBackground(new java.awt.Color(253, 249, 197));
         button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/img/exit.png"))); // NOI18N
         button1.setText("Exit");
         button1.addActionListener(new java.awt.event.ActionListener() {

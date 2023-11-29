@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-//    private static final String port = "3306";
-    private static final String port = "3307";
+    private static final String port = "3306";
+//    private static final String port = "3307";
     private static final String dbConn = "jdbc:mysql://localhost:" + port + "/dictionary";
     private static final String username = "root";
     private static final String password = "nhienhy6714";
