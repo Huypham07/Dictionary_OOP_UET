@@ -33,6 +33,7 @@ public class DictionaryManagement {
             Logger.getLogger(DictionaryManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         setupFromDB();
+        GetListVocabFromDB();
     }
 
     // getter
